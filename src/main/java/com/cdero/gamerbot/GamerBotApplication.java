@@ -99,6 +99,9 @@ public class GamerBotApplication {
 		
 		try {
 			
+			jda.addEventListeners(new MessageListener());
+			jda.addEventListeners(new OnReady());
+			
 			jda.build();
 			
 		} catch (LoginException e) {
