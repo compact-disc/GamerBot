@@ -1,45 +1,48 @@
 package com.cdero.gamerbot.sql;
 
+//import statements
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Logger;
-
 import com.cdero.gamerbot.GamerBotApplication;
 
+/**
+ * 
+ * @author		Christopher DeRoche
+ * @version		1.0
+ * @since		1.0
+ *
+ */
 public class SQLConnection {
 	
 	/**
-	 * Stored connection to the SQL server
+	 * Stored connection to the SQL server.
 	 */
 	private static Connection sqlConnection;
 	
 	/**
-	 * Check if the SQL server is connected or not
+	 * Check if the SQL server is connected or not.
 	 */
 	private static Boolean connected = false;
 	
 	/**
-	 * Logger for this class
+	 * Logger for the SQLConnection class.
 	 */
 	private final static Logger log = Logger.getLogger(GamerBotApplication.class.getPackage().getName());
 	
 	/**
-	 * Connect the application to the MySQL/MariaDB server
+	 * Connect the Gamer Bot Application to the MySQL/MariaDB server.
 	 * 
-	 * @author 		Christopher DeRoche 
-	 * @version		1.0
-	 * @since		1.0
-	 * 
-	 * @return		void
+	 * @return	void
 	 */
 	public static void connectToSQL() {
 		
 		try {
 			
-			String dbURL = "jdbc:mysql://db.cdero.com/gamer_bot";
+			String dbURL = "jdbc:mysql://db.cdero.com/gamerbot";
 			String dbUser = "gamerbot";
 			String dbPassword = "L6Bw4NdEhkxuZGtX";
 			
@@ -54,16 +57,14 @@ public class SQLConnection {
 			
 		}
 		
+		log.info("Gamer Bot Application successfully connected to MySQL/MariaDB...");
+		
 	}
 	
 	/**
-	 * Getter for the MySQL/MariaDB connection
+	 * Getter for the MySQL/MariaDB connection.
 	 * 
-	 * @author 		Christopher DeRoche 
-	 * @version		1.0
-	 * @since		1.0
-	 * 
-	 * @return		Connection	Returns the connection to the MySQL/MariaDB server
+	 * @return	Connection	Returns the connection to the MySQL/MariaDB server.
 	 */
 	public static Connection getSQL() {
 		
@@ -72,6 +73,8 @@ public class SQLConnection {
 			return sqlConnection;
 			
 		}else {
+			
+			log.info("Not connected to MySQL/MariaDB, connecting now...");
 			
 			connectToSQL();
 			
@@ -82,14 +85,42 @@ public class SQLConnection {
 	}
 	
 	/**
+	 * Get the status of the MySQL/MariaDB server
+	 * 
+	 * @return	Boolean	Either true or false depending if the SQL server is still connected.
+	 */
+	public static Boolean getSQLStatus() {
+		
+		Boolean status = false;
+		
+		try {
+			
+			log.info("Checking if the connection to MySQL/MariaDB is still valid...");
+			
+			status = sqlConnection.isValid(3);
+			
+		} catch (SQLException e) {
+
+			log.severe("Unable to contact the MySQL/MariaDB server" +
+			"\n Data will not be saved! Please check the connection to the MySQL/MariaDB server!");
+			
+			return false;
+			
+		} finally {
+			
+			log.info("Connection to MySQL/MariaDB is valid...");
+			
+		}
+		
+		return status;
+		
+	}
+	
+	/**
 	 * Query the MySQL/MariaDB server with passed data.
 	 * 
-	 * @author 		Christopher DeRoche 
-	 * @version		1.0
-	 * @since		1.0
-	 * 
-	 * @param		query	The SQL query that will be run in the MySQL/MariaDB server.
-	 * @return		ResultSet	The data that is returned from the query that was run.
+	 * @param	query	The SQL query that will be run in the MySQL/MariaDB server.
+	 * @return	ResultSet	The data that is returned from the query that was run.
 	 */
 	public static ResultSet query(String query) {
 		
@@ -105,7 +136,9 @@ public class SQLConnection {
 			
 		} catch (SQLException se) {
 			
-			log.severe("Unable to contact the MySQL/MariaDB server with: " + query + "\n Please check the connection or status of the server");
+			log.severe("Unable to contact the MySQL/MariaDB server with:" + 
+			"\n" + query +
+			"\n Data will not be saved! Please check the connection to the MySQL/MariaDB server!");
 			
 		}
 		
