@@ -11,6 +11,7 @@ import java.util.Scanner;
 import java.util.logging.Logger;
 import javax.security.auth.login.LoginException;
 
+import com.cdero.gamerbot.messagelisteners.BeansListener;
 import com.cdero.gamerbot.messagelisteners.PingListener;
 import com.cdero.gamerbot.messagelisteners.RemindMeListener;
 import com.cdero.gamerbot.messagelisteners.TestListener;
@@ -153,7 +154,7 @@ public class GamerBotApplication {
 			jda.addEventListeners(new RemindMeListener());
 			jda.addEventListeners(new TimerListener());
 			jda.addEventListeners(new TestListener());
-			
+			jda.addEventListeners(new BeansListener());
 			
 			jda.addEventListeners(new OnReady());
 			

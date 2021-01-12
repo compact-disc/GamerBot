@@ -25,11 +25,9 @@ public class PingListener extends ListenerAdapter {
 	@Override
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
 		
-		String message = event.getMessage().getContentRaw();
-		
-		if(message.equals(PREFIX + "ping") && !event.getAuthor().isBot()) {
+		if(event.getMessage().getContentRaw().equals(PREFIX + "ping") && !event.getAuthor().isBot()) {
 			
-			event.getChannel().sendMessage("Current Gamer Bot Response Time: " + event.getJDA().getGatewayPing() + "ms").queue();;
+			event.getChannel().sendMessage("Current Gamer Bot Response Time: " + event.getJDA().getGatewayPing() + "ms").queue();
 			
 		}
 		

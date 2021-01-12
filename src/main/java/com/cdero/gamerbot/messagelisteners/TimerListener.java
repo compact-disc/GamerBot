@@ -2,7 +2,11 @@ package com.cdero.gamerbot.messagelisteners;
 
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
+
+import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.exceptions.ErrorResponseException;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class TimerListener extends ListenerAdapter {
@@ -27,35 +31,42 @@ public class TimerListener extends ListenerAdapter {
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
 		
 		String[] command = event.getMessage().getContentRaw().split(" ");
-		StringBuilder task;
+		int commandLength = command.length;
 		
-		String[] totalTime = command[command.length - 1].split(".");;
-		String timeValue;
-		String timeNumeral;
-		TimeUnit timeUnit = null;
+		TextChannel channel = event.getChannel();
 		
-		if(command[0].equals(PREFIX + "timer") && !event.getAuthor().isBot()) {
+		if(command[0].equalsIgnoreCase(PREFIX + "timer") && !event.getAuthor().isBot()) {
 			
-			if(command.length == 1 || (command[1].equals("help") && command.length == 2)) {
+			if(commandLength == 1 || (command[1].equalsIgnoreCase("help") && commandLength == 2)) {
 				
-				event.getChannel().sendMessage("```" + "Usage: " + PREFIX + "timer [task] => [value].[hours/minutes/seconds]\nExample: " + PREFIX + "timer Play Games! => 4.hours" + "```").queue();
+				channel.sendMessage("```" + "Usage: " + PREFIX + "timer [task] => [value].[hours/minutes/seconds]\nExample: " + PREFIX + "timer Play Games! => 4.hours" + "```").queue();
 				
-			}else if(command[command.length - 2].equals("=>") && (command[command.length - 1].contains(".hours") || command[command.length - 1].contains(".minutes") || command[command.length - 1].contains(".seconds"))) {
+			}else if(command[commandLength - 2].equals("=>") && (command[commandLength - 1].contains(".hours") || command[commandLength - 1].contains(".hour") || command[commandLength - 1].contains(".minutes") || command[commandLength - 1].contains(".minute") || command[commandLength - 1].contains(".seconds") || command[commandLength - 1].contains(".second"))) {
 				
-				task = new StringBuilder();
+				StringBuilder task = new StringBuilder();
+				String[] totalTime = command[commandLength - 1].split("\\.");
+				String timeValue = "";
+				String timeNumeral = "";
+				TimeUnit timeUnit = null;
 				
-				for(int i = 1; i < command.length - 2; i++) {
+				Long author = event.getAuthor().getIdLong();
+				
+				for(int i = 1; i < commandLength - 2; i++) {
 					
 					task.append(command[i] + " ");
 					
 				}
 				
-				timeValue = totalTime[1];
 				timeNumeral = totalTime[0];
+				timeValue = totalTime[1];
 				
 				switch(timeValue) {
 				
 					case "hours":
+						timeUnit = TimeUnit.HOURS;
+						break;
+					
+					case "hour":
 						timeUnit = TimeUnit.HOURS;
 						break;
 						
@@ -63,18 +74,42 @@ public class TimerListener extends ListenerAdapter {
 						timeUnit = TimeUnit.MINUTES;
 						break;
 						
+					case "minute":
+						timeUnit = TimeUnit.MINUTES;
+						break;
+						
 					case "seconds":
+						timeUnit = TimeUnit.SECONDS;
+						break;
+						
+					case "second":
 						timeUnit = TimeUnit.SECONDS;
 						break;
 				
 				}
 				
-				event.getChannel().sendMessage(task.toString()).queueAfter(Integer.parseInt(timeNumeral), timeUnit);
-				//channel.sendMessage("This is the reminder").mention(event.getAuthor()).queueAfter(1, TimeUnit.MINUTES);
+				try {
+					
+					channel.sendMessage("<@!" + author + ">, " + task.toString()).queueAfter(Integer.parseInt(timeNumeral), timeUnit);
+					
+				} catch (ErrorResponseException e){
+					
+					channel.sendMessage("<@!" + author + ">" + ", there was an error creating your timer!").queue();
+					
+				} catch (IllegalArgumentException e) {
+					
+					channel.sendMessage("<@!" + author + ">" + ", there was an error creating your timer!").queue();
+					
+				} finally {
+					
+					channel.sendMessage("<@!" + author + ">" + ", you will be notified in " + timeNumeral + " " + timeValue + "!").queue();
+					
+				}
+				
 				
 			}else {
 				
-				event.getChannel().sendMessage("```" + "Usage: " + PREFIX + "timer [task] => [value].[hours/minutes/seconds]\nExample: " + PREFIX + "timer Play Games! => 4.hours" + "```").queue();
+				channel.sendMessage("```" + "Usage: " + PREFIX + "timer [task] => [value].[hours/minutes/seconds]\nExample: " + PREFIX + "timer Play Games! => 4.hours" + "```").queue();
 				
 			}
 			
