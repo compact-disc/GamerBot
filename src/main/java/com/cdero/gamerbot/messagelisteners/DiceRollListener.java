@@ -70,6 +70,14 @@ public class DiceRollListener extends ListenerAdapter {
 		
 	}
 	
+	/**
+	 * Returns a String with the dice rolls made.
+	 * 
+	 * 
+	 * @param dice	The type of dice to be rolled.
+	 * @param rolls	The number of rolls to make with the dice.
+	 * @return	String	All of the dice rolls formatted correctly.
+	 */
 	private String rollDice(int dice, int rolls) {
 		
 		StringBuilder reply = new StringBuilder();

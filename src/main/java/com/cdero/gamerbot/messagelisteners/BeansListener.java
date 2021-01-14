@@ -55,7 +55,7 @@ public class BeansListener extends ListenerAdapter{
 	}
 	
 	/**
-	 * Returns the file and path to the beans image
+	 * Returns the file and path to the beans image.
 	 * 
 	 * 
 	 * @return	File	the beans image file
