@@ -10,7 +10,6 @@ import java.util.Properties;
 import java.util.Scanner;
 import java.util.logging.Logger;
 import javax.security.auth.login.LoginException;
-
 import com.cdero.gamerbot.messagelisteners.BeansListener;
 import com.cdero.gamerbot.messagelisteners.DiceRollListener;
 import com.cdero.gamerbot.messagelisteners.PingListener;
@@ -18,8 +17,6 @@ import com.cdero.gamerbot.messagelisteners.RemindMeListener;
 import com.cdero.gamerbot.messagelisteners.TestListener;
 import com.cdero.gamerbot.messagelisteners.TimerListener;
 import com.cdero.gamerbot.sql.SQLConnection;
-import com.sun.tools.sjavac.server.log.LoggingOutputStream;
-
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
 
@@ -132,7 +129,7 @@ public class GamerBotApplication {
 		}
 		
 		//Connect the application to the SQL server
-		//SQLConnection.connectToSQL();
+		SQLConnection.connectToSQL();
 		
 		String token = config.getProperty("token");
 		

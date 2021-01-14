@@ -22,6 +22,9 @@ dependencies {
 
     // Java Discord API integration
     compile 'net.dv8tion:JDA:4.2.0_222'
+    
+    // MariaDB connection
+    implementation 'org.mariadb.jdbc:mariadb-java-client:2.1.2'
 
     // This dependency is exported to consumers, that is to say found on their compile classpath.
     api 'org.apache.commons:commons-math3:3.6.1'

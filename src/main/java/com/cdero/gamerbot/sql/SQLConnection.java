@@ -42,7 +42,7 @@ public class SQLConnection {
 		
 		try {
 			
-			String dbURL = "jdbc:mysql://db.cdero.com/gamerbot";
+			String dbURL = "jdbc:mysql://db.cdero.com:3306/gamerbot";
 			String dbUser = "gamerbot";
 			String dbPassword = "L6Bw4NdEhkxuZGtX";
 			
