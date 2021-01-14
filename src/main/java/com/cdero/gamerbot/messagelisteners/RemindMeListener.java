@@ -27,13 +27,19 @@ public class RemindMeListener extends ListenerAdapter {
 	@Override
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
 		
+		if(!event.getAuthor().isBot()) {
+			
+			return;
+			
+		}
+		
 		StringBuilder rawReminder;
 		String[] command = event.getMessage().getContentRaw().split(" ");
 		
 		String time;
 		long timeDifference;
 		
-		if(command[0].equals(PREFIX + "remind") && command[1].equals("me") && !event.getAuthor().isBot()) {
+		if(command[0].equals(PREFIX + "remind") && command[1].equals("me")) {
 			
 			event.getChannel().sendMessage("```" + "Try >>remindme\nUsage: " + PREFIX + "remindme [task] => [time].[AM/PM].[zone]\nExample: " + PREFIX + "remindme Play Games! => 7:00.PM.EST" + "```").queue();
 			

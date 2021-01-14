@@ -26,6 +26,12 @@ public class BeansListener extends ListenerAdapter{
 	@Override
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
 		
+		if(!event.getAuthor().isBot()) {
+			
+			return;
+			
+		}
+		
 		String content = event.getMessage().getContentRaw();
 		
 		if(content.equalsIgnoreCase(PREFIX + "beans") || content.equalsIgnoreCase(PREFIX + "bean")) {
@@ -34,7 +40,7 @@ public class BeansListener extends ListenerAdapter{
 			
 			return;
 			
-		}else if((content.contains("bean") || content.contains(" bean ")
+		} else if ((content.contains("bean") || content.contains(" bean ")
 				|| content.contains("beans") || content.contains(" beans ")
 				|| content.contains("Bean") || content.contains(" Bean ")
 				|| content.contains("Beans") || content.contains(" Beans "))

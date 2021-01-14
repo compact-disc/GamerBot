@@ -30,12 +30,18 @@ public class TimerListener extends ListenerAdapter {
 	@Override
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
 		
+		if(!event.getAuthor().isBot()) {
+			
+			return;
+			
+		}
+		
 		String[] command = event.getMessage().getContentRaw().split(" ");
 		int commandLength = command.length;
 		
 		TextChannel channel = event.getChannel();
 		
-		if(command[0].equalsIgnoreCase(PREFIX + "timer") && !event.getAuthor().isBot()) {
+		if(command[0].equalsIgnoreCase(PREFIX + "timer")) {
 			
 			if(commandLength == 1 || (command[1].equalsIgnoreCase("help") && commandLength == 2)) {
 				

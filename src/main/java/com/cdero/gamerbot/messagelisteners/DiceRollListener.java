@@ -26,10 +26,16 @@ public class DiceRollListener extends ListenerAdapter {
 	@Override
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
 		
+		if(!event.getAuthor().isBot()) {
+			
+			return;
+			
+		}
+		
 		String[] command = event.getMessage().getContentRaw().split(" ");
 		int commandLength = command.length;
 		
-		if(command[0].equalsIgnoreCase(PREFIX + "roll") && !event.getAuthor().isBot()) {
+		if(command[0].equalsIgnoreCase(PREFIX + "roll")) {
 			
 			TextChannel channel = event.getChannel();
 			
