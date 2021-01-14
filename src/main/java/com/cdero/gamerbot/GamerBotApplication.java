@@ -18,6 +18,7 @@ import com.cdero.gamerbot.messagelisteners.RemindMeListener;
 import com.cdero.gamerbot.messagelisteners.TestListener;
 import com.cdero.gamerbot.messagelisteners.TimerListener;
 import com.cdero.gamerbot.sql.SQLConnection;
+import com.sun.tools.sjavac.server.log.LoggingOutputStream;
 
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
@@ -72,7 +73,7 @@ public class GamerBotApplication {
 	 */
 	private GamerBotApplication() {
 		
-		shutdownOperations();
+		serverCommands();
 		
 		log.info("Starting Gamer Bot...");
 		
@@ -91,6 +92,8 @@ public class GamerBotApplication {
 				config.store(configOutput, "Gamer Bot Configuration File");
 				
 				log.info("Add token to configuration file and restart...");
+				
+				configOutput.close();
 				System.exit(0);
 				
 			} catch (IOException io) {
@@ -113,6 +116,8 @@ public class GamerBotApplication {
 			configInput = new FileInputStream(configFile);
 			
 			config.load(configInput);
+			
+			configInput.close();
 			
 		} catch (FileNotFoundException fnfe) {
 			
@@ -173,7 +178,10 @@ public class GamerBotApplication {
 		
 	}
 	
-	private void shutdownOperations() {
+	/**
+	 * Setup the thread to run server side commands. This includes the shutdown hook.
+	 */
+	private void serverCommands() {
 		
 		
 		Thread shutdown = new Thread() {
@@ -201,33 +209,7 @@ public class GamerBotApplication {
 			
 			public void run() {
 				
-				try {
-					
-					configInput.close();
-					
-				} catch (IOException e) {
-					
-					log.warning("I/O error when closing configuration file...");
-					
-				} catch (NullPointerException ne) {
-					
-					log.warning("Input configuration file was null...");
-					
-				}
-				
-				try {
-					
-					configOutput.close();
-					
-				} catch (IOException e) {
-					
-					log.warning("I/O error when closing configuration file...");
-					
-				} catch (NullPointerException ne) {
-					
-					log.warning("Output configuration file was null...");
-					
-				}
+				log.info("Gamer Bot Closed...");
 				
 			}
 			
