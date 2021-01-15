@@ -100,11 +100,11 @@ public class TimerListener extends ListenerAdapter {
 					
 				} catch (ErrorResponseException e){
 					
-					channel.sendMessage("<@!" + author + ">" + ", there was an error creating your timer!").queue();
+					channel.sendMessage("<@!" + author + ">" + ", there was an error creating your timer! Check your input!").queue();
 					
 				} catch (IllegalArgumentException e) {
 					
-					channel.sendMessage("<@!" + author + ">" + ", there was an error creating your timer!").queue();
+					channel.sendMessage("<@!" + author + ">" + ", there was an error creating your timer! Check your input!").queue();
 					
 				} finally {
 					

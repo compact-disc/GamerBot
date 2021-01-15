@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.exceptions.ErrorResponseException;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class RemindMeListener extends ListenerAdapter {
@@ -44,6 +45,7 @@ public class RemindMeListener extends ListenerAdapter {
 		TextChannel channel = event.getChannel();
 		
 		String time;
+		Long queueTime;
 		
 		if(command[0].equals(PREFIX + "remind") && command[1].equals("me")) {
 			
@@ -68,8 +70,34 @@ public class RemindMeListener extends ListenerAdapter {
 					rawReminder.append(command[i] + " ");
 					
 				}
+				
+				queueTime = getTime(time);
+				
+				if(queueTime == -1) {
 					
-				channel.sendMessage("<@!" + event.getAuthor().getIdLong() + ">, " + rawReminder.toString()).queueAfter(calculateTime(time), TimeUnit.MILLISECONDS);
+					channel.sendMessage("<@!" + event.getAuthor().getIdLong() + ">, " + "there was an issue adding your reminder! Check your input!").queue();
+					return;
+					
+				}
+				
+				try {
+					
+					channel.sendMessage("<@!" + event.getAuthor().getIdLong() + ">, " + rawReminder.toString()).queueAfter(queueTime, TimeUnit.MILLISECONDS);
+					
+				} catch (ErrorResponseException e) {
+					
+					channel.sendMessage("<@!" + event.getAuthor().getIdLong() + ">, " + "there was an issue adding your reminder! Check your input!").queue();
+					
+				} catch (IllegalArgumentException e) {
+					
+					channel.sendMessage("<@!" + event.getAuthor().getIdLong() + ">, " + "there was an issue adding your reminder! Check your input!").queue();
+					
+				} finally {
+					
+					channel.sendMessage("<@!" + event.getAuthor().getIdLong() + ">, " + "your reminder has been scheduled!").queue();
+					
+				}
+					
 				
 			}else {
 				
@@ -82,31 +110,62 @@ public class RemindMeListener extends ListenerAdapter {
 	}
 	
 	/**
-	 * Return the time difference in milliseconds from the given time and the current system time.
+	 * Does input validation on the time parameter before calculation to avoid errors. Then calls calculateTime to calculate the difference in time, in milliseconds.
 	 * 
 	 * @param completeTime	The full [time].[AM/PM].[zone] in a String format.
 	 * @return	long	The time in milliseconds.
 	 */
-	private long calculateTime(String completeTime) {
+	private long getTime(String completeTime) {
+		
+		int hoursInt;
+		int minutesInt;
 		
 		String[] timeAndZone = completeTime.split("\\.");
+		
+		if(timeAndZone.length != 3) {
+			
+			return -1;
+			
+		}
+		
 		String time = timeAndZone[0];
 		String ampm = timeAndZone[1];
 		String zone = timeAndZone[2];
 		
 		String[] timeNumerals = time.split(":");
+		
+		if(timeNumerals.length != 2) {
+			
+			return -1;
+			
+		}
+		
 		String hoursString = timeNumerals[0];
 		String minutesString = timeNumerals[1];
 		
-		String ZoneIdString = "";
+		String ZoneIdString = null;
 		
-		int hoursInt = Integer.parseInt(hoursString);
-		int hoursIntMilitary = hoursInt;
-		int minutesInt = Integer.parseInt(minutesString);
+		try {
+			
+			hoursInt = Integer.parseInt(hoursString);
+			minutesInt = Integer.parseInt(minutesString);
+			
+		} catch (NumberFormatException e) {
+			
+			return -1;
+			
+		}
+
+		
+		if(!ampm.equalsIgnoreCase("am") && !ampm.equalsIgnoreCase("pm")) {
+			
+			return -1;
+			
+		}
 		
 		if(ampm.equalsIgnoreCase("pm")) {
 			
-			hoursIntMilitary += 12;
+			hoursInt += 12;
 			
 		}
 		
@@ -132,17 +191,33 @@ public class RemindMeListener extends ListenerAdapter {
 			case "PDT":
 				ZoneIdString = "America/Los_Angeles";
 				break;
+			default:
+				return -1;
 		
 		}
 		
+		return calculateTime(hoursInt, minutesInt, ZoneIdString, ampm);
 		
-		LocalDateTime givenDateTime = LocalDate.now().atTime(hoursIntMilitary, minutesInt);
+	}
+	
+	/**
+	 * Calculates the difference between the given time in UTC and the system local time in UTC. Returns the value in milliseconds from now.
+	 * 
+	 * 
+	 * @param hoursIntMilitary	Integer value of the hours, in 24 hour format.
+	 * @param minutesInt	Integer value of the minutes
+	 * @param ZoneIdString	The time zone in a string format.
+	 * @param ampm	Value is either AM or PM for time.
+	 * @return	long	The time, in milliseconds, until the reminder will be run.
+	 */
+	private long calculateTime(int hoursInt, int minutesInt, String ZoneIdString, String ampm) {
+		
+		LocalDateTime givenDateTime = LocalDate.now().atTime(hoursInt, minutesInt);
 		
 		ZonedDateTime currentTimeUTC = ZonedDateTime.now().withZoneSameInstant(ZoneId.of("UTC"));
 		ZonedDateTime givenTime = givenDateTime.atZone(ZoneId.of(ZoneIdString));
 		ZonedDateTime givenTimeUTC = givenTime.withZoneSameInstant(ZoneId.of("UTC"));
 
-		log.info(">>remindme in " + currentTimeUTC.until(givenTimeUTC, ChronoUnit.MILLIS) + "ms");
 		return currentTimeUTC.until(givenTimeUTC, ChronoUnit.MILLIS);
 		
 	}
