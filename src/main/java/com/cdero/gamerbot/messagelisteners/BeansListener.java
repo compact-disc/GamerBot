@@ -26,7 +26,7 @@ public class BeansListener extends ListenerAdapter{
 	@Override
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
 		
-		if(!event.getAuthor().isBot()) {
+		if(event.getAuthor().isBot()) {
 			
 			return;
 			

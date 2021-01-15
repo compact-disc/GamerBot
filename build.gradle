@@ -9,6 +9,9 @@
 plugins {
     // Apply the java-library plugin to add support for Java Library
     id 'java-library'
+    id 'eclipse'
+    id 'java'
+    id 'application'
 }
 
 repositories {
@@ -21,7 +24,7 @@ dependencies {
 
 
     // Java Discord API integration
-    compile 'net.dv8tion:JDA:4.2.0_222'
+    compile 'net.dv8tion:JDA:4.2.0_227'
     
     // MariaDB connection
     implementation 'org.mariadb.jdbc:mariadb-java-client:2.1.2'
@@ -35,3 +38,5 @@ dependencies {
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
 }
+
+mainClassName = 'com.cdero.gamerbot.GamerBotApplication'
