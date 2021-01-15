@@ -10,12 +10,14 @@ import java.util.Properties;
 import java.util.Scanner;
 import java.util.logging.Logger;
 import javax.security.auth.login.LoginException;
-import com.cdero.gamerbot.messagelisteners.BeansListener;
-import com.cdero.gamerbot.messagelisteners.DiceRollListener;
-import com.cdero.gamerbot.messagelisteners.PingListener;
-import com.cdero.gamerbot.messagelisteners.RemindMeListener;
-import com.cdero.gamerbot.messagelisteners.TestListener;
-import com.cdero.gamerbot.messagelisteners.TimerListener;
+
+import com.cdero.gamerbot.commands.BeansListener;
+import com.cdero.gamerbot.commands.DiceRollListener;
+import com.cdero.gamerbot.commands.PingListener;
+import com.cdero.gamerbot.commands.PurgeListener;
+import com.cdero.gamerbot.commands.RemindMeListener;
+import com.cdero.gamerbot.commands.TestListener;
+import com.cdero.gamerbot.commands.TimerListener;
 import com.cdero.gamerbot.sql.SQLConnection;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
@@ -159,6 +161,7 @@ public class GamerBotApplication {
 			jda.addEventListeners(new TestListener());
 			jda.addEventListeners(new BeansListener());
 			jda.addEventListeners(new DiceRollListener());
+			jda.addEventListeners(new PurgeListener());
 			
 			jda.addEventListeners(new OnReady());
 			

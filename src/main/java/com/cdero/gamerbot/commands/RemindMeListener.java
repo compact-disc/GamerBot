@@ -1,4 +1,4 @@
-package com.cdero.gamerbot.messagelisteners;
+package com.cdero.gamerbot.commands;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -12,6 +12,13 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.exceptions.ErrorResponseException;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
+/**
+ * 
+ * @author 		Christopher DeRoche
+ * @version		1.0
+ * @since		1.0
+ *
+ */
 public class RemindMeListener extends ListenerAdapter {
 	
 	/**
@@ -49,7 +56,7 @@ public class RemindMeListener extends ListenerAdapter {
 		
 		if(command[0].equals(PREFIX + "remind") && command[1].equals("me")) {
 			
-			channel.sendMessage("```" + "Usage: " + PREFIX + "remindme [task] => [time].[AM/PM].[zone]\nSupported Zones: EST/EDT/CST/CDT/PST/PDT\nExample: " + PREFIX + "remindme Play Games! => 2:00.PM.EST" + "```").queue();
+			channel.sendMessage("```" + "Usage: Create a reminder on the present day given an exact time.\n" + PREFIX + "remindme [task] => [time].[AM/PM].[zone]\nSupported Zones: EST/EDT/CST/CDT/PST/PDT\nExample: " + PREFIX + "remindme Play Games! => 2:00.PM.EST" + "```").queue();
 			
 		}
 		
@@ -57,7 +64,7 @@ public class RemindMeListener extends ListenerAdapter {
 			
 			if(command.length == 1 || command[1].equals("help")) {
 				
-				channel.sendMessage("```" + "Usage: " + PREFIX + "remindme [task] => [time].[AM/PM].[zone]\nSupported Zones: EST/EDT/CST/CDT/PST/PDT\nExample: " + PREFIX + "remindme Play Games! => 2:00.PM.EST" + "```").queue();
+				channel.sendMessage("```" + "Usage: Create a reminder on the present day given an exact time.\n" + PREFIX + "remindme [task] => [time].[AM/PM].[zone]\nSupported Zones: EST/EDT/CST/CDT/PST/PDT\nExample: " + PREFIX + "remindme Play Games! => 2:00.PM.EST" + "```").queue();
 				
 			}else if (command[command.length - 2].equals("=>")) {
 				
@@ -101,7 +108,7 @@ public class RemindMeListener extends ListenerAdapter {
 				
 			}else {
 				
-				channel.sendMessage("```" + "Usage: " + PREFIX + "remindme [task] => [time].[AM/PM].[zone]\nSupported Zones: EST/EDT/CST/CDT/PST/PDT\nExample: " + PREFIX + "remindme Play Games! => 2:00.PM.EST" + "```").queue();
+				channel.sendMessage("```" + "Usage: Create a reminder on the present day given an exact time.\n" + PREFIX + "remindme [task] => [time].[AM/PM].[zone]\nSupported Zones: EST/EDT/CST/CDT/PST/PDT\nExample: " + PREFIX + "remindme Play Games! => 2:00.PM.EST" + "```").queue();
 				
 			}
 			

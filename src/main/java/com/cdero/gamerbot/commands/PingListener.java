@@ -1,9 +1,16 @@
-package com.cdero.gamerbot.messagelisteners;
+package com.cdero.gamerbot.commands;
 
 import java.util.logging.Logger;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
+/**
+ * 
+ * @author 		Christopher DeRoche
+ * @version		1.0
+ * @since		1.0
+ *
+ */
 public class PingListener extends ListenerAdapter {
 	
 	/**

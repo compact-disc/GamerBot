@@ -1,4 +1,4 @@
-package com.cdero.gamerbot.messagelisteners;
+package com.cdero.gamerbot.commands;
 
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
@@ -9,6 +9,13 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.exceptions.ErrorResponseException;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
+/**
+ * 
+ * @author 		Christopher DeRoche
+ * @version		1.0
+ * @since		1.0
+ *
+ */
 public class TimerListener extends ListenerAdapter {
 
 	/**
@@ -45,7 +52,7 @@ public class TimerListener extends ListenerAdapter {
 			
 			if(commandLength == 1 || (command[1].equalsIgnoreCase("help") && commandLength == 2)) {
 				
-				channel.sendMessage("```" + "Usage: " + PREFIX + "timer [task] => [value].[hours/minutes/seconds]\nExample: " + PREFIX + "timer Play Games! => 4.hours" + "```").queue();
+				channel.sendMessage("```" + "Usage: Create a timer given a time.\n" + PREFIX + "timer [task] => [value].[hours/minutes/seconds]\nExample: " + PREFIX + "timer Play Games! => 4.hours" + "```").queue();
 				
 			}else if(command[commandLength - 2].equals("=>") && (command[commandLength - 1].contains(".hours") || command[commandLength - 1].contains(".hour") || command[commandLength - 1].contains(".minutes") || command[commandLength - 1].contains(".minute") || command[commandLength - 1].contains(".seconds") || command[commandLength - 1].contains(".second"))) {
 				
@@ -115,7 +122,7 @@ public class TimerListener extends ListenerAdapter {
 				
 			}else {
 				
-				channel.sendMessage("```" + "Usage: " + PREFIX + "timer [task] => [value].[hours/minutes/seconds]\nExample: " + PREFIX + "timer Play Games! => 4.hours" + "```").queue();
+				channel.sendMessage("```" + "Usage: Create a timer given a time.\n" + PREFIX + "timer [task] => [value].[hours/minutes/seconds]\nExample: " + PREFIX + "timer Play Games! => 4.hours" + "```").queue();
 				
 			}
 			

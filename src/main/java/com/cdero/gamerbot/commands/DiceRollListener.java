@@ -1,10 +1,17 @@
-package com.cdero.gamerbot.messagelisteners;
+package com.cdero.gamerbot.commands;
 
 import java.util.logging.Logger;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
+/**
+ * 
+ * @author 		Christopher DeRoche
+ * @version		1.0
+ * @since		1.0
+ *
+ */
 public class DiceRollListener extends ListenerAdapter {
 
 	/**
@@ -41,7 +48,7 @@ public class DiceRollListener extends ListenerAdapter {
 			
 			if(commandLength == 1 || command[1].equalsIgnoreCase("help") && commandLength == 2) {
 				
-				channel.sendMessage("```" + "Usage: " + PREFIX + "roll [dice] <times>\nExamples:\n" + PREFIX + "roll d6\n"+ PREFIX + "roll d20 5" + "```").queue();
+				channel.sendMessage("```" + "Usage: Roll any dice d, x number of times.\n" + PREFIX + "roll [dice] <times>\nExamples:\n" + PREFIX + "roll d6\n"+ PREFIX + "roll d20 5" + "```").queue();
 				
 			}else if(command[1].startsWith("d") && commandLength == 2 || commandLength == 3) {
 				
@@ -62,7 +69,7 @@ public class DiceRollListener extends ListenerAdapter {
 				
 			}else {
 				
-				channel.sendMessage("```" + "Usage: " + PREFIX + "roll [dice] <times>\nExamples:\n" + PREFIX + "roll d6\n"+ PREFIX + "roll d20 5" + "```").queue();
+				channel.sendMessage("```" + "Usage: Roll any dice d, x number of times.\n" + PREFIX + "roll [dice] <times>\nExamples:\n" + PREFIX + "roll d6\n"+ PREFIX + "roll d20 5" + "```").queue();
 				
 			}
 			
