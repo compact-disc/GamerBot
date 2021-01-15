@@ -1,8 +1,13 @@
 package com.cdero.gamerbot.messagelisteners;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.TimeZone;
+import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
+import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
@@ -36,20 +41,21 @@ public class RemindMeListener extends ListenerAdapter {
 		StringBuilder rawReminder;
 		String[] command = event.getMessage().getContentRaw().split(" ");
 		
+		TextChannel channel = event.getChannel();
+		
 		String time;
-		long timeDifference;
 		
 		if(command[0].equals(PREFIX + "remind") && command[1].equals("me")) {
 			
-			event.getChannel().sendMessage("```" + "Try >>remindme\nUsage: " + PREFIX + "remindme [task] => [time].[AM/PM].[zone]\nExample: " + PREFIX + "remindme Play Games! => 7:00.PM.EST" + "```").queue();
+			channel.sendMessage("```" + "Usage: " + PREFIX + "remindme [task] => [time].[AM/PM].[zone]\nSupported Zones: EST/EDT/CST/CDT/PST/PDT\nExample: " + PREFIX + "remindme Play Games! => 2:00.PM.EST" + "```").queue();
 			
 		}
 		
-		if(command[0].equals(PREFIX + "remindme") && !event.getAuthor().isBot()) {
+		if(command[0].equals(PREFIX + "remindme")) {
 			
 			if(command.length == 1 || command[1].equals("help")) {
 				
-				event.getChannel().sendMessage("```" + "Usage: " + PREFIX + "remindme [task] => [time].[AM/PM].[zone]\nExample: " + PREFIX + "remindme Play Games! => 7:00.PM.EST" + "```").queue();
+				channel.sendMessage("```" + "Usage: " + PREFIX + "remindme [task] => [time].[AM/PM].[zone]\nSupported Zones: EST/EDT/CST/CDT/PST/PDT\nExample: " + PREFIX + "remindme Play Games! => 2:00.PM.EST" + "```").queue();
 				
 			}else if (command[command.length - 2].equals("=>")) {
 				
@@ -59,18 +65,15 @@ public class RemindMeListener extends ListenerAdapter {
 				
 				for(int i = 1; i < command.length - 2; i++) {
 					
-					rawReminder.append(command[i]);
+					rawReminder.append(command[i] + " ");
 					
 				}
-				
-				timeDifference = calculateTime(time);
-				
-				
-				//channel.sendMessage("This is the reminder").mention(event.getAuthor()).queueAfter(1, TimeUnit.MINUTES);
+					
+				channel.sendMessage("<@!" + event.getAuthor().getIdLong() + ">, " + rawReminder.toString()).queueAfter(calculateTime(time), TimeUnit.MILLISECONDS);
 				
 			}else {
 				
-				event.getChannel().sendMessage("```" + "Usage: " + PREFIX + "remindme [task] => [time].[AM/PM].[zone]\nExample: " + PREFIX + "remindme Play Games! => 7:00.PM.EST" + "```").queue();
+				channel.sendMessage("```" + "Usage: " + PREFIX + "remindme [task] => [time].[AM/PM].[zone]\nSupported Zones: EST/EDT/CST/CDT/PST/PDT\nExample: " + PREFIX + "remindme Play Games! => 2:00.PM.EST" + "```").queue();
 				
 			}
 			
@@ -78,17 +81,69 @@ public class RemindMeListener extends ListenerAdapter {
 		
 	}
 	
+	/**
+	 * Return the time difference in milliseconds from the given time and the current system time.
+	 * 
+	 * @param completeTime	The full [time].[AM/PM].[zone] in a String format.
+	 * @return	long	The time in milliseconds.
+	 */
 	private long calculateTime(String completeTime) {
 		
-		String[] timeAndZone = completeTime.split(".");
+		String[] timeAndZone = completeTime.split("\\.");
 		String time = timeAndZone[0];
 		String ampm = timeAndZone[1];
 		String zone = timeAndZone[2];
 		
-		ZoneId system = ZoneId.systemDefault();
-		ZoneId user = ZoneId.of("");
+		String[] timeNumerals = time.split(":");
+		String hoursString = timeNumerals[0];
+		String minutesString = timeNumerals[1];
 		
-		return 0;
+		String ZoneIdString = "";
+		
+		int hoursInt = Integer.parseInt(hoursString);
+		int hoursIntMilitary = hoursInt;
+		int minutesInt = Integer.parseInt(minutesString);
+		
+		if(ampm.equalsIgnoreCase("pm")) {
+			
+			hoursIntMilitary += 12;
+			
+		}
+		
+		///////////////////////////////////////////
+		// America/Chicago - CST/CDT
+		// America/Indiana/Indianapolis - EST/EDT
+		// America/Los_Angeles - PST/PDT
+		///////////////////////////////////////////
+		
+		switch(zone) {
+		
+			case "CST":
+			case "CDT":
+				ZoneIdString = "America/Chicago";
+				break;
+				
+			case "EST":
+			case "EDT":
+				ZoneIdString = "America/Indiana/Indianapolis";
+				break;
+				
+			case "PST":
+			case "PDT":
+				ZoneIdString = "America/Los_Angeles";
+				break;
+		
+		}
+		
+		
+		LocalDateTime givenDateTime = LocalDate.now().atTime(hoursIntMilitary, minutesInt);
+		
+		ZonedDateTime currentTimeUTC = ZonedDateTime.now().withZoneSameInstant(ZoneId.of("UTC"));
+		ZonedDateTime givenTime = givenDateTime.atZone(ZoneId.of(ZoneIdString));
+		ZonedDateTime givenTimeUTC = givenTime.withZoneSameInstant(ZoneId.of("UTC"));
+
+		log.info(">>remindme in " + currentTimeUTC.until(givenTimeUTC, ChronoUnit.MILLIS) + "ms");
+		return currentTimeUTC.until(givenTimeUTC, ChronoUnit.MILLIS);
 		
 	}
 
