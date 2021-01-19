@@ -1,17 +1,11 @@
 package com.cdero.gamerbot.commands;
 
-import java.util.EnumSet;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
-
 import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageHistory;
-import net.dv8tion.jda.api.entities.MessageHistory.MessageRetrieveAction;
 import net.dv8tion.jda.api.entities.TextChannel;
-import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
@@ -34,7 +28,15 @@ public class PurgeListener extends ListenerAdapter {
 	 */
 	private final String PREFIX = ">>";
 	
+	/**
+	 * The max number of messages that can be purged at once.
+	 */
 	private final int PURGE_MAX = 20;
+	
+	/**
+	 * The minimum number of messages that can be purged at once.
+	 */
+	private final int PURGE_MIN = 1;
 	
 	/**
 	 * Overridden method to receive and respond to the purge command.
@@ -53,7 +55,6 @@ public class PurgeListener extends ListenerAdapter {
 		
 		String[] command = event.getMessage().getContentRaw().split(" ");
 		int commandLength = command.length;
-		Member member = event.getGuild().getMember(event.getAuthor());
 		
 		if(command[0].equals(PREFIX + "purge")) {
 			
@@ -61,7 +62,7 @@ public class PurgeListener extends ListenerAdapter {
 			
 			if(commandLength == 1 || command[1].equalsIgnoreCase("help") && commandLength == 2) {
 				
-				channel.sendMessage("```" + "Usage: Purge x number of messages above, including the command, where is between 1 and 20.\n" + PREFIX + "purge [number]\nExample: " + PREFIX + "purge 5" + "```").queue();
+				channel.sendMessage("```" + "Usage: Purge x number of messages above where x is between 1 and 20.\n" + PREFIX + "purge [number]\nExample: " + PREFIX + "purge 5" + "```").queue();
 				
 			} else if (!command[1].equals("help") && commandLength == 2) {
 				
@@ -77,15 +78,15 @@ public class PurgeListener extends ListenerAdapter {
 					
 				}
 				
-				if(member.hasPermission(Permission.MESSAGE_MANAGE) && purgeNumberInt > 0 && purgeNumberInt < 21) {
+				if(event.getGuild().getMember(event.getAuthor()).hasPermission(Permission.MESSAGE_MANAGE) && purgeNumberInt >= PURGE_MIN && purgeNumberInt <= PURGE_MAX) {
 					
-					MessageHistory history = new MessageHistory(event.getChannel());
+					MessageHistory history = new MessageHistory(channel);
 					List<Message> messages = history.retrievePast(purgeNumberInt  + 1).complete();
-					event.getChannel().deleteMessages(messages).queue();
+					channel.deleteMessages(messages).queue();
 					
-				} else if (purgeNumberInt < 1 || purgeNumberInt > 20) {
+				} else if (purgeNumberInt < PURGE_MIN || purgeNumberInt > PURGE_MAX) {
 					
-					channel.sendMessage("```" + "Usage: Purge x number of messages above, including the command, where is between 1 and 20.\n" + PREFIX + "purge [number]\nExample: " + PREFIX + "purge 5" + "```").queue();
+					channel.sendMessage("```" + "Usage: Purge x number of messages above where x is between 1 and 20.\n" + PREFIX + "purge [number]\nExample: " + PREFIX + "purge 5" + "```").queue();
 					
 				} else {
 					
@@ -96,7 +97,7 @@ public class PurgeListener extends ListenerAdapter {
 				
 			}else {
 				
-				channel.sendMessage("```" + "Usage: Purge x number of messages above, including the command, where is between 1 and 20.\n" + PREFIX + "purge [number]\nExample: " + PREFIX + "purge 5" + "```").queue();
+				channel.sendMessage("```" + "Usage: Purge x number of messages above where x is between 1 and 20.\n" + PREFIX + "purge [number]\nExample: " + PREFIX + "purge 5" + "```").queue();
 				
 			}
 			
