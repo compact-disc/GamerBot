@@ -38,7 +38,6 @@ public class RemindMeCommandListener extends ListenerAdapter {
 	 * Overridden method to receive and respond to the remind me command. This will setup reminders that users want.
 	 * 
 	 * @param		event	includes information about the event.
-	 * @return		void
 	 */
 	@Override
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {

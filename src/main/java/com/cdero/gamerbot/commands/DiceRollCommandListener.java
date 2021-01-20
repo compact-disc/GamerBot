@@ -31,7 +31,6 @@ public class DiceRollCommandListener extends ListenerAdapter {
 	 * Overridden method to receive and respond the roll function, this includes rolling dice.
 	 * 
 	 * @param		event	includes information about the event.
-	 * @return		void
 	 */
 	@Override
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {

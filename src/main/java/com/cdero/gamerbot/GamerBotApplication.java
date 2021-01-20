@@ -59,7 +59,7 @@ public class GamerBotApplication {
 	/**
 	 * Main method for the Gamer Bot Application.
 	 * 
-	 * @param args
+	 * @param args	Program arguments
 	 */
 	public static void main(String[] args) {
 		
@@ -144,7 +144,6 @@ public class GamerBotApplication {
 	 * 
 	 * 
 	 * @param	token	String of the Discord token to connect the application to Discord.
-	 * @return	void
 	 */
 	private void JDABuild(String token) {
 		

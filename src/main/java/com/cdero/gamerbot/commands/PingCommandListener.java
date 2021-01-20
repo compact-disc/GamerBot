@@ -31,7 +31,6 @@ public class PingCommandListener extends ListenerAdapter {
 	 * Overridden method to receive and respond to the ping command. Generally used for testing.
 	 * 
 	 * @param		event	includes information about the event.
-	 * @return		void
 	 */
 	@Override
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {

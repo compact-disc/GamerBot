@@ -45,7 +45,6 @@ public class PurgeCommandListener extends ListenerAdapter {
 	 * Overridden method to receive and respond to the purge command.
 	 * 
 	 * @param		event	includes information about the event.
-	 * @return		void
 	 */
 	@Override
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {

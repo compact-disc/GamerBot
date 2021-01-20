@@ -9,6 +9,13 @@ import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
+/**
+ * 
+ * @author 		Christopher DeRoche
+ * @version		1.0
+ * @since		1.0
+ *
+ */
 public class RoleCommandListener extends ListenerAdapter {
 
 	/**
@@ -25,7 +32,6 @@ public class RoleCommandListener extends ListenerAdapter {
 	 * Overridden method to receive and respond to the timer command. Users can have a task and timer to be notified later.
 	 * 
 	 * @param		event	includes information about the event.
-	 * @return		void
 	 */
 	@Override
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {

@@ -36,7 +36,6 @@ public class SQLConnection {
 	/**
 	 * Connect the Gamer Bot Application to the MySQL/MariaDB server.
 	 * 
-	 * @return	void
 	 */
 	public static void connectToSQL() {
 		

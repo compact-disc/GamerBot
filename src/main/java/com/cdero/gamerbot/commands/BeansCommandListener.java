@@ -32,7 +32,6 @@ public class BeansCommandListener extends ListenerAdapter{
 	 * Overridden method to receive and respond to any time the word bean/beans is mentioned.
 	 * 
 	 * @param		event	includes information about the event.
-	 * @return		void
 	 */
 	@Override
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
