@@ -4,19 +4,19 @@
 
 ### Complete:
 - Beans Listener/Command
-  - >>beans
+  - ```>>beans```
 - Dice Rolling Command
-  - >>roll [dice] [rolls]
+  - ```>>roll [dice] [rolls]```
 - Ping Command
-  - >>ping
+  - ```>>ping```
 - Purge Command
-  - >>purge [number]
+  - ```>>purge [number]```
 - Remind Me Command
-  - >>remindme [task] => [time].[AM/PM].[zone]
+  - ```>>remindme [task] => [time].[AM/PM].[zone]```
 - Role Command
-  - >>role [add/remove/help] [role] [user]
+  - ```>>role [add/remove/help] [role] [user]```
 - Timer Command
-  - >>timer [task] => [value].[hours/minutes/seconds]
+  - ```>>timer [task] => [value].[hours/minutes/seconds]```
 
 ### Plans:
 - Customized prefixes per server
