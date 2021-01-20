@@ -1,6 +1,10 @@
 package com.cdero.gamerbot.commands;
 
+//import statements
 import java.util.logging.Logger;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
@@ -32,15 +36,24 @@ public class PingListener extends ListenerAdapter {
 	@Override
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
 		
-		if(event.getAuthor().isBot()) {
+		User author = event.getAuthor();
+		
+		if(author.isBot()) {
 			
 			return;
 			
 		}
 		
+		Guild guild = event.getGuild();
+		TextChannel channel = event.getChannel();
+		
 		if(event.getMessage().getContentRaw().equals(PREFIX + "ping")) {
 			
-			event.getChannel().sendMessage("Current Gamer Bot Response Time: " + event.getJDA().getGatewayPing() + "ms").queue();
+			channel.sendMessage("Current Gamer Bot Response Time: " + event.getJDA().getGatewayPing() + "ms").queue();
+			log.info("Command: " + PREFIX + "ping"
+					+ "\nGuild: " + guild.toString()
+					+ "\nChannel: " + channel.toString()
+					+ "\nAuthor: " + author.toString());
 			
 		}
 		

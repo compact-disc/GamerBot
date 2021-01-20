@@ -1,7 +1,11 @@
 package com.cdero.gamerbot.commands;
 
+//import statements
 import java.io.File;
 import java.util.logging.Logger;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
@@ -33,17 +37,25 @@ public class BeansListener extends ListenerAdapter{
 	@Override
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
 		
-		if(event.getAuthor().isBot()) {
+		User author = event.getAuthor();
+		
+		if(author.isBot()) {
 			
 			return;
 			
 		}
 		
 		String content = event.getMessage().getContentRaw();
+		TextChannel channel = event.getChannel();
+		Guild guild = event.getGuild();
 		
 		if(content.equalsIgnoreCase(PREFIX + "beans") || content.equalsIgnoreCase(PREFIX + "bean")) {
 			
 			event.getChannel().sendFile(beansImage()).append(":b:eans").queue();
+			log.info("Command: " + PREFIX + "beans"
+					+ "\nGuild: " + guild.toString()
+					+ "\nChannel: " + channel.toString()
+					+ "\nAuthor: " + author.toString());
 			
 			return;
 			
@@ -51,9 +63,13 @@ public class BeansListener extends ListenerAdapter{
 				|| content.contains("beans") || content.contains(" beans ")
 				|| content.contains("Bean") || content.contains(" Bean ")
 				|| content.contains("Beans") || content.contains(" Beans "))
-				&& !event.getAuthor().isBot()) {
+				&& !author.isBot()) {
 			
 			event.getChannel().sendFile(beansImage()).append(":b:eans").queue();
+			log.info("Event: Beans Detected"
+					+ "\nGuild: " + guild.toString()
+					+ "\nChannel: " + channel.toString()
+					+ "\nAuthor: " + author.toString());
 			
 			return;
 			
@@ -69,6 +85,7 @@ public class BeansListener extends ListenerAdapter{
 	 */
 	private File beansImage() {
 		
+		log.info("Loaded beans.png...");
 		return (new File("src/main/resources/images/beans.png"));
 		
 	}

@@ -1,7 +1,10 @@
 package com.cdero.gamerbot.commands;
 
+//import statements
 import java.util.logging.Logger;
+import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
@@ -33,12 +36,15 @@ public class DiceRollListener extends ListenerAdapter {
 	@Override
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
 		
-		if(event.getAuthor().isBot()) {
+		User author = event.getAuthor();
+		
+		if(author.isBot()) {
 			
 			return;
 			
 		}
 		
+		Guild guild = event.getGuild();
 		String[] command = event.getMessage().getContentRaw().split(" ");
 		int commandLength = command.length;
 		
@@ -49,6 +55,10 @@ public class DiceRollListener extends ListenerAdapter {
 			if(commandLength == 1 || command[1].equalsIgnoreCase("help") && commandLength == 2) {
 				
 				channel.sendMessage("```" + "Usage: Roll any dice d, x number of times.\n" + PREFIX + "roll [dice] <times>\nExamples:\n" + PREFIX + "roll d6\n"+ PREFIX + "roll d20 5" + "```").queue();
+				log.info("Command: " + PREFIX + "roll"
+						+ "\nGuild: " + guild.toString()
+						+ "\nChannel: " + channel.toString()
+						+ "\nAuthor: " + author.toString());
 				
 			}else if(command[1].startsWith("d") && commandLength == 2 || commandLength == 3) {
 				
@@ -66,10 +76,18 @@ public class DiceRollListener extends ListenerAdapter {
 				}
 				
 				channel.sendMessage(rollDice(diceNumberInteger, numberOfRolls)).queue();
+				log.info("Command: " + PREFIX + "roll"
+						+ "\nGuild: " + guild.toString()
+						+ "\nChannel: " + channel.toString()
+						+ "\nAuthor: " + author.toString());
 				
 			}else {
 				
 				channel.sendMessage("```" + "Usage: Roll any dice d, x number of times.\n" + PREFIX + "roll [dice] <times>\nExamples:\n" + PREFIX + "roll d6\n"+ PREFIX + "roll d20 5" + "```").queue();
+				log.info("Command: " + PREFIX + "roll"
+						+ "\nGuild: " + guild.toString()
+						+ "\nChannel: " + channel.toString()
+						+ "\nAuthor: " + author.toString());
 				
 			}
 			

@@ -2,9 +2,6 @@ package com.cdero.gamerbot;
 
 //import statements
 import java.util.logging.Logger;
-
-import com.cdero.gamerbot.sql.SQLConnection;
-
 import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 

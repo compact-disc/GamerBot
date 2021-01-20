@@ -10,7 +10,6 @@ import java.util.Properties;
 import java.util.Scanner;
 import java.util.logging.Logger;
 import javax.security.auth.login.LoginException;
-
 import com.cdero.gamerbot.commands.BeansListener;
 import com.cdero.gamerbot.commands.DiceRollListener;
 import com.cdero.gamerbot.commands.PingListener;
@@ -63,7 +62,7 @@ public class GamerBotApplication {
 	 */
 	public static void main(String[] args) {
 		
-		GamerBotApplication gba = new GamerBotApplication();
+		new GamerBotApplication();
 
 	}
 	
