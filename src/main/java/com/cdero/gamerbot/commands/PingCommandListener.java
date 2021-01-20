@@ -15,12 +15,12 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
  * @since		1.0
  *
  */
-public class PingListener extends ListenerAdapter {
+public class PingCommandListener extends ListenerAdapter {
 	
 	/**
 	 * Logger for the PingListener class.
 	 */
-	private final static Logger log = Logger.getLogger(PingListener.class.getPackage().getName());
+	private final static Logger log = Logger.getLogger(PingCommandListener.class.getPackage().getName());
 	
 	/**
 	 * Prefix for the application commands on client side.

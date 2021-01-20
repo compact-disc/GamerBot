@@ -16,12 +16,12 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
  * @since		1.0
  *
  */
-public class BeansListener extends ListenerAdapter{
+public class BeansCommandListener extends ListenerAdapter{
 	
 	/**
 	 * Logger for the BeansListener class.
 	 */
-	private final static Logger log = Logger.getLogger(BeansListener.class.getPackage().getName());
+	private final static Logger log = Logger.getLogger(BeansCommandListener.class.getPackage().getName());
 	
 	/**
 	 * Prefix for the application commands on client side.

@@ -15,12 +15,12 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
  * @since		1.0
  *
  */
-public class DiceRollListener extends ListenerAdapter {
+public class DiceRollCommandListener extends ListenerAdapter {
 
 	/**
 	 * Logger for the DiceRollListener class.
 	 */
-	private final static Logger log = Logger.getLogger(DiceRollListener.class.getPackage().getName());
+	private final static Logger log = Logger.getLogger(DiceRollCommandListener.class.getPackage().getName());
 	
 	/**
 	 * Prefix for the application commands on client side.

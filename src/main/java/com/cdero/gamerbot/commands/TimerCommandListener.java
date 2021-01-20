@@ -17,12 +17,12 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
  * @since		1.0
  *
  */
-public class TimerListener extends ListenerAdapter {
+public class TimerCommandListener extends ListenerAdapter {
 
 	/**
 	 * Logger for the MessageListener class.
 	 */
-	private final static Logger log = Logger.getLogger(TimerListener.class.getPackage().getName());
+	private final static Logger log = Logger.getLogger(TimerCommandListener.class.getPackage().getName());
 	
 	/**
 	 * Prefix for the application commands on client side.

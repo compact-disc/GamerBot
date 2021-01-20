@@ -22,12 +22,12 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
  * @since		1.0
  *
  */
-public class RemindMeListener extends ListenerAdapter {
+public class RemindMeCommandListener extends ListenerAdapter {
 	
 	/**
 	 * Logger for the RemindMeListener class.
 	 */
-	private final static Logger log = Logger.getLogger(RemindMeListener.class.getPackage().getName());
+	private final static Logger log = Logger.getLogger(RemindMeCommandListener.class.getPackage().getName());
 	
 	/**
 	 * Prefix for the application commands on client side.

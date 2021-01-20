@@ -10,13 +10,13 @@ import java.util.Properties;
 import java.util.Scanner;
 import java.util.logging.Logger;
 import javax.security.auth.login.LoginException;
-import com.cdero.gamerbot.commands.BeansListener;
-import com.cdero.gamerbot.commands.DiceRollListener;
-import com.cdero.gamerbot.commands.PingListener;
-import com.cdero.gamerbot.commands.PurgeListener;
-import com.cdero.gamerbot.commands.RemindMeListener;
-import com.cdero.gamerbot.commands.TestListener;
-import com.cdero.gamerbot.commands.TimerListener;
+import com.cdero.gamerbot.commands.BeansCommandListener;
+import com.cdero.gamerbot.commands.DiceRollCommandListener;
+import com.cdero.gamerbot.commands.PingCommandListener;
+import com.cdero.gamerbot.commands.PurgeCommandListener;
+import com.cdero.gamerbot.commands.RemindMeCommandListener;
+import com.cdero.gamerbot.commands.TestCommandListener;
+import com.cdero.gamerbot.commands.TimerCommandListener;
 import com.cdero.gamerbot.sql.SQLConnection;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
@@ -154,13 +154,13 @@ public class GamerBotApplication {
 			jda.setActivity(Activity.watching("You"));
 			
 			//Command Listeners
-			jda.addEventListeners(new PingListener());
-			jda.addEventListeners(new RemindMeListener());
-			jda.addEventListeners(new TimerListener());
-			jda.addEventListeners(new TestListener());
-			jda.addEventListeners(new BeansListener());
-			jda.addEventListeners(new DiceRollListener());
-			jda.addEventListeners(new PurgeListener());
+			jda.addEventListeners(new PingCommandListener());
+			jda.addEventListeners(new RemindMeCommandListener());
+			jda.addEventListeners(new TimerCommandListener());
+			jda.addEventListeners(new TestCommandListener());
+			jda.addEventListeners(new BeansCommandListener());
+			jda.addEventListeners(new DiceRollCommandListener());
+			jda.addEventListeners(new PurgeCommandListener());
 			
 			jda.addEventListeners(new OnReady());
 			
@@ -194,6 +194,7 @@ public class GamerBotApplication {
 				if(input.next().equals("stop")) {
 					
 					input.close();
+					log.info("Shutting down Gamer Bot...");
 					System.exit(0);
 					
 				}

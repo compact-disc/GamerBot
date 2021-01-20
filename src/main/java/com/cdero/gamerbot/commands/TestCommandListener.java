@@ -9,6 +9,6 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
  * @since		1.0
  *
  */
-public class TestListener extends ListenerAdapter {
+public class TestCommandListener extends ListenerAdapter {
 
 }

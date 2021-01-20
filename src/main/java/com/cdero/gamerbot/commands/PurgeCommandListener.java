@@ -19,12 +19,12 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
  * @since		1.0
  *
  */
-public class PurgeListener extends ListenerAdapter {
+public class PurgeCommandListener extends ListenerAdapter {
 
 	/**
 	 * Logger for the PurgeListener class.
 	 */
-	private final static Logger log = Logger.getLogger(PurgeListener.class.getPackage().getName());
+	private final static Logger log = Logger.getLogger(PurgeCommandListener.class.getPackage().getName());
 	
 	/**
 	 * Prefix for the application commands on client side.
