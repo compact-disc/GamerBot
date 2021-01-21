@@ -18,6 +18,7 @@ import com.cdero.gamerbot.commands.RemindMeCommandListener;
 import com.cdero.gamerbot.commands.RoleCommandListener;
 import com.cdero.gamerbot.commands.TestCommandListener;
 import com.cdero.gamerbot.commands.TimerCommandListener;
+import com.cdero.gamerbot.events.MemberJoinEventListener;
 import com.cdero.gamerbot.sql.SQLConnection;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
@@ -151,9 +152,12 @@ public class GamerBotApplication {
 		
 		try {
 			
+			//Set the activity
 			jda.setActivity(Activity.watching("You"));
 			
-			//Command Listeners
+			/*
+			 * Start Command Event Listeners
+			 */
 			jda.addEventListeners(new PingCommandListener());
 			jda.addEventListeners(new RemindMeCommandListener());
 			jda.addEventListeners(new TimerCommandListener());
@@ -162,8 +166,25 @@ public class GamerBotApplication {
 			jda.addEventListeners(new DiceRollCommandListener());
 			jda.addEventListeners(new PurgeCommandListener());
 			jda.addEventListeners(new RoleCommandListener());
+			/*
+			 * End Command Event Listeners
+			 */
 			
+			/*
+			 * Start Event Listeners
+			 */
+			jda.addEventListeners(new MemberJoinEventListener());
+			/*
+			 * End Event Listeners
+			 */
+			
+			/*
+			 * Start Utility Events
+			 */
 			jda.addEventListeners(new OnReady());
+			/*
+			 * End Utility Events
+			 */
 			
 			jda.setEnableShutdownHook(true);
 			
