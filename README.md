@@ -2,7 +2,10 @@
 
 ### Default Prefix: >>
 
-### Complete:
+### Complete
+- Switched to Log4j
+
+### Complete Commands:
 - Beans Listener/Command
   - ```>>beans```
 - Dice Rolling Command
@@ -18,9 +21,11 @@
 - Timer Command
   - ```>>timer [task] => [value].[hours/minutes/seconds]```
 
+### Complete Events:
+- Guild Member Join Event
+
 ### Plans:
 - Customized prefixes per server
 - Either MariaDB/MongoDB integration for per server customizations
 - Auto Role functionality - Users add their own specific roles and/or react roles
 - Image returner based on given parameter
-- Return cute image command

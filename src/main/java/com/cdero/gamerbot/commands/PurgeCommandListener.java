@@ -2,7 +2,8 @@ package com.cdero.gamerbot.commands;
 
 //import statements
 import java.util.List;
-import java.util.logging.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Message;
@@ -24,7 +25,7 @@ public class PurgeCommandListener extends ListenerAdapter {
 	/**
 	 * Logger for the PurgeListener class.
 	 */
-	private final static Logger log = Logger.getLogger(PurgeCommandListener.class.getPackage().getName());
+	private final static Logger log = LogManager.getLogger(PurgeCommandListener.class.getName());
 	
 	/**
 	 * Prefix for the application commands on client side.
@@ -84,7 +85,7 @@ public class PurgeCommandListener extends ListenerAdapter {
 				} catch (NumberFormatException e) {
 					
 					channel.sendMessage("Error when purging messages from channel!").queue();
-					log.warning("Error with the purge command!"
+					log.warn("Error with the purge command!"
 							+ "\nGuild: " + guild.toString()
 							+ "\nChannel: " + channel.toString()
 							+ "\nAuthor: " + author.toString());
@@ -112,7 +113,7 @@ public class PurgeCommandListener extends ListenerAdapter {
 				} else {
 					
 					channel.sendMessage("You do not have permission to do that.").queue();
-					log.warning("Error with the purge command!"
+					log.warn("Error with the purge command!"
 							+ "\nGuild: " + guild.toString()
 							+ "\nChannel: " + channel.toString()
 							+ "\nAuthor: " + author.toString());

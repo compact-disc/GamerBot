@@ -7,7 +7,8 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
@@ -27,7 +28,7 @@ public class RemindMeCommandListener extends ListenerAdapter {
 	/**
 	 * Logger for the RemindMeListener class.
 	 */
-	private final static Logger log = Logger.getLogger(RemindMeCommandListener.class.getPackage().getName());
+	private final static Logger log = LogManager.getLogger(RemindMeCommandListener.class.getName());
 	
 	/**
 	 * Prefix for the application commands on client side.
@@ -98,7 +99,7 @@ public class RemindMeCommandListener extends ListenerAdapter {
 				if(queueTime == -1) {
 					
 					channel.sendMessage("<@!" + author.getIdLong() + ">, " + "there was an issue adding your reminder! Check your input!").queue();
-					log.warning("Error with the remindme command!"
+					log.warn("Error with the remindme command!"
 							+ "\nGuild: " + guild.toString()
 							+ "\nChannel: " + channel.toString()
 							+ "\nAuthor: " + author.toString());
@@ -118,7 +119,7 @@ public class RemindMeCommandListener extends ListenerAdapter {
 				} catch (ErrorResponseException e) {
 					
 					channel.sendMessage("<@!" + author.getIdLong() + ">, " + "there was an issue adding your reminder! Check your input!").queue();
-					log.warning("Error with the remindme command!"
+					log.warn("Error with the remindme command!"
 							+ "\nGuild: " + guild.toString()
 							+ "\nChannel: " + channel.toString()
 							+ "\nAuthor: " + author.toString());
@@ -126,7 +127,7 @@ public class RemindMeCommandListener extends ListenerAdapter {
 				} catch (IllegalArgumentException e) {
 					
 					channel.sendMessage("<@!" + author.getIdLong() + ">, " + "there was an issue adding your reminder! Check your input!").queue();
-					log.warning("Error with the remindme command!"
+					log.warn("Error with the remindme command!"
 							+ "\nGuild: " + guild.toString()
 							+ "\nChannel: " + channel.toString()
 							+ "\nAuthor: " + author.toString());
@@ -134,7 +135,7 @@ public class RemindMeCommandListener extends ListenerAdapter {
 				} finally {
 					
 					channel.sendMessage("<@!" + author.getIdLong() + ">, " + "your reminder has been scheduled!").queue();
-					log.warning("Error with the remindme command!"
+					log.warn("Error with the remindme command!"
 							+ "\nGuild: " + guild.toString()
 							+ "\nChannel: " + channel.toString()
 							+ "\nAuthor: " + author.toString());

@@ -2,7 +2,8 @@ package com.cdero.gamerbot.commands;
 
 //import statements
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
@@ -22,7 +23,7 @@ public class TimerCommandListener extends ListenerAdapter {
 	/**
 	 * Logger for the MessageListener class.
 	 */
-	private final static Logger log = Logger.getLogger(TimerCommandListener.class.getPackage().getName());
+	private final static Logger log = LogManager.getLogger(TimerCommandListener.class.getName());
 	
 	/**
 	 * Prefix for the application commands on client side.
@@ -116,7 +117,7 @@ public class TimerCommandListener extends ListenerAdapter {
 				} catch (ErrorResponseException e){
 					
 					channel.sendMessage("<@!" + authorLong + ">" + ", there was an error creating your timer! Check your input!").queue();
-					log.warning("Error with the timer command!"
+					log.warn("Error with the timer command!"
 							+ "\nGuild: " + guild.toString()
 							+ "\nChannel: " + channel.toString()
 							+ "\nAuthor: " + author.toString());
@@ -124,7 +125,7 @@ public class TimerCommandListener extends ListenerAdapter {
 				} catch (IllegalArgumentException e) {
 					
 					channel.sendMessage("<@!" + authorLong + ">" + ", there was an error creating your timer! Check your input!").queue();
-					log.warning("Error with the timer command!"
+					log.warn("Error with the timer command!"
 							+ "\nGuild: " + guild.toString()
 							+ "\nChannel: " + channel.toString()
 							+ "\nAuthor: " + author.toString());

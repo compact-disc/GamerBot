@@ -8,7 +8,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.Scanner;
-import java.util.logging.Logger;
 import javax.security.auth.login.LoginException;
 import com.cdero.gamerbot.commands.BeansCommandListener;
 import com.cdero.gamerbot.commands.DiceRollCommandListener;
@@ -22,6 +21,8 @@ import com.cdero.gamerbot.events.MemberJoinEventListener;
 import com.cdero.gamerbot.sql.SQLConnection;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * 
@@ -55,7 +56,8 @@ public class GamerBotApplication {
 	/**
 	 * Logger for the GamerBotApplication class.
 	 */
-	private final static Logger log = Logger.getLogger(GamerBotApplication.class.getPackage().getName());
+	//private final static Logger log = Logger.getLogger(GamerBotApplication.class.getPackage().getName());
+	private static final Logger log = LogManager.getLogger(GamerBotApplication.class.getName());
 
 	/**
 	 * Main method for the Gamer Bot Application.
@@ -98,12 +100,12 @@ public class GamerBotApplication {
 				
 			} catch (IOException io) {
 				
-				log.severe("There was an I/O error creating the configuration file...");
+				log.fatal("There was an I/O error creating the configuration file...");
 				System.exit(1);
 				
 			} catch (SecurityException se) {
 				
-				log.severe("There was a permissions error when trying to write the configuration file...");
+				log.fatal("There was a permissions error when trying to write the configuration file...");
 				System.exit(1);
 				
 			}
@@ -121,12 +123,12 @@ public class GamerBotApplication {
 			
 		} catch (FileNotFoundException fnfe) {
 			
-			log.severe("There was no configuration file found...");
+			log.fatal("There was no configuration file found...");
 			System.exit(1);
 			
 		} catch (IOException io) {
 			
-			log.severe("There was an I/O error when loading the configuration file...");
+			log.fatal("There was an I/O error when loading the configuration file...");
 			System.exit(1);
 			
 		}
@@ -135,6 +137,13 @@ public class GamerBotApplication {
 		SQLConnection.connectToSQL();
 		
 		String token = config.getProperty("token");
+		
+		if(token.equals("ENTER YOUR TOKEN HERE")) {
+			
+			log.fatal("Invalid token! It looks like you have not entered one yet! Please enter a valid token and then start Gamer Bot...");
+			System.exit(1);
+			
+		}
 		
 		JDABuild(token);
 		
@@ -192,7 +201,7 @@ public class GamerBotApplication {
 			
 		} catch (LoginException e) {
 			
-			log.severe("Gamer Bot cannot login...");
+			log.fatal("Gamer Bot cannot login...");
 			System.exit(1);
 			
 		}

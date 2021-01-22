@@ -1,7 +1,8 @@
 package com.cdero.gamerbot.commands;
 
 //import statements
-import java.util.logging.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
@@ -20,7 +21,7 @@ public class PingCommandListener extends ListenerAdapter {
 	/**
 	 * Logger for the PingListener class.
 	 */
-	private final static Logger log = Logger.getLogger(PingCommandListener.class.getPackage().getName());
+	private final static Logger log = LogManager.getLogger(PingCommandListener.class.getName());
 	
 	/**
 	 * Prefix for the application commands on client side.

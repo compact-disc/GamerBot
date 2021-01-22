@@ -6,7 +6,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import com.cdero.gamerbot.GamerBotApplication;
 
 /**
@@ -31,7 +32,7 @@ public class SQLConnection {
 	/**
 	 * Logger for the SQLConnection class.
 	 */
-	private final static Logger log = Logger.getLogger(GamerBotApplication.class.getPackage().getName());
+	private final static Logger log = LogManager.getLogger(GamerBotApplication.class.getName());
 	
 	/**
 	 * Connect the Gamer Bot Application to the MySQL/MariaDB server.
@@ -51,7 +52,7 @@ public class SQLConnection {
 			
 		} catch (SQLException se) {
 
-			log.severe("Unable to connect to MySQL/MariaDB server, shutting down...");
+			log.fatal("Unable to connect to MySQL/MariaDB server, shutting down...");
 			System.exit(1);
 			
 		}
@@ -100,7 +101,7 @@ public class SQLConnection {
 			
 		} catch (SQLException e) {
 
-			log.severe("Unable to contact the MySQL/MariaDB server" +
+			log.fatal("Unable to contact the MySQL/MariaDB server" +
 			"\n Data will not be saved! Please check the connection to the MySQL/MariaDB server!");
 			
 			return false;
@@ -135,7 +136,7 @@ public class SQLConnection {
 			
 		} catch (SQLException se) {
 			
-			log.severe("Unable to contact the MySQL/MariaDB server with:" + 
+			log.fatal("Unable to contact the MySQL/MariaDB server with:" + 
 			"\n" + query +
 			"\n Data will not be saved! Please check the connection to the MySQL/MariaDB server!");
 			

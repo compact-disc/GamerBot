@@ -1,7 +1,8 @@
 package com.cdero.gamerbot.commands;
 
 //import statements
-import java.util.logging.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.TextChannel;
@@ -21,7 +22,7 @@ public class RoleCommandListener extends ListenerAdapter {
 	/**
 	 * Logger for the RoleCommandListener class.
 	 */
-	private final static Logger log = Logger.getLogger(RoleCommandListener.class.getPackage().getName());
+	private final static Logger log = LogManager.getLogger(RoleCommandListener.class.getName());
 	
 	/**
 	 * Prefix for the application commands on client side.
@@ -75,7 +76,7 @@ public class RoleCommandListener extends ListenerAdapter {
 					} catch (IllegalArgumentException e) {
 						
 						channel.sendMessage("Error adding role to user!").queue();
-						log.warning("Error adding role to user!"
+						log.warn("Error adding role to user!"
 								+ "\nGuild: " + guild.toString()
 								+ "\nChannel: " + channel.toString()
 								+ "\nAuthor: " + author.toString());
@@ -86,7 +87,7 @@ public class RoleCommandListener extends ListenerAdapter {
 				} else {
 					
 					channel.sendMessage("You don't have permission to do that!").queue();
-					log.warning("User does not have permission to do that!"
+					log.warn("User does not have permission to do that!"
 							+ "\nGuild: " + guild.toString()
 							+ "\nChannel: " + channel.toString()
 							+ "\nAuthor: " + author.toString());
@@ -108,7 +109,7 @@ public class RoleCommandListener extends ListenerAdapter {
 					} catch (IllegalArgumentException e) {
 						
 						channel.sendMessage("Error removing role from user!").queue();
-						log.warning("Error removing role from user!"
+						log.warn("Error removing role from user!"
 								+ "\nGuild: " + guild.toString()
 								+ "\nChannel: " + channel.toString()
 								+ "\nAuthor: " + author.toString());
@@ -118,7 +119,7 @@ public class RoleCommandListener extends ListenerAdapter {
 				} else {
 					
 					channel.sendMessage("You don't have permission to do that!").queue();
-					log.warning("User does not have permission to do that!"
+					log.warn("User does not have permission to do that!"
 							+ "\nGuild: " + guild.toString()
 							+ "\nChannel: " + channel.toString()
 							+ "\nAuthor: " + author.toString());

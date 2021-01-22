@@ -1,6 +1,8 @@
 package com.cdero.gamerbot.events;
 
-import java.util.logging.Logger;
+//import statements
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.TextChannel;
@@ -12,7 +14,7 @@ public class MemberJoinEventListener extends ListenerAdapter {
 	/**
 	 * Logger for the MemberJoinEventListener class.
 	 */
-	private final static Logger log = Logger.getLogger(MemberJoinEventListener.class.getPackage().getName());
+	private final static Logger log = LogManager.getLogger(MemberJoinEventListener.class.getName());
 	
 	/**
 	 * Overridden event that will run when a new guild member joins the guild.
@@ -27,10 +29,20 @@ public class MemberJoinEventListener extends ListenerAdapter {
 		String user = event.getMember().getAsMention();
 		TextChannel channel = event.getGuild().getDefaultChannel();
 		
-		channel.sendMessage("Welcome " + user + " to " + guild.getName() + "!").queue();
-		log.info("Event: Member Join Event"
-				+ "\nGuild: " + guild.getName()
-				+ "\nMember: " + member.getEffectiveName());
+		try {
+			
+			channel.sendMessage("Welcome " + user + " to " + guild.getName() + "!").queue();
+			log.info("Event: Member Join Event"
+					+ "\nGuild: " + guild.getName()
+					+ "\nMember: " + member.getEffectiveName());
+			
+		} catch (IllegalArgumentException e) {
+			
+			log.warn("Event: Member Join Event Error");
+			
+		}
+		
+
 		
 	}
 	

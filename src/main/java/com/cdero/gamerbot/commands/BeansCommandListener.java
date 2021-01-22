@@ -2,7 +2,8 @@ package com.cdero.gamerbot.commands;
 
 //import statements
 import java.io.File;
-import java.util.logging.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
@@ -21,7 +22,7 @@ public class BeansCommandListener extends ListenerAdapter{
 	/**
 	 * Logger for the BeansListener class.
 	 */
-	private final static Logger log = Logger.getLogger(BeansCommandListener.class.getPackage().getName());
+	private final static Logger log = LogManager.getLogger(BeansCommandListener.class.getName());
 	
 	/**
 	 * Prefix for the application commands on client side.
@@ -50,11 +51,21 @@ public class BeansCommandListener extends ListenerAdapter{
 		
 		if(content.equalsIgnoreCase(PREFIX + "beans") || content.equalsIgnoreCase(PREFIX + "bean")) {
 			
-			event.getChannel().sendFile(beansImage()).append(":b:eans").queue();
-			log.info("Command: " + PREFIX + "beans"
-					+ "\nGuild: " + guild.toString()
-					+ "\nChannel: " + channel.toString()
-					+ "\nAuthor: " + author.toString());
+			try {
+				
+				event.getChannel().sendFile(beansImage()).append(":b:eans").queue();
+				log.info("Command: " + PREFIX + "beans"
+						+ "\nGuild: " + guild.toString()
+						+ "\nChannel: " + channel.toString()
+						+ "\nAuthor: " + author.toString());
+				
+			} catch (IllegalArgumentException e) {
+				
+				event.getChannel().sendMessage("Error running the " + PREFIX + "beans command!").queue();
+				log.warn("Error when running " + PREFIX + "beans command!");
+				
+			}
+
 			
 			return;
 			
@@ -64,11 +75,19 @@ public class BeansCommandListener extends ListenerAdapter{
 				|| content.contains("Beans") || content.contains(" Beans "))
 				&& !author.isBot()) {
 			
-			event.getChannel().sendFile(beansImage()).append(":b:eans").queue();
-			log.info("Event: Beans Detected"
-					+ "\nGuild: " + guild.toString()
-					+ "\nChannel: " + channel.toString()
-					+ "\nAuthor: " + author.toString());
+			try {
+				
+				event.getChannel().sendFile(beansImage()).append(":b:eans").queue();
+				log.info("Event: Beans Detected"
+						+ "\nGuild: " + guild.toString()
+						+ "\nChannel: " + channel.toString()
+						+ "\nAuthor: " + author.toString());	
+				
+			} catch (IllegalArgumentException e) {
+				
+				log.warn("Error when replying with beans!");
+				
+			}
 			
 			return;
 			

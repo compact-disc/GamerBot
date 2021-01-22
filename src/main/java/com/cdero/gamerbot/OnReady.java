@@ -1,7 +1,8 @@
 package com.cdero.gamerbot;
 
 //import statements
-import java.util.logging.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
@@ -17,7 +18,7 @@ public class OnReady extends ListenerAdapter {
 	/**
 	 * Logger for the OnReady class.
 	 */
-	private final static Logger log = Logger.getLogger(OnReady.class.getPackage().getName());
+	private final static Logger log = LogManager.getLogger(OnReady.class.getName());
 	
 	@Override
 	public void onReady(ReadyEvent event) {
