@@ -32,6 +32,9 @@ dependencies {
     // Java Discord API integration
     compile 'net.dv8tion:JDA:4.2.0_227'
     
+    // Lava Player for audio
+    implementation 'com.sedmelluq:lavaplayer:1.3.66'
+    
     // MariaDB connection
     implementation 'org.mariadb.jdbc:mariadb-java-client:2.1.2'
 

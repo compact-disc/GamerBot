@@ -9,6 +9,13 @@ import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
+/**
+ * 
+ * @author 		Christopher DeRoche
+ * @version		1.0
+ * @since		1.0
+ *
+ */
 public class MemberJoinEventListener extends ListenerAdapter {
 
 	/**
@@ -38,11 +45,9 @@ public class MemberJoinEventListener extends ListenerAdapter {
 			
 		} catch (IllegalArgumentException e) {
 			
-			log.warn("Event: Member Join Event Error");
+			log.warn("Event: Member Join Event --> IllegalArgumentException");
 			
 		}
-		
-
 		
 	}
 	

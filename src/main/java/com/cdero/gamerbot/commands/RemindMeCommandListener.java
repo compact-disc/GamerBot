@@ -135,10 +135,7 @@ public class RemindMeCommandListener extends ListenerAdapter {
 				} finally {
 					
 					channel.sendMessage("<@!" + author.getIdLong() + ">, " + "your reminder has been scheduled!").queue();
-					log.warn("Error with the remindme command!"
-							+ "\nGuild: " + guild.toString()
-							+ "\nChannel: " + channel.toString()
-							+ "\nAuthor: " + author.toString());
+					log.info("Command: " + PREFIX + "remindme scheduled!");
 					
 				}
 					
