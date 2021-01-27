@@ -1,4 +1,4 @@
-package com.cdero.gamerbot.commands;
+package com.cdero.gamerbot.audio;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

@@ -20,6 +20,8 @@
   - ```>>role [add/remove/help] [role] [user]```
 - Timer Command
   - ```>>timer [task] => [value].[hours/minutes/seconds]```
+- Shutdown Command
+  - ```>>shutdown```
 
 ### Complete Events:
 - Guild Member Join Event
