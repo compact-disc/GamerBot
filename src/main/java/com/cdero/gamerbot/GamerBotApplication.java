@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.Scanner;
 import javax.security.auth.login.LoginException;
-import com.cdero.gamerbot.audio.PlayCommandListener;
+import com.cdero.gamerbot.audio.AudioCommandsListener;
 import com.cdero.gamerbot.commands.BeansCommandListener;
 import com.cdero.gamerbot.commands.DiceRollCommandListener;
 import com.cdero.gamerbot.commands.PingCommandListener;
@@ -177,10 +177,17 @@ public class GamerBotApplication {
 			jda.addEventListeners(new DiceRollCommandListener());
 			jda.addEventListeners(new PurgeCommandListener());
 			jda.addEventListeners(new RoleCommandListener());
-			jda.addEventListeners(new PlayCommandListener());
 			jda.addEventListeners(new ShutdownCommandListener());
 			/*
 			 * End Command Event Listeners
+			 */
+			
+			/*
+			 * Start Audio Command/Event Listeners
+			 */
+			jda.addEventListeners(new AudioCommandsListener());
+			/*
+			 * End Audio Command/Event Listeners
 			 */
 			
 			/*

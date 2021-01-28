@@ -39,19 +39,16 @@ public class ShutdownCommandListener extends ListenerAdapter {
 		User author = event.getAuthor();
 		TextChannel channel = event.getChannel();
 		Guild guild = event.getGuild();
+		String command[] = event.getMessage().getContentRaw().split(" ");
+		int commandLength = command.length;
 		
-		if(author.isBot() || !author.getId().equalsIgnoreCase("276544589861486593")) {
+		if(author.isBot()) {
 			
-			channel.sendMessage("You do not have permission to do that!").queue();
-			log.info("Command: " + PREFIX + "shutdown"
-					+ "\nGuild: " + guild.toString()
-					+ "\nChannel: " + channel.toString()
-					+ "\nAuthor: " + author.toString());
 			return;
 			
 		}
 		
-		if(event.getMessage().getContentRaw().equalsIgnoreCase(PREFIX + "shutdown") && author.getId().equalsIgnoreCase("276544589861486593")) {
+		if(command[0].equalsIgnoreCase(PREFIX + "shutdown") && commandLength == 1 && author.getId().equalsIgnoreCase("276544589861486593")) {
 			
 			channel.sendMessage("Gamer Bot Application shutting down...").queue();
 			log.info("Command: " + PREFIX + "shutdown"
@@ -60,6 +57,15 @@ public class ShutdownCommandListener extends ListenerAdapter {
 					+ "\nAuthor: " + author.toString());
 			
 			System.exit(0);
+			
+		}else if(command[0].equalsIgnoreCase(PREFIX + "shutdown") && commandLength == 1 && !author.getId().equalsIgnoreCase("276544589861486593")) {
+			
+			channel.sendMessage("You do not have permission to do that!").queue();
+			log.info("Command: " + PREFIX + "shutdown"
+					+ "\nGuild: " + guild.toString()
+					+ "\nChannel: " + channel.toString()
+					+ "\nAuthor: " + author.toString());
+			return;
 			
 		}
 		

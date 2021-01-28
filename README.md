@@ -31,3 +31,4 @@
 - Either MariaDB/MongoDB integration for per server customizations
 - Auto Role functionality - Users add their own specific roles and/or react roles
 - Image returner based on given parameter
+- Audio

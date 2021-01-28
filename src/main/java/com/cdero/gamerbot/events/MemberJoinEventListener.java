@@ -7,6 +7,7 @@ import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
+import net.dv8tion.jda.api.exceptions.InsufficientPermissionException;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 /**
@@ -46,6 +47,14 @@ public class MemberJoinEventListener extends ListenerAdapter {
 		} catch (IllegalArgumentException e) {
 			
 			log.warn("Event: Member Join Event --> IllegalArgumentException");
+			
+		} catch (InsufficientPermissionException e) {
+			
+			log.warn("Event: Member Join Event --> InsufficientPermissionException");
+			
+		} catch (UnsupportedOperationException e) {
+			
+			log.warn("Event: Member Join Event --> UnsupportedOperationException");
 			
 		}
 		
