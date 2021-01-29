@@ -47,17 +47,6 @@ public class AudioCommandsListener extends ListenerAdapter {
 		TextChannel channel = event.getChannel();
 		
 		if(command[0].equalsIgnoreCase(PREFIX + "leave") || command[0].equalsIgnoreCase(PREFIX + "pause") || command[0].equalsIgnoreCase(PREFIX + "play") || command[0].equalsIgnoreCase(PREFIX + "queue") || command[0].equalsIgnoreCase(PREFIX + "skip") || command[0].equalsIgnoreCase(PREFIX + "stop") || command[0].equalsIgnoreCase(PREFIX + "join")) {
-		
-			if(commandLength == 1 && command[0].equalsIgnoreCase(PREFIX + "play") && MusicManagers.musicManagers.get(Long.parseLong(event.getGuild().getId())).getSendHandler().getAudioPlayer().isPaused()) {
-				
-				log.info("Audio Command: " + command[0]
-						+ "\nGuild: " + guild.toString()
-						+ "\nChannel: " + channel.toString()
-						+ "\nAuthor: " + author.toString());
-				new PlayCommand(command, event);
-				return;
-				
-			}
 			
 			if(commandLength == 1 || (command[1].equalsIgnoreCase("help") && commandLength == 2)) {
 				
@@ -93,6 +82,14 @@ public class AudioCommandsListener extends ListenerAdapter {
 								+ "\nChannel: " + channel.toString()
 								+ "\nAuthor: " + author.toString());
 						new JoinCommand(event);
+						break;
+						
+					case PREFIX + "play":
+						log.info("Audio Command: " + command[0]
+								+ "\nGuild: " + guild.toString()
+								+ "\nChannel: " + channel.toString()
+								+ "\nAuthor: " + author.toString());
+						new PlayCommand(command, event);
 						break;
 					
 					default:

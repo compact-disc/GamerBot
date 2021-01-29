@@ -33,6 +33,13 @@ public class PlayCommand {
 			
 		}
 		
+		if(command.length == 1 && !event.getGuild().getAudioManager().isConnected()) {
+			
+			textChannel.sendMessage(":x: **There is nothing to play!**").queue();
+			return;
+			
+		}
+		
 		if(event.getGuild().getAudioManager().isConnected() && command.length == 2) {
 			
 			playTrack(textChannel, command[1]);
