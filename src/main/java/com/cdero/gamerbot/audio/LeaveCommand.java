@@ -1,10 +1,10 @@
 package com.cdero.gamerbot.audio;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import net.dv8tion.jda.api.entities.Guild;
+import com.cdero.gamerbot.audio.lavaplayer.MusicManagers;
+
 import net.dv8tion.jda.api.entities.TextChannel;
-import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.entities.VoiceChannel;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 /**
  * 
@@ -15,14 +15,22 @@ import net.dv8tion.jda.api.entities.User;
  */
 public class LeaveCommand {
 	
-	/**
-	 * Logger for the LeaveCommand class.
-	 */
-	private final static Logger log = LogManager.getLogger(LeaveCommand.class.getName());
-	
-	protected LeaveCommand(TextChannel channel, Guild guild, User author) {
+	protected LeaveCommand(GuildMessageReceivedEvent event) {
 		
+		VoiceChannel voiceChannel = event.getMember().getVoiceState().getChannel();
+		TextChannel textChannel = event.getChannel();
 		
+		if(voiceChannel == null) {
+			
+			textChannel.sendMessage(":x: **I am not connected to voice!**").queue();
+			return;
+			
+		}
+		
+		event.getGuild().getAudioManager().closeAudioConnection();
+		textChannel.sendMessage(":white_check_mark: **Disconnected from voice!**").queue();
+		
+		MusicManagers.musicManagers.get(Long.parseLong(event.getGuild().getId())).player.destroy();
 		
 	}
 

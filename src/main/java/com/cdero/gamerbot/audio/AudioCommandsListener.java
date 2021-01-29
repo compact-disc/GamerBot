@@ -2,6 +2,9 @@ package com.cdero.gamerbot.audio;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import com.cdero.gamerbot.audio.lavaplayer.MusicManagers;
+
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
@@ -43,61 +46,117 @@ public class AudioCommandsListener extends ListenerAdapter {
 		
 		TextChannel channel = event.getChannel();
 		
-		if(command[0].equalsIgnoreCase(PREFIX + "leave") || command[0].equalsIgnoreCase(PREFIX + "pause") || command[0].equalsIgnoreCase(PREFIX + "play") || command[0].equalsIgnoreCase(PREFIX + "queue") || command[0].equalsIgnoreCase(PREFIX + "skip") || command[0].equalsIgnoreCase(PREFIX + "stop")) {
+		if(command[0].equalsIgnoreCase(PREFIX + "leave") || command[0].equalsIgnoreCase(PREFIX + "pause") || command[0].equalsIgnoreCase(PREFIX + "play") || command[0].equalsIgnoreCase(PREFIX + "queue") || command[0].equalsIgnoreCase(PREFIX + "skip") || command[0].equalsIgnoreCase(PREFIX + "stop") || command[0].equalsIgnoreCase(PREFIX + "join")) {
 		
+			if(commandLength == 1 && command[0].equalsIgnoreCase(PREFIX + "play") && MusicManagers.musicManagers.get(Long.parseLong(event.getGuild().getId())).getSendHandler().getAudioPlayer().isPaused()) {
+				
+				log.info("Audio Command: " + command[0]
+						+ "\nGuild: " + guild.toString()
+						+ "\nChannel: " + channel.toString()
+						+ "\nAuthor: " + author.toString());
+				new PlayCommand(command, event);
+				return;
+				
+			}
+			
 			if(commandLength == 1 || (command[1].equalsIgnoreCase("help") && commandLength == 2)) {
 				
 				switch(command[0].toLowerCase()) {
 				
 					case PREFIX + "skip":
-						AudioLoggingAndReplies.audioLog(command[0], channel, guild, author);
-						new SkipCommand(channel, guild, author);
-						break;
-					
-					case PREFIX + "stop":
-						AudioLoggingAndReplies.audioLog(command[0], channel, guild, author);
-						new StopCommand(channel, guild, author);
+						log.info("Audio Command: " + command[0]
+								+ "\nGuild: " + guild.toString()
+								+ "\nChannel: " + channel.toString()
+								+ "\nAuthor: " + author.toString());
+						new SkipCommand(event);
 						break;
 						
 					case PREFIX + "leave":
-						AudioLoggingAndReplies.audioLog(command[0], channel, guild, author);
-						new LeaveCommand(channel, guild, author);
+						log.info("Audio Command: " + command[0]
+								+ "\nGuild: " + guild.toString()
+								+ "\nChannel: " + channel.toString()
+								+ "\nAuthor: " + author.toString());
+						new LeaveCommand(event);
 						break;
 						
 					case PREFIX + "pause":
-						AudioLoggingAndReplies.audioLog(command[0], channel, guild, author);
-						new PauseCommand(channel, guild, author);
+						log.info("Audio Command: " + command[0]
+								+ "\nGuild: " + guild.toString()
+								+ "\nChannel: " + channel.toString()
+								+ "\nAuthor: " + author.toString());
+						new PauseCommand(event);
+						break;
+						
+					case PREFIX + "join":
+						log.info("Audio Command: " + command[0]
+								+ "\nGuild: " + guild.toString()
+								+ "\nChannel: " + channel.toString()
+								+ "\nAuthor: " + author.toString());
+						new JoinCommand(event);
 						break;
 					
 					default:
-						AudioLoggingAndReplies.audioHelpReply(channel, guild, author);
+						channel.sendMessage("```"
+								+ "Audio Player Commands:"
+								+ "\n" + PREFIX + "play [YouTube URL]"
+								+ "\n" + PREFIX + "pause"
+								+ "\n" + PREFIX + "skip"
+								+ "\n" + PREFIX + "stop"
+								+ "\n" + PREFIX + "leave"
+								+ "```").queue();
+						
+						log.info("Audio Commands"
+								+ "\nGuild: " + guild.toString()
+								+ "\nChannel: " + channel.toString()
+								+ "\nAuthor: " + author.toString());
 						break;
 				
 				}
 				
-			}else if(commandLength >= 2 && !command[1].equalsIgnoreCase("help")) {
+			}else if((commandLength == 2 && !command[1].equalsIgnoreCase("help"))) {
 				
 				switch(command[0].toLowerCase()) {
 						
 					case PREFIX + "play":
-						AudioLoggingAndReplies.audioLog(command[0], channel, guild, author);
-						new PlayCommand(command, channel, guild, author);
-						break;
-						
-					case PREFIX + "queue":
-						AudioLoggingAndReplies.audioLog(command[0], channel, guild, author);
-						new QueueCommand(command, channel, guild, author);
+						log.info("Audio Command: " + command[0]
+								+ "\nGuild: " + guild.toString()
+								+ "\nChannel: " + channel.toString()
+								+ "\nAuthor: " + author.toString());
+						new PlayCommand(command, event);
 						break;
 						
 					default:
-						AudioLoggingAndReplies.audioHelpReply(channel, guild, author);
+						channel.sendMessage("```"
+								+ "Audio Player Commands:"
+								+ "\n" + PREFIX + "play [YouTube URL]"
+								+ "\n" + PREFIX + "pause"
+								+ "\n" + PREFIX + "skip"
+								+ "\n" + PREFIX + "stop"
+								+ "\n" + PREFIX + "leave"
+								+ "```").queue();
+						
+						log.info("Audio Commands"
+								+ "\nGuild: " + guild.toString()
+								+ "\nChannel: " + channel.toString()
+								+ "\nAuthor: " + author.toString());
 						break;
 				
 				}
 				
 			}else {
 				
-				AudioLoggingAndReplies.audioHelpReply(channel, guild, author);
+				channel.sendMessage("```"
+						+ "Audio Player Commands:"
+						+ "\n" + PREFIX + "play [YouTube URL]"
+						+ "\n" + PREFIX + "pause"
+						+ "\n" + PREFIX + "skip"
+						+ "\n" + PREFIX + "leave"
+						+ "```").queue();
+				
+				log.info("Audio Commands"
+						+ "\nGuild: " + guild.toString()
+						+ "\nChannel: " + channel.toString()
+						+ "\nAuthor: " + author.toString());
 				
 			}
 			

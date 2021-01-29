@@ -1,10 +1,10 @@
 package com.cdero.gamerbot.audio;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import com.cdero.gamerbot.audio.lavaplayer.GuildMusicManager;
+import com.cdero.gamerbot.audio.lavaplayer.MusicManagers;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.TextChannel;
-import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 /**
  * 
@@ -15,14 +15,39 @@ import net.dv8tion.jda.api.entities.User;
  */
 public class SkipCommand {
 	
-	/**
-	 * Logger for the SkipCommand class.
-	 */
-	private final static Logger log = LogManager.getLogger(SkipCommand.class.getName());
+	protected SkipCommand(GuildMessageReceivedEvent event) {
+		
+		TextChannel channel = event.getChannel();
+		
+		skipTrack(channel);
+		
+	}
 	
-	protected SkipCommand(TextChannel channel, Guild guild, User author) {
+	private void skipTrack(TextChannel channel) {
 		
+		GuildMusicManager musicManager = getGuildAudioPlayer(channel.getGuild());
+		musicManager.scheduler.nextTrack();
 		
+		channel.sendMessage(":white_check_mark: **Skipped to next track!**").queue();
+		
+	}
+	
+	private synchronized GuildMusicManager getGuildAudioPlayer(Guild guild) {
+		
+		long guildId = Long.parseLong(guild.getId());
+		
+		GuildMusicManager musicManager = MusicManagers.musicManagers.get(guildId);
+		
+		if(musicManager == null) {
+			
+			musicManager = new GuildMusicManager(MusicManagers.playerManager);
+			MusicManagers.musicManagers.put(guildId, musicManager);
+			
+		}
+		
+		guild.getAudioManager().setSendingHandler(musicManager.getSendHandler());
+		
+		return musicManager;
 		
 	}
 

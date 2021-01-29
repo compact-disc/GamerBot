@@ -25,6 +25,7 @@
 
 ### Complete Events:
 - Guild Member Join Event
+- Bot join Guild Event
 
 ### Plans:
 - Customized prefixes per server

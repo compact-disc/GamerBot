@@ -1,10 +1,9 @@
 package com.cdero.gamerbot.audio;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import net.dv8tion.jda.api.entities.Guild;
+import com.cdero.gamerbot.audio.lavaplayer.MusicManagers;
 import net.dv8tion.jda.api.entities.TextChannel;
-import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.entities.VoiceChannel;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 /**
  * 
@@ -14,15 +13,36 @@ import net.dv8tion.jda.api.entities.User;
  *
  */
 public class PauseCommand {
-
-	/**
-	 * Logger for the PauseCommand class.
-	 */
-	private final static Logger log = LogManager.getLogger(PauseCommand.class.getName());
 	
-	protected PauseCommand(TextChannel channel, Guild guild, User author) {
+	protected PauseCommand(GuildMessageReceivedEvent event) {
 		
+		VoiceChannel voiceChannel = event.getMember().getVoiceState().getChannel();
+		TextChannel textChannel = event.getChannel();
 		
+		if(voiceChannel == null) {
+			
+			textChannel.sendMessage(":x: **You are not connected to a voice channel!**").queue();
+			return;
+			
+		}
+		
+		if(event.getGuild().getAudioManager().isConnected() && !MusicManagers.musicManagers.get(Long.parseLong(event.getGuild().getId())).getSendHandler().getAudioPlayer().isPaused()) {
+			
+			MusicManagers.musicManagers.get(Long.parseLong(event.getGuild().getId())).getSendHandler().getAudioPlayer().setPaused(true);
+			
+			textChannel.sendMessage(":white_check_mark: **Track paused!**").queue();
+			
+		}else if(event.getGuild().getAudioManager().isConnected() && MusicManagers.musicManagers.get(Long.parseLong(event.getGuild().getId())).getSendHandler().getAudioPlayer().isPaused()) {
+			
+			MusicManagers.musicManagers.get(Long.parseLong(event.getGuild().getId())).getSendHandler().getAudioPlayer().setPaused(false);
+			
+			textChannel.sendMessage(":white_check_mark: **Track unpaused!**").queue();
+			
+		}else if (!event.getGuild().getAudioManager().isConnected()){
+			
+			textChannel.sendMessage(":x: **The bot is not in voice!**").queue();
+			
+		}
 		
 	}
 	

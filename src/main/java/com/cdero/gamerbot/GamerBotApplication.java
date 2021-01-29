@@ -10,6 +10,7 @@ import java.util.Properties;
 import java.util.Scanner;
 import javax.security.auth.login.LoginException;
 import com.cdero.gamerbot.audio.AudioCommandsListener;
+import com.cdero.gamerbot.audio.lavaplayer.MusicManagers;
 import com.cdero.gamerbot.commands.BeansCommandListener;
 import com.cdero.gamerbot.commands.DiceRollCommandListener;
 import com.cdero.gamerbot.commands.PingCommandListener;
@@ -256,6 +257,8 @@ public class GamerBotApplication {
 			
 			public void run() {
 				
+				MusicManagers.musicManagers.clear();
+				MusicManagers.playerManager.shutdown();
 				log.info("Gamer Bot Closed...");
 				
 			}
