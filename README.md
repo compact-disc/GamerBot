@@ -23,6 +23,18 @@
 - Shutdown Command
   - ```>>shutdown```
 
+### Complete Audio
+- Join
+  - ```>>join```
+- Leave
+  - ```>>leave```
+- Pause
+  - ```>>pause```
+- Play
+  - ```>>play / >>play [YouTube URL]```
+- Skip
+  - ```>>skip```
+
 ### Complete Events:
 - Guild Member Join Event
 - Bot join Guild Event
@@ -32,4 +44,3 @@
 - Either MariaDB/MongoDB integration for per server customizations
 - Auto Role functionality - Users add their own specific roles and/or react roles
 - Image returner based on given parameter
-- Audio
