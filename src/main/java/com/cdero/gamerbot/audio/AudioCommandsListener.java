@@ -1,5 +1,6 @@
 package com.cdero.gamerbot.audio;
 
+//import statements
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -11,6 +12,13 @@ import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
+/**
+ * 
+ * @author 		Christopher DeRoche
+ * @version		1.0
+ * @since		1.0
+ *
+ */
 public class AudioCommandsListener extends ListenerAdapter {
 	
 	/**
@@ -46,7 +54,29 @@ public class AudioCommandsListener extends ListenerAdapter {
 		
 		TextChannel channel = event.getChannel();
 		
-		if(command[0].equalsIgnoreCase(PREFIX + "leave") || command[0].equalsIgnoreCase(PREFIX + "pause") || command[0].equalsIgnoreCase(PREFIX + "play") || command[0].equalsIgnoreCase(PREFIX + "queue") || command[0].equalsIgnoreCase(PREFIX + "skip") || command[0].equalsIgnoreCase(PREFIX + "stop") || command[0].equalsIgnoreCase(PREFIX + "join")) {
+		if(command[0].equalsIgnoreCase(PREFIX + "leave") || command[0].equalsIgnoreCase(PREFIX + "pause") || command[0].equalsIgnoreCase(PREFIX + "play") || command[0].equalsIgnoreCase(PREFIX + "skip") || command[0].equalsIgnoreCase(PREFIX + "join")) {
+			
+			if(commandLength == 2 && command[1].equalsIgnoreCase("help")) {
+				
+				channel.sendMessage(":white_check_mark: **Audio Player Commands:"
+						+ "\n"
+						+ "\n" + PREFIX + "play [YouTube URL] :arrow_right: To play the audio from a YouTube video."
+						+ "\n"
+						+ "\n" + PREFIX + "pause :arrow_right: To pause and unpause audio."
+						+ "\n"
+						+ "\n" + PREFIX + "skip :arrow_right: To skip the current song."
+						+ "\n"
+						+ "\n" + PREFIX + "leave :arrow_right: To make Gamer Bot leave the voice channel."
+						+ "**").queue();
+				
+				log.info("Audio Commands"
+						+ "\nGuild: " + guild.toString()
+						+ "\nChannel: " + channel.toString()
+						+ "\nAuthor: " + author.toString());
+				
+				return;
+				
+			}
 			
 			if(commandLength == 1 || (command[1].equalsIgnoreCase("help") && commandLength == 2)) {
 				
@@ -83,24 +113,18 @@ public class AudioCommandsListener extends ListenerAdapter {
 								+ "\nAuthor: " + author.toString());
 						new JoinCommand(event);
 						break;
-						
-					case PREFIX + "play":
-						log.info("Audio Command: " + command[0]
-								+ "\nGuild: " + guild.toString()
-								+ "\nChannel: " + channel.toString()
-								+ "\nAuthor: " + author.toString());
-						new PlayCommand(command, event);
-						break;
 					
 					default:
-						channel.sendMessage("```"
-								+ "Audio Player Commands:"
-								+ "\n" + PREFIX + "play [YouTube URL]"
-								+ "\n" + PREFIX + "pause"
-								+ "\n" + PREFIX + "skip"
-								+ "\n" + PREFIX + "stop"
-								+ "\n" + PREFIX + "leave"
-								+ "```").queue();
+						channel.sendMessage(":white_check_mark: **Audio Player Commands:"
+								+ "\n"
+								+ "\n" + PREFIX + "play [YouTube URL] :arrow_right: To play the audio from a YouTube video."
+								+ "\n"
+								+ "\n" + PREFIX + "pause :arrow_right: To pause and unpause audio."
+								+ "\n"
+								+ "\n" + PREFIX + "skip :arrow_right: To skip the current song."
+								+ "\n"
+								+ "\n" + PREFIX + "leave :arrow_right: To make Gamer Bot leave the voice channel."
+								+ "**").queue();
 						
 						log.info("Audio Commands"
 								+ "\nGuild: " + guild.toString()
@@ -113,7 +137,7 @@ public class AudioCommandsListener extends ListenerAdapter {
 			}else if((commandLength == 2 && !command[1].equalsIgnoreCase("help"))) {
 				
 				switch(command[0].toLowerCase()) {
-						
+				
 					case PREFIX + "play":
 						log.info("Audio Command: " + command[0]
 								+ "\nGuild: " + guild.toString()
@@ -123,14 +147,16 @@ public class AudioCommandsListener extends ListenerAdapter {
 						break;
 						
 					default:
-						channel.sendMessage("```"
-								+ "Audio Player Commands:"
-								+ "\n" + PREFIX + "play [YouTube URL]"
-								+ "\n" + PREFIX + "pause"
-								+ "\n" + PREFIX + "skip"
-								+ "\n" + PREFIX + "stop"
-								+ "\n" + PREFIX + "leave"
-								+ "```").queue();
+						channel.sendMessage(":white_check_mark: **Audio Player Commands:"
+								+ "\n"
+								+ "\n" + PREFIX + "play [YouTube URL] :arrow_right: To play the audio from a YouTube video."
+								+ "\n"
+								+ "\n" + PREFIX + "pause :arrow_right: To pause and unpause audio."
+								+ "\n"
+								+ "\n" + PREFIX + "skip :arrow_right: To skip the current song."
+								+ "\n"
+								+ "\n" + PREFIX + "leave :arrow_right: To make Gamer Bot leave the voice channel."
+								+ "**").queue();
 						
 						log.info("Audio Commands"
 								+ "\nGuild: " + guild.toString()
@@ -142,13 +168,16 @@ public class AudioCommandsListener extends ListenerAdapter {
 				
 			}else {
 				
-				channel.sendMessage("```"
-						+ "Audio Player Commands:"
-						+ "\n" + PREFIX + "play [YouTube URL]"
-						+ "\n" + PREFIX + "pause"
-						+ "\n" + PREFIX + "skip"
-						+ "\n" + PREFIX + "leave"
-						+ "```").queue();
+				channel.sendMessage(":white_check_mark: **Audio Player Commands:"
+						+ "\n"
+						+ "\n" + PREFIX + "play [YouTube URL] :arrow_right: To play the audio from a YouTube video."
+						+ "\n"
+						+ "\n" + PREFIX + "pause :arrow_right: To pause and unpause audio."
+						+ "\n"
+						+ "\n" + PREFIX + "skip :arrow_right: To skip the current song."
+						+ "\n"
+						+ "\n" + PREFIX + "leave :arrow_right: To make Gamer Bot leave the voice channel."
+						+ "**").queue();
 				
 				log.info("Audio Commands"
 						+ "\nGuild: " + guild.toString()

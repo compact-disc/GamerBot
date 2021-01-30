@@ -18,8 +18,8 @@ import com.cdero.gamerbot.commands.PurgeCommandListener;
 import com.cdero.gamerbot.commands.RemindMeCommandListener;
 import com.cdero.gamerbot.commands.RoleCommandListener;
 import com.cdero.gamerbot.commands.ShutdownCommandListener;
-import com.cdero.gamerbot.commands.TestCommandListener;
 import com.cdero.gamerbot.commands.TimerCommandListener;
+import com.cdero.gamerbot.events.BotJoinEventListener;
 import com.cdero.gamerbot.events.MemberJoinEventListener;
 import com.cdero.gamerbot.sql.SQLConnection;
 import net.dv8tion.jda.api.JDABuilder;
@@ -173,7 +173,6 @@ public class GamerBotApplication {
 			jda.addEventListeners(new PingCommandListener());
 			jda.addEventListeners(new RemindMeCommandListener());
 			jda.addEventListeners(new TimerCommandListener());
-			jda.addEventListeners(new TestCommandListener());
 			jda.addEventListeners(new BeansCommandListener());
 			jda.addEventListeners(new DiceRollCommandListener());
 			jda.addEventListeners(new PurgeCommandListener());
@@ -195,6 +194,7 @@ public class GamerBotApplication {
 			 * Start Event Listeners
 			 */
 			jda.addEventListeners(new MemberJoinEventListener());
+			jda.addEventListeners(new BotJoinEventListener());
 			/*
 			 * End Event Listeners
 			 */
@@ -229,7 +229,6 @@ public class GamerBotApplication {
 	 * Setup the thread to run server side commands. This includes the shutdown hook.
 	 */
 	private void serverCommands() {
-		
 		
 		Thread shutdown = new Thread() {
 			

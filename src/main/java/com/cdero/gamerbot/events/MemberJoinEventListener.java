@@ -39,7 +39,7 @@ public class MemberJoinEventListener extends ListenerAdapter {
 		
 		try {
 			
-			channel.sendMessage("Welcome " + user + " to " + guild.getName() + "!").queue();
+			channel.sendMessage(":sunglasses:  **Welcome " + user + " to " + guild.getName() + "!**").queue();
 			log.info("Event: Member Join Event"
 					+ "\nGuild: " + guild.getName()
 					+ "\nMember: " + member.getEffectiveName());

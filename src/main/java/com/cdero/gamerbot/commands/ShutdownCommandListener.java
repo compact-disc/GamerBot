@@ -50,7 +50,7 @@ public class ShutdownCommandListener extends ListenerAdapter {
 		
 		if(command[0].equalsIgnoreCase(PREFIX + "shutdown") && commandLength == 1 && author.getId().equalsIgnoreCase("276544589861486593")) {
 			
-			channel.sendMessage("Gamer Bot Application shutting down...").queue();
+			channel.sendMessage(":white_check_mark: **Gamer Bot Application shutting down!**").queue();
 			log.info("Command: " + PREFIX + "shutdown"
 					+ "\nGuild: " + guild.toString()
 					+ "\nChannel: " + channel.toString()
@@ -60,7 +60,7 @@ public class ShutdownCommandListener extends ListenerAdapter {
 			
 		}else if(command[0].equalsIgnoreCase(PREFIX + "shutdown") && commandLength == 1 && !author.getId().equalsIgnoreCase("276544589861486593")) {
 			
-			channel.sendMessage("You do not have permission to do that!").queue();
+			channel.sendMessage(":x: **You do not have permission to do that!**").queue();
 			log.info("Command: " + PREFIX + "shutdown"
 					+ "\nGuild: " + guild.toString()
 					+ "\nChannel: " + channel.toString()

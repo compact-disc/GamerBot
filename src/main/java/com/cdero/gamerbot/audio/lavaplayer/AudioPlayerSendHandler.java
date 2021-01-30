@@ -1,5 +1,6 @@
 package com.cdero.gamerbot.audio.lavaplayer;
 
+//import statements
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.track.playback.MutableAudioFrame;
 import java.nio.Buffer;
@@ -11,6 +12,10 @@ import java.nio.ByteBuffer;
  * AudioSendHandler for JDA. As JDA calls canProvide before every call to
  * provide20MsAudio(), we pull the frame in canProvide() and use the frame we
  * already pulled in provide20MsAudio().
+ * 
+ * @version		1.0
+ * @since		1.0
+ *
  */
 public class AudioPlayerSendHandler implements AudioSendHandler {
 	private final AudioPlayer audioPlayer;

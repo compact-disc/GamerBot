@@ -15,6 +15,11 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
  */
 public class LeaveCommand {
 	
+	/**
+	 * Operations that are run on the leave command.
+	 * 
+	 * @param event	Information about the event including the voice channel and text channel.
+	 */
 	protected LeaveCommand(GuildMessageReceivedEvent event) {
 		
 		VoiceChannel voiceChannel = event.getMember().getVoiceState().getChannel();

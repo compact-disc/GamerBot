@@ -53,7 +53,7 @@ public class BeansCommandListener extends ListenerAdapter{
 			
 			try {
 				
-				event.getChannel().sendFile(beansImage()).append(":b:eans").queue();
+				event.getChannel().sendFile(beansImage()).append(":b:**eans**").queue();
 				log.info("Command: " + PREFIX + "beans"
 						+ "\nGuild: " + guild.toString()
 						+ "\nChannel: " + channel.toString()
@@ -61,7 +61,7 @@ public class BeansCommandListener extends ListenerAdapter{
 				
 			} catch (IllegalArgumentException e) {
 				
-				event.getChannel().sendMessage("Error running the " + PREFIX + "beans command!").queue();
+				event.getChannel().sendMessage(":x: **Error running the " + PREFIX + "beans command!**").queue();
 				log.warn("Error when running " + PREFIX + "beans command!");
 				
 			}
@@ -77,7 +77,7 @@ public class BeansCommandListener extends ListenerAdapter{
 			
 			try {
 				
-				event.getChannel().sendFile(beansImage()).append(":b:eans").queue();
+				event.getChannel().sendFile(beansImage()).append(":b:**eans**").queue();
 				log.info("Event: Beans Detected"
 						+ "\nGuild: " + guild.toString()
 						+ "\nChannel: " + channel.toString()
@@ -85,7 +85,7 @@ public class BeansCommandListener extends ListenerAdapter{
 				
 			} catch (IllegalArgumentException e) {
 				
-				log.warn("Error when replying with beans!");
+				log.warn(":x: **Error when replying with beans!**");
 				
 			}
 			

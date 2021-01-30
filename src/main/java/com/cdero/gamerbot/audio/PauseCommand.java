@@ -14,6 +14,11 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
  */
 public class PauseCommand {
 	
+	/**
+	 * Operations that are run on the pause command.
+	 * 
+	 * @param event	Information about the event including the voice channel and text channel.
+	 */
 	protected PauseCommand(GuildMessageReceivedEvent event) {
 		
 		VoiceChannel voiceChannel = event.getMember().getVoiceState().getChannel();

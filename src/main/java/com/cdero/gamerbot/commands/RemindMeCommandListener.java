@@ -64,7 +64,12 @@ public class RemindMeCommandListener extends ListenerAdapter {
 		
 		if(command[0].equals(PREFIX + "remind") && command[1].equals("me")) {
 			
-			channel.sendMessage("```" + "Usage: Create a reminder on the present day given an exact time.\n" + PREFIX + "remindme [task] => [time].[AM/PM].[zone]\nSupported Zones: EST/EDT/CST/CDT/PST/PDT\nExample: " + PREFIX + "remindme Play Games! => 2:00.PM.EST" + "```").queue();
+			channel.sendMessage(":white_check_mark: **Usage: Create a reminder on the present day given an exact time."
+					+ "\n" + PREFIX + "remindme [task] => [time].[AM/PM].[zone]"
+					+ "\nSupported Zones: EST/EDT/CST/CDT/PST/PDT"
+					+ "\nExample: " + PREFIX + "remindme Play Games! => 2:00.PM.EST"
+					+ "**").queue();
+			
 			log.info("Command: " + PREFIX + "remindme"
 					+ "\nGuild: " + guild.toString()
 					+ "\nChannel: " + channel.toString()
@@ -76,7 +81,12 @@ public class RemindMeCommandListener extends ListenerAdapter {
 			
 			if(commandLength == 1 || command[1].equals("help")) {
 				
-				channel.sendMessage("```" + "Usage: Create a reminder on the present day given an exact time.\n" + PREFIX + "remindme [task] => [time].[AM/PM].[zone]\nSupported Zones: EST/EDT/CST/CDT/PST/PDT\nExample: " + PREFIX + "remindme Play Games! => 2:00.PM.EST" + "```").queue();
+				channel.sendMessage(":white_check_mark: **Usage: Create a reminder on the present day given an exact time."
+						+ "\n" + PREFIX + "remindme [task] => [time].[AM/PM].[zone]"
+						+ "\nSupported Zones: EST/EDT/CST/CDT/PST/PDT"
+						+ "\nExample: " + PREFIX + "remindme Play Games! => 2:00.PM.EST"
+						+ "**").queue();
+				
 				log.info("Command: " + PREFIX + "remindme"
 						+ "\nGuild: " + guild.toString()
 						+ "\nChannel: " + channel.toString()
@@ -98,7 +108,7 @@ public class RemindMeCommandListener extends ListenerAdapter {
 				
 				if(queueTime == -1) {
 					
-					channel.sendMessage("<@!" + author.getIdLong() + ">, " + "there was an issue adding your reminder! Check your input!").queue();
+					channel.sendMessage(":x: **<@!" + author.getIdLong() + ">, " + "there was an issue adding your reminder! Check your input!**").queue();
 					log.warn("Error with the remindme command!"
 							+ "\nGuild: " + guild.toString()
 							+ "\nChannel: " + channel.toString()
@@ -109,7 +119,7 @@ public class RemindMeCommandListener extends ListenerAdapter {
 				
 				try {
 					
-					channel.sendMessage("<@!" + author.getIdLong() + ">, " + rawReminder.toString()).queueAfter(queueTime, TimeUnit.MILLISECONDS);
+					channel.sendMessage(":white_check_mark: **<@!" + author.getIdLong() + ">, " + rawReminder.toString() + "**").queueAfter(queueTime, TimeUnit.MILLISECONDS);
 					log.info("Command: " + PREFIX + "remindme"
 							+ "\nTime: " + queueTime + "ms"
 							+ "\nGuild: " + guild.toString()
@@ -118,7 +128,7 @@ public class RemindMeCommandListener extends ListenerAdapter {
 					
 				} catch (ErrorResponseException e) {
 					
-					channel.sendMessage("<@!" + author.getIdLong() + ">, " + "there was an issue adding your reminder! Check your input!").queue();
+					channel.sendMessage(":x: **<@!" + author.getIdLong() + ">, " + "there was an issue adding your reminder! Check your input!**").queue();
 					log.warn("Error with the remindme command!"
 							+ "\nGuild: " + guild.toString()
 							+ "\nChannel: " + channel.toString()
@@ -126,7 +136,7 @@ public class RemindMeCommandListener extends ListenerAdapter {
 					
 				} catch (IllegalArgumentException e) {
 					
-					channel.sendMessage("<@!" + author.getIdLong() + ">, " + "there was an issue adding your reminder! Check your input!").queue();
+					channel.sendMessage(":x: **<@!" + author.getIdLong() + ">, " + "there was an issue adding your reminder! Check your input!**").queue();
 					log.warn("Error with the remindme command!"
 							+ "\nGuild: " + guild.toString()
 							+ "\nChannel: " + channel.toString()
@@ -134,7 +144,7 @@ public class RemindMeCommandListener extends ListenerAdapter {
 					
 				} finally {
 					
-					channel.sendMessage("<@!" + author.getIdLong() + ">, " + "your reminder has been scheduled!").queue();
+					channel.sendMessage(":white_check_mark: **<@!" + author.getIdLong() + ">, " + "your reminder has been scheduled!**").queue();
 					log.info("Command: " + PREFIX + "remindme scheduled!");
 					
 				}
@@ -142,7 +152,12 @@ public class RemindMeCommandListener extends ListenerAdapter {
 				
 			}else {
 				
-				channel.sendMessage("```" + "Usage: Create a reminder on the present day given an exact time.\n" + PREFIX + "remindme [task] => [time].[AM/PM].[zone]\nSupported Zones: EST/EDT/CST/CDT/PST/PDT\nExample: " + PREFIX + "remindme Play Games! => 2:00.PM.EST" + "```").queue();
+				channel.sendMessage(":white_check_mark: **Usage: Create a reminder on the present day given an exact time."
+						+ "\n" + PREFIX + "remindme [task] => [time].[AM/PM].[zone]"
+						+ "\nSupported Zones: EST/EDT/CST/CDT/PST/PDT"
+						+ "\nExample: " + PREFIX + "remindme Play Games! => 2:00.PM.EST"
+						+ "**").queue();
+				
 				log.info("Command: " + PREFIX + "remindme"
 						+ "\nGuild: " + guild.toString()
 						+ "\nChannel: " + channel.toString()

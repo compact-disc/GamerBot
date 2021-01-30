@@ -54,7 +54,14 @@ public class DiceRollCommandListener extends ListenerAdapter {
 			
 			if(commandLength == 1 || command[1].equalsIgnoreCase("help") && commandLength == 2) {
 				
-				channel.sendMessage("```" + "Usage: Roll any dice d, x number of times.\n" + PREFIX + "roll [dice] <times>\nExamples:\n" + PREFIX + "roll d6\n"+ PREFIX + "roll d20 5" + "```").queue();
+				channel.sendMessage(":white_check_mark: **Usage: Roll any dice d, x number of times."
+						+ "\n" 
+						+ "\n" + PREFIX + "roll [dice] <times>"
+						+ "\nExamples:"
+						+ "\n" + PREFIX + "roll d6"
+						+ "\n" + PREFIX + "roll d20 5"
+						+ "**").queue();
+				
 				log.info("Command: " + PREFIX + "roll"
 						+ "\nGuild: " + guild.toString()
 						+ "\nChannel: " + channel.toString()
@@ -76,6 +83,7 @@ public class DiceRollCommandListener extends ListenerAdapter {
 				}
 				
 				channel.sendMessage(rollDice(diceNumberInteger, numberOfRolls)).queue();
+				
 				log.info("Command: " + PREFIX + "roll"
 						+ "\nGuild: " + guild.toString()
 						+ "\nChannel: " + channel.toString()
@@ -83,7 +91,14 @@ public class DiceRollCommandListener extends ListenerAdapter {
 				
 			}else {
 				
-				channel.sendMessage("```" + "Usage: Roll any dice d, x number of times.\n" + PREFIX + "roll [dice] <times>\nExamples:\n" + PREFIX + "roll d6\n"+ PREFIX + "roll d20 5" + "```").queue();
+				channel.sendMessage(":white_check_mark: **Usage: Roll any dice d, x number of times."
+						+ "\n" 
+						+ "\n" + PREFIX + "roll [dice] <times>"
+						+ "\nExamples:"
+						+ "\n" + PREFIX + "roll d6"
+						+ "\n" + PREFIX + "roll d20 5"
+						+ "**").queue();
+				
 				log.info("Command: " + PREFIX + "roll"
 						+ "\nGuild: " + guild.toString()
 						+ "\nChannel: " + channel.toString()
@@ -110,13 +125,13 @@ public class DiceRollCommandListener extends ListenerAdapter {
 		
 		if(rolls == 1) {
 			
-			reply.append("Roll Result: ");
+			reply.append(":white_check_mark: **Roll Result: ");
 			rollResult = (int)(Math.random() * dice) + 1;
 			reply.append(rollResult);
 			
 		}else {
 			
-			reply.append("Roll Results:\n");
+			reply.append(":white_check_mark: **Roll Results:\n");
 			
 			for(int i = 1; i <= rolls; i++) {
 				
@@ -127,6 +142,8 @@ public class DiceRollCommandListener extends ListenerAdapter {
 			}
 			
 		}
+		
+		reply.append("**");
 		
 		return reply.toString();
 		

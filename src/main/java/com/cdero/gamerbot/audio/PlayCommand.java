@@ -21,6 +21,11 @@ import net.dv8tion.jda.api.managers.AudioManager;
  */
 public class PlayCommand {
 	
+	/**
+	 * Operations that are run on the play command.
+	 * 
+	 * @param event	Information about the event including the voice channel and text channel.
+	 */
 	protected PlayCommand(String[] command, GuildMessageReceivedEvent event) {
 		
 		VoiceChannel voiceChannel = event.getMember().getVoiceState().getChannel();
@@ -43,12 +48,6 @@ public class PlayCommand {
 		if(event.getGuild().getAudioManager().isConnected() && command.length == 2) {
 			
 			playTrack(textChannel, command[1]);
-			
-		}else if(event.getGuild().getAudioManager().isConnected() && command.length == 1 && MusicManagers.musicManagers.get(Long.parseLong(event.getGuild().getId())).getSendHandler().getAudioPlayer().isPaused()) {
-			
-			MusicManagers.musicManagers.get(Long.parseLong(event.getGuild().getId())).getSendHandler().getAudioPlayer().setPaused(false);
-			
-			textChannel.sendMessage(":white_check_mark: **Track unpaused!**").queue();
 			
 		}else {
 			
@@ -83,6 +82,13 @@ public class PlayCommand {
 				
 	}
 	
+	/**
+	 * 
+	 * Method to play a track given a URL and reply to the Text Channel with a response.
+	 * 
+	 * @param channel	The Text Channel that replies will be given to.
+	 * @param URL	The web URL for the audio that will be played.
+	 */
 	private void playTrack(final TextChannel channel, final String URL) {
 		
 		GuildMusicManager musicManager = getGuildAudioPlayer(channel.getGuild());
@@ -133,6 +139,12 @@ public class PlayCommand {
 		
 	}
 	
+	/**
+	 * Get the Audio Player for a specific guild that is requesting the player.
+	 * 
+	 * @param guild	The Discord Guild that the command was given in.
+	 * @return	The GuildMusicManager for the given Guild to play and manage the music.
+	 */
 	private synchronized GuildMusicManager getGuildAudioPlayer(Guild guild) {
 		
 		long guildId = Long.parseLong(guild.getId());
@@ -152,6 +164,12 @@ public class PlayCommand {
 		
 	}
 	
+	/**
+	 * Method to add the audio to the queue for a given server.
+	 * 
+	 * @param musicManager	The music manager for the given guild.
+	 * @param track	The specified audio track that is passed into the command.
+	 */
 	private void play(GuildMusicManager musicManager, AudioTrack track) {
 		
 		musicManager.scheduler.queue(track);

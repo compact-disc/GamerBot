@@ -1,5 +1,6 @@
 package com.cdero.gamerbot.events;
 
+//import statements
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import net.dv8tion.jda.api.entities.TextChannel;
@@ -33,7 +34,8 @@ public class BotJoinEventListener extends ListenerAdapter {
 		
 		try {
 			
-			channel.sendMessage("**I have arrived!**").queue();
+			channel.sendMessage(":sunglasses: **I have arrived!**").queue();
+			log.info("Joined Discord Guild: " + event.getGuild().getName());
 			
 		} catch (IllegalArgumentException e) {
 			

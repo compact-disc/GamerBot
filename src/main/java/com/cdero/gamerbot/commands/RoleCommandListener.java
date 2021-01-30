@@ -8,6 +8,7 @@ import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.exceptions.InsufficientPermissionException;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 /**
@@ -55,7 +56,11 @@ public class RoleCommandListener extends ListenerAdapter {
 			
 			if (commandLength == 1 || (command[1].equalsIgnoreCase("help") && commandLength == 2)) {
 				
-				channel.sendMessage("```" + "Usage: Modify a user's roles.\n" + PREFIX + "role [add/remove/help] [role] [user]\nExample: " + PREFIX + "role add developer compact-disc" + "```").queue();
+				channel.sendMessage(":white_check_mark: **Usage: Modify a user's roles."
+						+ "\n" + PREFIX + "role [add/remove/help] [role] [user]"
+						+ "\nExample: " + PREFIX + "role add developer compact-disc"
+						+ "**").queue();
+				
 				log.info("Command: " + PREFIX + "role"
 						+ "\nGuild: " + guild.toString()
 						+ "\nChannel: " + channel.toString()
@@ -75,8 +80,16 @@ public class RoleCommandListener extends ListenerAdapter {
 						
 					} catch (IllegalArgumentException e) {
 						
-						channel.sendMessage("Error adding role to user!").queue();
+						channel.sendMessage(":x: **Error adding role to user!**").queue();
 						log.warn("Error adding role to user!"
+								+ "\nGuild: " + guild.toString()
+								+ "\nChannel: " + channel.toString()
+								+ "\nAuthor: " + author.toString());
+						
+					} catch (InsufficientPermissionException e) {
+						
+						channel.sendMessage(":x: **You don't have permission to do that!**").queue();
+						log.warn("User does not have permission to do that!"
 								+ "\nGuild: " + guild.toString()
 								+ "\nChannel: " + channel.toString()
 								+ "\nAuthor: " + author.toString());
@@ -86,7 +99,7 @@ public class RoleCommandListener extends ListenerAdapter {
 					
 				} else {
 					
-					channel.sendMessage("You don't have permission to do that!").queue();
+					channel.sendMessage(":x: **You don't have permission to do that!**").queue();
 					log.warn("User does not have permission to do that!"
 							+ "\nGuild: " + guild.toString()
 							+ "\nChannel: " + channel.toString()
@@ -114,11 +127,19 @@ public class RoleCommandListener extends ListenerAdapter {
 								+ "\nChannel: " + channel.toString()
 								+ "\nAuthor: " + author.toString());
 						
+					} catch (InsufficientPermissionException e) {
+						
+						channel.sendMessage(":x: **You don't have permission to do that!**").queue();
+						log.warn("User does not have permission to do that!"
+								+ "\nGuild: " + guild.toString()
+								+ "\nChannel: " + channel.toString()
+								+ "\nAuthor: " + author.toString());
+						
 					}
 					
 				} else {
 					
-					channel.sendMessage("You don't have permission to do that!").queue();
+					channel.sendMessage(":x: **You don't have permission to do that!**").queue();
 					log.warn("User does not have permission to do that!"
 							+ "\nGuild: " + guild.toString()
 							+ "\nChannel: " + channel.toString()
@@ -128,7 +149,11 @@ public class RoleCommandListener extends ListenerAdapter {
 				
 			} else {
 				
-				channel.sendMessage("```" + "Usage: Modify a user's roles.\n" + PREFIX + "role [add/remove/help] [role] [user]\nExample: " + PREFIX + "role add developer compact-disc" + "```").queue();
+				channel.sendMessage(":white_check_mark: **Usage: Modify a user's roles."
+						+ "\n" + PREFIX + "role [add/remove/help] [role] [user]"
+						+ "\nExample: " + PREFIX + "role add developer compact-disc"
+						+ "**").queue();
+				
 				log.info("Command: " + PREFIX + "role"
 						+ "\nGuild: " + guild.toString()
 						+ "\nChannel: " + channel.toString()

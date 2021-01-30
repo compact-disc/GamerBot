@@ -49,7 +49,7 @@ public class PingCommandListener extends ListenerAdapter {
 		
 		if(event.getMessage().getContentRaw().equals(PREFIX + "ping")) {
 			
-			channel.sendMessage("Current Gamer Bot Response Time: " + event.getJDA().getGatewayPing() + "ms").queue();
+			channel.sendMessage(":white_check_mark: **Current Gamer Bot Response Time: " + event.getJDA().getGatewayPing() + "ms**").queue();
 			log.info("Command: " + PREFIX + "ping"
 					+ "\nGuild: " + guild.toString()
 					+ "\nChannel: " + channel.toString()

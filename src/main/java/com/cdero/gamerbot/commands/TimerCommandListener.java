@@ -57,7 +57,11 @@ public class TimerCommandListener extends ListenerAdapter {
 			
 			if(commandLength == 1 || (command[1].equalsIgnoreCase("help") && commandLength == 2)) {
 				
-				channel.sendMessage("```" + "Usage: Create a timer given a time.\n" + PREFIX + "timer [task] => [value].[hours/minutes/seconds]\nExample: " + PREFIX + "timer Play Games! => 4.hours" + "```").queue();
+				channel.sendMessage(":white_check_mark: **Usage: Create a timer given a time."
+						+ "\n" + PREFIX + "timer [task] => [value].[hours/minutes/seconds]"
+						+ "\nExample: " + PREFIX + "timer Play Games! => 4.hours"
+						+ "**").queue();
+				
 				log.info("Command: " + PREFIX + "timer"
 						+ "\nGuild: " + guild.toString()
 						+ "\nChannel: " + channel.toString()
@@ -112,11 +116,11 @@ public class TimerCommandListener extends ListenerAdapter {
 				
 				try {
 					
-					channel.sendMessage("<@!" + authorLong + ">, " + task.toString()).queueAfter(Integer.parseInt(timeNumeral), timeUnit);
+					channel.sendMessage(":white_check_mark: **<@!" + authorLong + ">, " + task.toString() + "**").queueAfter(Integer.parseInt(timeNumeral), timeUnit);
 					
 				} catch (ErrorResponseException e){
 					
-					channel.sendMessage("<@!" + authorLong + ">" + ", there was an error creating your timer! Check your input!").queue();
+					channel.sendMessage(":x: **<@!" + authorLong + ">" + ", there was an error creating your timer! Check your input!**").queue();
 					log.warn("Error with the timer command!"
 							+ "\nGuild: " + guild.toString()
 							+ "\nChannel: " + channel.toString()
@@ -124,7 +128,7 @@ public class TimerCommandListener extends ListenerAdapter {
 					
 				} catch (IllegalArgumentException e) {
 					
-					channel.sendMessage("<@!" + authorLong + ">" + ", there was an error creating your timer! Check your input!").queue();
+					channel.sendMessage(":x: **<@!" + authorLong + ">" + ", there was an error creating your timer! Check your input!**").queue();
 					log.warn("Error with the timer command!"
 							+ "\nGuild: " + guild.toString()
 							+ "\nChannel: " + channel.toString()
@@ -132,7 +136,7 @@ public class TimerCommandListener extends ListenerAdapter {
 					
 				} finally {
 					
-					channel.sendMessage("<@!" + authorLong + ">" + ", you will be notified in " + timeNumeral + " " + timeValue + "!").queue();
+					channel.sendMessage(":white_check_mark: **<@!" + authorLong + ">" + ", you will be notified in " + timeNumeral + " " + timeValue + "!**").queue();
 					log.info("Command: " + PREFIX + "remindme"
 							+ "\nTime: " + Integer.parseInt(timeNumeral) + " " + timeUnit.toString()
 							+ "\nGuild: " + guild.toString()
@@ -144,7 +148,11 @@ public class TimerCommandListener extends ListenerAdapter {
 				
 			}else {
 				
-				channel.sendMessage("```" + "Usage: Create a timer given a time.\n" + PREFIX + "timer [task] => [value].[hours/minutes/seconds]\nExample: " + PREFIX + "timer Play Games! => 4.hours" + "```").queue();
+				channel.sendMessage(":white_check_mark: **Usage: Create a timer given a time."
+						+ "\n" + PREFIX + "timer [task] => [value].[hours/minutes/seconds]"
+						+ "\nExample: " + PREFIX + "timer Play Games! => 4.hours"
+						+ "**").queue();
+				
 				log.info("Command: " + PREFIX + "timer"
 						+ "\nGuild: " + guild.toString()
 						+ "\nChannel: " + channel.toString()

@@ -1,5 +1,6 @@
 package com.cdero.gamerbot.audio.lavaplayer;
 
+//import statements
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.player.event.AudioEventAdapter;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
@@ -10,6 +11,10 @@ import java.util.concurrent.LinkedBlockingQueue;
 /**
  * This class schedules tracks for the audio player. It contains the queue of
  * tracks.
+ * 
+ * @version		1.0
+ * @since		1.0
+ *
  */
 public class TrackScheduler extends AudioEventAdapter {
 	private final AudioPlayer player;

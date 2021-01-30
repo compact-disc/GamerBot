@@ -16,6 +16,11 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
  */
 public class SkipCommand {
 	
+	/**
+	 * Operations that are run on the skip command.
+	 * 
+	 * @param event	Information about the event including the voice channel and text channel.
+	 */
 	protected SkipCommand(GuildMessageReceivedEvent event) {
 		
 		TextChannel channel = event.getChannel();
@@ -32,6 +37,11 @@ public class SkipCommand {
 		
 	}
 	
+	/**
+	 * Skip the current audio track in the music manager.
+	 * 
+	 * @param channel	The Text Channel where the bot will reply to the user.
+	 */
 	private void skipTrack(TextChannel channel) {
 		
 		GuildMusicManager musicManager = getGuildAudioPlayer(channel.getGuild());
@@ -41,6 +51,12 @@ public class SkipCommand {
 		
 	}
 	
+	/**
+	 * Get the Audio Player for a specific guild that is requesting the player.
+	 * 
+	 * @param guild	The Discord Guild that the command was given in.
+	 * @return	The GuildMusicManager for the given Guild to play and manage the music.
+	 */
 	private synchronized GuildMusicManager getGuildAudioPlayer(Guild guild) {
 		
 		long guildId = Long.parseLong(guild.getId());

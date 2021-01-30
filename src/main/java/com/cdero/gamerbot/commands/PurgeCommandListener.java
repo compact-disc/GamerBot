@@ -68,7 +68,10 @@ public class PurgeCommandListener extends ListenerAdapter {
 			
 			if(commandLength == 1 || command[1].equalsIgnoreCase("help") && commandLength == 2) {
 				
-				channel.sendMessage("```" + "Usage: Purge x number of messages above where x is between 1 and 20.\n" + PREFIX + "purge [number]\nExample: " + PREFIX + "purge 5" + "```").queue();
+				channel.sendMessage(":white_check_mark: **Usage: Purge x number of messages above where x is between 1 and 20."
+						+ "\n" + PREFIX + "purge [number]"
+						+ "\nExample: " + PREFIX + "purge 5"
+						+ "**").queue();
 				log.info("Command: " + PREFIX + "purge"
 						+ "\nGuild: " + guild.toString()
 						+ "\nChannel: " + channel.toString()
@@ -84,7 +87,7 @@ public class PurgeCommandListener extends ListenerAdapter {
 					
 				} catch (NumberFormatException e) {
 					
-					channel.sendMessage("Error when purging messages from channel!").queue();
+					channel.sendMessage(":x: **Error when purging messages from channel!**").queue();
 					log.warn("Error with the purge command!"
 							+ "\nGuild: " + guild.toString()
 							+ "\nChannel: " + channel.toString()
@@ -104,7 +107,10 @@ public class PurgeCommandListener extends ListenerAdapter {
 					
 				} else if (purgeNumberInt < PURGE_MIN || purgeNumberInt > PURGE_MAX) {
 					
-					channel.sendMessage("```" + "Usage: Purge x number of messages above where x is between 1 and 20.\n" + PREFIX + "purge [number]\nExample: " + PREFIX + "purge 5" + "```").queue();
+					channel.sendMessage(":white_check_mark: **Usage: Purge x number of messages above where x is between 1 and 20."
+							+ "\n" + PREFIX + "purge [number]"
+							+ "\nExample: " + PREFIX + "purge 5"
+							+ "**").queue();
 					log.info("Command: " + PREFIX + "purge"
 							+ "\nGuild: " + guild.toString()
 							+ "\nChannel: " + channel.toString()
@@ -112,7 +118,7 @@ public class PurgeCommandListener extends ListenerAdapter {
 					
 				} else {
 					
-					channel.sendMessage("You do not have permission to do that.").queue();
+					channel.sendMessage(":x: **You do not have permission to do that.**").queue();
 					log.warn("Error with the purge command!"
 							+ "\nGuild: " + guild.toString()
 							+ "\nChannel: " + channel.toString()
@@ -123,7 +129,11 @@ public class PurgeCommandListener extends ListenerAdapter {
 				
 			}else {
 				
-				channel.sendMessage("```" + "Usage: Purge x number of messages above where x is between 1 and 20.\n" + PREFIX + "purge [number]\nExample: " + PREFIX + "purge 5" + "```").queue();
+				channel.sendMessage(":white_check_mark: **Usage: Purge x number of messages above where x is between 1 and 20."
+						+ "\n" + PREFIX + "purge [number]"
+						+ "\nExample: " + PREFIX + "purge 5"
+						+ "**").queue();
+				
 				log.info("Command: " + PREFIX + "purge"
 						+ "\nGuild: " + guild.toString()
 						+ "\nChannel: " + channel.toString()

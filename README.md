@@ -2,7 +2,7 @@
 
 ### Default Prefix: >>
 
-### Complete
+### Complete Misc.
 - Switched to Log4j
 
 ### Complete Commands:
@@ -39,8 +39,9 @@
 - Guild Member Join Event
 - Bot join Guild Event
 
-### Plans:
+### Plans/Todo:
 - Customized prefixes per server
 - Either MariaDB/MongoDB integration for per server customizations
 - Auto Role functionality - Users add their own specific roles and/or react roles
 - Image returner based on given parameter
+- Always more Documentation/Javadoc
