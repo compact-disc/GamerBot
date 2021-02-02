@@ -13,6 +13,7 @@ import com.cdero.gamerbot.audio.AudioCommandsListener;
 import com.cdero.gamerbot.audio.lavaplayer.MusicManagers;
 import com.cdero.gamerbot.commands.BeansCommandListener;
 import com.cdero.gamerbot.commands.DiceRollCommandListener;
+import com.cdero.gamerbot.commands.MemeCommandListener;
 import com.cdero.gamerbot.commands.PingCommandListener;
 import com.cdero.gamerbot.commands.PurgeCommandListener;
 import com.cdero.gamerbot.commands.RemindMeCommandListener;
@@ -137,7 +138,7 @@ public class GamerBotApplication {
 		}
 		
 		//Connect the application to the SQL server
-		SQLConnection.connectToSQL();
+		//SQLConnection.connectToSQL();
 		
 		String token = config.getProperty("token");
 		
@@ -178,6 +179,7 @@ public class GamerBotApplication {
 			jda.addEventListeners(new PurgeCommandListener());
 			jda.addEventListeners(new RoleCommandListener());
 			jda.addEventListeners(new ShutdownCommandListener());
+			jda.addEventListeners(new MemeCommandListener());
 			/*
 			 * End Command Event Listeners
 			 */
