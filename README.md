@@ -22,6 +22,8 @@
   - ```>>timer [task] => [value].[hours/minutes/seconds]```
 - Shutdown Command
   - ```>>shutdown```
+- Meme Command
+  - ```>>meme```
 
 ### Complete Audio
 - Join
