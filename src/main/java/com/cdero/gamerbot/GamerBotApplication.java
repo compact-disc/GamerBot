@@ -138,7 +138,7 @@ public class GamerBotApplication {
 		}
 		
 		//Connect the application to the SQL server
-		//SQLConnection.connectToSQL();
+		SQLConnection.connectToSQL();
 		
 		String token = config.getProperty("token");
 		

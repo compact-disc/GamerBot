@@ -3,9 +3,6 @@ package com.cdero.gamerbot.audio;
 //import statements
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import com.cdero.gamerbot.audio.lavaplayer.MusicManagers;
-
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
