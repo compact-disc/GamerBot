@@ -4,6 +4,7 @@
 
 ### Complete Misc.
 - Switched to Log4j
+- Image returner based on given parameter (Works for any subreddit)
 
 ### Complete Commands:
 - Beans Listener/Command
@@ -24,6 +25,8 @@
   - ```>>shutdown```
 - Meme Command
   - ```>>meme```
+- Magic 8 Ball Command
+  - ```>>magic8ball [question]```
 
 ### Complete Audio
 - Join
@@ -45,6 +48,6 @@
 - Customized prefixes per server
 - Either MariaDB/MongoDB integration for per server customizations
 - Auto Role functionality - Users add their own specific roles and/or react roles
-- Image returner based on given parameter
 - Always more Documentation/Javadoc
 - Spring Integration with user accounts and bot management per server?
+- Get weather by zip code command

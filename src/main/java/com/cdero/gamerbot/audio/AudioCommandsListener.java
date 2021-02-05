@@ -75,7 +75,7 @@ public class AudioCommandsListener extends ListenerAdapter {
 				
 			}
 			
-			if(commandLength == 1 || (command[1].equalsIgnoreCase("help") && commandLength == 2)) {
+			if(commandLength == 1) {
 				
 				switch(command[0].toLowerCase()) {
 				
@@ -109,24 +109,6 @@ public class AudioCommandsListener extends ListenerAdapter {
 								+ "\nChannel: " + channel.toString()
 								+ "\nAuthor: " + author.toString());
 						new JoinCommand(event);
-						break;
-					
-					default:
-						channel.sendMessage(":white_check_mark: **Audio Player Commands:"
-								+ "\n"
-								+ "\n" + PREFIX + "play [YouTube URL] :arrow_right: To play the audio from a YouTube video."
-								+ "\n"
-								+ "\n" + PREFIX + "pause :arrow_right: To pause and unpause audio."
-								+ "\n"
-								+ "\n" + PREFIX + "skip :arrow_right: To skip the current song."
-								+ "\n"
-								+ "\n" + PREFIX + "leave :arrow_right: To make Gamer Bot leave the voice channel."
-								+ "**").queue();
-						
-						log.info("Audio Commands"
-								+ "\nGuild: " + guild.toString()
-								+ "\nChannel: " + channel.toString()
-								+ "\nAuthor: " + author.toString());
 						break;
 				
 				}

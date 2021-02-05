@@ -13,6 +13,7 @@ import com.cdero.gamerbot.audio.AudioCommandsListener;
 import com.cdero.gamerbot.audio.lavaplayer.MusicManagers;
 import com.cdero.gamerbot.commands.BeansCommandListener;
 import com.cdero.gamerbot.commands.DiceRollCommandListener;
+import com.cdero.gamerbot.commands.MagicEightBallCommandListener;
 import com.cdero.gamerbot.commands.MemeCommandListener;
 import com.cdero.gamerbot.commands.PingCommandListener;
 import com.cdero.gamerbot.commands.PurgeCommandListener;
@@ -180,6 +181,7 @@ public class GamerBotApplication {
 			jda.addEventListeners(new RoleCommandListener());
 			jda.addEventListeners(new ShutdownCommandListener());
 			jda.addEventListeners(new MemeCommandListener());
+			jda.addEventListeners(new MagicEightBallCommandListener());
 			/*
 			 * End Command Event Listeners
 			 */
