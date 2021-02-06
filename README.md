@@ -28,7 +28,7 @@
 - Magic 8 Ball Command
   - ```>>magic8ball [question]```
 - Stocks/Stonks Command
-  - ```>>stocks/>>stonks [symbol] <symbol> <symbol> <symbol> <symbol>
+  - ```>>stocks/>>stonks [symbol] <symbol> <symbol> <symbol> <symbol>```
 
 ### Complete Audio
 - Join
