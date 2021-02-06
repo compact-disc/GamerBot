@@ -27,6 +27,8 @@
   - ```>>meme```
 - Magic 8 Ball Command
   - ```>>magic8ball [question]```
+- Stocks/Stonks Command
+  - ```>>stocks/>>stonks [symbol] <symbol> <symbol> <symbol> <symbol>
 
 ### Complete Audio
 - Join
@@ -51,4 +53,3 @@
 - Always more Documentation/Javadoc
 - Spring Integration with user accounts and bot management per server?
 - Get weather by zip code command
-- Get stock info
