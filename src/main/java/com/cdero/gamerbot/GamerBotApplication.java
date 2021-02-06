@@ -20,6 +20,7 @@ import com.cdero.gamerbot.commands.PurgeCommandListener;
 import com.cdero.gamerbot.commands.RemindMeCommandListener;
 import com.cdero.gamerbot.commands.RoleCommandListener;
 import com.cdero.gamerbot.commands.ShutdownCommandListener;
+import com.cdero.gamerbot.commands.StockInformationCommandListener;
 import com.cdero.gamerbot.commands.TimerCommandListener;
 import com.cdero.gamerbot.events.BotJoinEventListener;
 import com.cdero.gamerbot.events.MemberJoinEventListener;
@@ -182,6 +183,7 @@ public class GamerBotApplication {
 			jda.addEventListeners(new ShutdownCommandListener());
 			jda.addEventListeners(new MemeCommandListener());
 			jda.addEventListeners(new MagicEightBallCommandListener());
+			jda.addEventListeners(new StockInformationCommandListener());
 			/*
 			 * End Command Event Listeners
 			 */
@@ -242,11 +244,15 @@ public class GamerBotApplication {
 			
 				Scanner input = new Scanner(System.in);
 				
-				if(input.next().equals("stop")) {
+				while(true) {
 					
-					input.close();
-					log.info("Shutting down Gamer Bot...");
-					System.exit(0);
+					if(input.next().equals("stop")) {
+						
+						input.close();
+						log.info("Shutting down Gamer Bot...");
+						System.exit(0);
+						
+					}
 					
 				}
 				

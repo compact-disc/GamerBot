@@ -51,3 +51,4 @@
 - Always more Documentation/Javadoc
 - Spring Integration with user accounts and bot management per server?
 - Get weather by zip code command
+- Get stock info
