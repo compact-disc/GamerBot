@@ -55,7 +55,7 @@ public class StockInformationCommandListener extends ListenerAdapter {
 		String[] command = event.getMessage().getContentRaw().split(" ");
 		int commandLength = command.length;
 		
-		if(command[0].equalsIgnoreCase(PREFIX + "stocks") || command[0].equalsIgnoreCase(PREFIX + "stonks")) {
+		if(command[0].equalsIgnoreCase(PREFIX + "stocks") || command[0].equalsIgnoreCase(PREFIX + "stonks") || command[0].equalsIgnoreCase(PREFIX + "stock") || command[0].equalsIgnoreCase(PREFIX + "stonk")) {
 			
 			TextChannel channel = event.getChannel();
 			
