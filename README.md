@@ -51,5 +51,7 @@
 - Either MariaDB/MongoDB integration for per server customizations
 - Auto Role functionality - Users add their own specific roles and/or react roles
 - Always more Documentation/Javadoc
-- Spring Integration with user accounts and bot management per server?
 - Get weather by zip code command
+
+### Spring Boot
+I am working on an additional extension of this project [Gamer Bot Spring](https://github.com/compact-disc/GamerBot-Spring) that is a Spring Boot integration of this project. This will still be maintained standalone but implemented in the Spring Boot version.

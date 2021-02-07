@@ -131,21 +131,28 @@ public class StockInformationCommandListener extends ListenerAdapter {
 		
 		Map<String, Stock> stocksMap = YahooFinance.get(stocks);
 		
+		String name;
+		String price;
+		String currency;
+		String stockExchange;
+		String dividend;
+		String stats;
+		
 		for(Stock s : stocksMap.values()) {
 			
-			String name = s.getName() == null ? "N/A" : s.getName();
-			String price = s.getQuote().toString() == null ? "N/A" : s.getQuote().toString();
-			String currency = s.getCurrency() == null ? "N/A" : s.getCurrency();
-			String stockExchange = s.getStockExchange() == null ? "N/A" : s.getStockExchange();
-			String dividend = s.getDividend().toString() == null ? "N/A" : s.getDividend().toString();
-			String stats = s.getStats().toString() == null ? "N/A" : s.getStats().toString();
+			name = s.getName() == null ? "N/A" : s.getName();
+			price = s.getQuote().toString() == null ? "N/A" : s.getQuote().toString();
+			currency = s.getCurrency() == null ? "N/A" : s.getCurrency();
+			stockExchange = s.getStockExchange() == null ? "N/A" : s.getStockExchange();
+			dividend = s.getDividend().toString() == null ? "N/A" : s.getDividend().toString();
+			stats = s.getStats().toString() == null ? "N/A" : s.getStats().toString();
 			
 			embedBuilder.addField(s.getSymbol(), "Name: " + name
-								+ "\nPrice: " + price
-								+ "\nCurrency: " + currency
-								+ "\nStock Exchange: " + stockExchange
-								+ "\nDividend: " + dividend
-								+ "\nStats: " + stats
+								+ "\nPrice - " + price
+								+ "\nCurrency - " + currency
+								+ "\nStock Exchange - " + stockExchange
+								+ "\nDividend - " + dividend
+								+ "\nStats - " + stats
 								, true);
 			
 			embedBuilder.addBlankField(true);
