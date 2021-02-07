@@ -38,7 +38,7 @@
 - Pause
   - ```>>pause```
 - Play
-  - ```>>play / >>play [YouTube URL]```
+  - ```>>play / >>play [YouTube URL]/[YouTube Search]```
 - Skip
   - ```>>skip```
 

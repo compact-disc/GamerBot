@@ -57,7 +57,7 @@ public class AudioCommandsListener extends ListenerAdapter {
 				
 				channel.sendMessage(":white_check_mark: **Audio Player Commands:"
 						+ "\n"
-						+ "\n" + PREFIX + "play [YouTube URL] :arrow_right: To play the audio from a YouTube video."
+						+ "\n" + PREFIX + "play [YouTube URL]/[YouTube Search] :arrow_right: To play the audio from a YouTube video."
 						+ "\n"
 						+ "\n" + PREFIX + "pause :arrow_right: To pause and unpause audio."
 						+ "\n"
@@ -113,7 +113,7 @@ public class AudioCommandsListener extends ListenerAdapter {
 				
 				}
 				
-			}else if((commandLength == 2 && !command[1].equalsIgnoreCase("help"))) {
+			}else if((commandLength >= 2 && !command[1].equalsIgnoreCase("help"))) {
 				
 				switch(command[0].toLowerCase()) {
 				
@@ -128,7 +128,7 @@ public class AudioCommandsListener extends ListenerAdapter {
 					default:
 						channel.sendMessage(":white_check_mark: **Audio Player Commands:"
 								+ "\n"
-								+ "\n" + PREFIX + "play [YouTube URL] :arrow_right: To play the audio from a YouTube video."
+								+ "\n" + PREFIX + "play [YouTube URL]/[YouTube Search] :arrow_right: To play the audio from a YouTube video."
 								+ "\n"
 								+ "\n" + PREFIX + "pause :arrow_right: To pause and unpause audio."
 								+ "\n"
@@ -149,7 +149,7 @@ public class AudioCommandsListener extends ListenerAdapter {
 				
 				channel.sendMessage(":white_check_mark: **Audio Player Commands:"
 						+ "\n"
-						+ "\n" + PREFIX + "play [YouTube URL] :arrow_right: To play the audio from a YouTube video."
+						+ "\n" + PREFIX + "play [YouTube URL]/[YouTube Search] :arrow_right: To play the audio from a YouTube video."
 						+ "\n"
 						+ "\n" + PREFIX + "pause :arrow_right: To pause and unpause audio."
 						+ "\n"

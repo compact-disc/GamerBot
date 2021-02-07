@@ -11,6 +11,8 @@ import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.VoiceChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.managers.AudioManager;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 /**
  * 
@@ -22,6 +24,11 @@ import net.dv8tion.jda.api.managers.AudioManager;
 public class PlayCommand {
 	
 	/**
+	 * String variable to be appended to a YouTube search. This will be added when arguments are not URL's.
+	 */
+	private final String YT_SEARCH_IDENTIFIER = "ytsearch:";
+	
+	/**
 	 * Operations that are run on the play command.
 	 * 
 	 * @param event	Information about the event including the voice channel and text channel.
@@ -30,6 +37,8 @@ public class PlayCommand {
 		
 		VoiceChannel voiceChannel = event.getMember().getVoiceState().getChannel();
 		TextChannel textChannel = event.getChannel();
+		
+		StringBuilder query = null;
 		
 		if(voiceChannel == null) {
 			
@@ -45,9 +54,25 @@ public class PlayCommand {
 			
 		}
 		
-		if(event.getGuild().getAudioManager().isConnected() && command.length == 2) {
+		if(event.getGuild().getAudioManager().isConnected() && command.length >= 2) {
 			
-			playTrack(textChannel, command[1]);
+			query =  new StringBuilder();
+			
+			for(int i = 1; i < command.length; i++) {
+				
+				if(i == command.length - 1) {
+					
+					query.append(command[i]);
+					
+				}else {
+					
+					query.append(command[i] + " ");
+					
+				}
+				
+			}
+			
+			playTrack(textChannel, query.toString());
 			
 		}else {
 			
@@ -56,7 +81,23 @@ public class PlayCommand {
 				AudioManager audioManager = event.getGuild().getAudioManager();
 				audioManager.openAudioConnection(voiceChannel);
 				
-				playTrack(textChannel, command[1]);
+				query =  new StringBuilder();
+				
+				for(int i = 1; i < command.length; i++) {
+					
+					if(i == command.length - 1) {
+						
+						query.append(command[i]);
+						
+					}else {
+						
+						query.append(command[i] + " ");
+						
+					}
+					
+				}
+				
+				playTrack(textChannel, query.toString());
 				
 			} catch (IllegalStateException e) {
 				
@@ -87,13 +128,25 @@ public class PlayCommand {
 	 * Method to play a track given a URL and reply to the Text Channel with a response.
 	 * 
 	 * @param channel	The Text Channel that replies will be given to.
-	 * @param URL	The web URL for the audio that will be played.
+	 * @param query	This is either a YouTube URL or YouTube search query.
 	 */
-	private void playTrack(final TextChannel channel, final String URL) {
+	private void playTrack(final TextChannel channel, final String query) {
+		
+		String checkedQuery = query;
+		
+		try {
+			
+			new URL(query);
+			
+		} catch (MalformedURLException e) {
+			
+			checkedQuery = YT_SEARCH_IDENTIFIER + query;
+			
+		}
 		
 		GuildMusicManager musicManager = getGuildAudioPlayer(channel.getGuild());
 		
-		MusicManagers.playerManager.loadItemOrdered(musicManager, URL, new AudioLoadResultHandler() {
+		MusicManagers.playerManager.loadItemOrdered(musicManager, checkedQuery, new AudioLoadResultHandler() {
 			
 			@Override
 			public void trackLoaded(AudioTrack track) {
@@ -115,7 +168,8 @@ public class PlayCommand {
 					
 				}
 				
-				channel.sendMessage(":white_check_mark: Adding to queue :arrow_right: " + firstTrack.getInfo().title + " [First track in playlist " + playlist.getName() + "]").queue();
+				//channel.sendMessage(":white_check_mark: Adding to queue :arrow_right: " + firstTrack.getInfo().title + " [First track in playlist " + playlist.getName() + "]").queue();
+				channel.sendMessage(":white_check_mark: Adding to queue :arrow_right: " + firstTrack.getInfo().title).queue();
 				
 				play(musicManager, firstTrack);
 				
@@ -124,7 +178,7 @@ public class PlayCommand {
 			@Override
 			public void noMatches() {
 				
-				channel.sendMessage(":x: **Nothing found by :arrow_right: <" + URL + ">**").queue();
+				channel.sendMessage(":x: **Nothing found by :arrow_right: <" + query + ">**").queue();
 				
 			}
 			
