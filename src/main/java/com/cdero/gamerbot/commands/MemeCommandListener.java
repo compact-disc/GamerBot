@@ -71,7 +71,7 @@ public class MemeCommandListener extends ListenerAdapter{
 				
 				try {
 					
-					image = RedditImageGetter.getRedditImageInputStream(REDDIT_JSON_ARRAY, REDDIT_JSON_LENGTH);
+					image = RedditImageGetter.getImageLink(REDDIT_JSON_ARRAY, REDDIT_JSON_LENGTH);
 					
 				} catch (IOException e) {
 					
