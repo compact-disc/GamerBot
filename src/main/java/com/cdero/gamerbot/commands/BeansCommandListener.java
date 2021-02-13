@@ -17,7 +17,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
  * @since		1.0
  *
  */
-public class BeansCommandListener extends ListenerAdapter{
+public class BeansCommandListener extends ListenerAdapter {
 	
 	/**
 	 * Logger for the BeansListener class.

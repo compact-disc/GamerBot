@@ -23,6 +23,7 @@ import com.cdero.gamerbot.commands.ShutdownCommandListener;
 import com.cdero.gamerbot.commands.StockInformationCommandListener;
 import com.cdero.gamerbot.commands.TimerCommandListener;
 import com.cdero.gamerbot.events.BotJoinEventListener;
+import com.cdero.gamerbot.events.BotLeaveVoiceOnEmpty;
 import com.cdero.gamerbot.events.MemberJoinEventListener;
 import com.cdero.gamerbot.sql.SQLConnection;
 import net.dv8tion.jda.api.JDABuilder;
@@ -201,6 +202,7 @@ public class GamerBotApplication {
 			 */
 			jda.addEventListeners(new MemberJoinEventListener());
 			jda.addEventListeners(new BotJoinEventListener());
+			jda.addEventListeners(new BotLeaveVoiceOnEmpty());
 			/*
 			 * End Event Listeners
 			 */

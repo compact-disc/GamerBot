@@ -151,7 +151,7 @@ public class PlayCommand {
 			@Override
 			public void trackLoaded(AudioTrack track) {
 				
-				channel.sendMessage(":white_check_mark: Adding to queue :arrow_right: " + track.getInfo().title).queue();
+				channel.sendMessage(":white_check_mark: **Adding to queue :arrow_right: " + track.getInfo().title + "**").queue();
 				
 				play(musicManager, track);
 				
@@ -169,7 +169,7 @@ public class PlayCommand {
 				}
 				
 				//channel.sendMessage(":white_check_mark: Adding to queue :arrow_right: " + firstTrack.getInfo().title + " [First track in playlist " + playlist.getName() + "]").queue();
-				channel.sendMessage(":white_check_mark: Adding to queue :arrow_right: " + firstTrack.getInfo().title).queue();
+				channel.sendMessage(":white_check_mark: **Adding to queue :arrow_right: " + firstTrack.getInfo().title + "**").queue();
 				
 				play(musicManager, firstTrack);
 				

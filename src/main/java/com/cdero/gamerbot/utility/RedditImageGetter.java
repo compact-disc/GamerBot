@@ -8,8 +8,6 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Random;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -21,11 +19,6 @@ import org.json.JSONObject;
  *
  */
 public class RedditImageGetter {
-
-	/**
-	 * Logger for the RedditImageGetter class.
-	 */
-	private final static Logger log = LogManager.getLogger(RedditImageGetter.class.getName());
 
 	/**
 	 * Takes in an array of subreddit URL's and returns an InputStream of an image from a random post.
