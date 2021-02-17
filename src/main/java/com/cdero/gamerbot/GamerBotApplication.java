@@ -26,6 +26,7 @@ import com.cdero.gamerbot.events.BotJoinEventListener;
 import com.cdero.gamerbot.events.BotLeaveVoiceOnEmpty;
 import com.cdero.gamerbot.events.MemberJoinEventListener;
 import com.cdero.gamerbot.sql.SQLConnection;
+import com.cdero.gamerbot.web.WebClientReceiver;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
 import org.apache.logging.log4j.LogManager;
@@ -59,6 +60,8 @@ public class GamerBotApplication {
 	 * File class for the properties file.
 	 */
 	private File configFile;
+	
+	private Thread webClientThread;
 	
 	/**
 	 * Logger for the GamerBotApplication class.
@@ -165,6 +168,18 @@ public class GamerBotApplication {
 	private void JDABuild(String token) {
 		
 		JDABuilder jda = JDABuilder.createDefault(token);
+		
+		try {
+			
+			webClientThread = new WebClientReceiver();
+			webClientThread.start();
+			
+		} catch (IOException e) {
+			
+			log.fatal("Unable to connect to Gamer Bot Spring!");
+			
+		}
+		
 		
 		try {
 			
