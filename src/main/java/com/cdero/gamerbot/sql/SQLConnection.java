@@ -47,6 +47,7 @@ public class SQLConnection {
 			String dbPassword = "L6Bw4NdEhkxuZGtX";
 			
 			sqlConnection = DriverManager.getConnection(dbURL, dbUser, dbPassword);
+			sqlConnection.setAutoCommit(false);
 			
 			connected = true;
 			
@@ -134,15 +135,34 @@ public class SQLConnection {
 			
 			data = sqlStatement.executeQuery(query);
 			
+			sqlConnection.commit();
+			
 		} catch (SQLException se) {
 			
 			log.fatal("Unable to contact the MySQL/MariaDB server with:" + 
 			"\n" + query +
-			"\n Data will not be saved! Please check the connection to the MySQL/MariaDB server!");
+			"\nData will not be saved! Please check the connection to the MySQL/MariaDB server!");
 			
 		}
 		
 		return data;
+		
+	}
+	
+	public static void batchQuery(Statement sqlStatement) {
+		
+		try {
+			
+			sqlStatement.executeBatch();
+			sqlConnection.commit();
+			
+		} catch (SQLException se) {
+			
+			log.fatal("There was an error executing a batch query!" + 
+			"\nData will not be saved! Please check the connection to the MySQL/MariaDB server!");
+			log.error(se);
+			
+		}
 		
 	}
 

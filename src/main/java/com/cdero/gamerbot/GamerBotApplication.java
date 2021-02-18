@@ -27,6 +27,8 @@ import com.cdero.gamerbot.events.BotLeaveVoiceOnEmpty;
 import com.cdero.gamerbot.events.MemberJoinEventListener;
 import com.cdero.gamerbot.sql.SQLConnection;
 import com.cdero.gamerbot.web.WebClientReceiver;
+
+import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
 import org.apache.logging.log4j.LogManager;
@@ -168,18 +170,7 @@ public class GamerBotApplication {
 	private void JDABuild(String token) {
 		
 		JDABuilder jda = JDABuilder.createDefault(token);
-		
-		try {
-			
-			webClientThread = new WebClientReceiver();
-			webClientThread.start();
-			
-		} catch (IOException e) {
-			
-			log.fatal("Unable to connect to Gamer Bot Spring!");
-			
-		}
-		
+		JDA botInstance = null;
 		
 		try {
 			
@@ -232,7 +223,7 @@ public class GamerBotApplication {
 			
 			jda.setEnableShutdownHook(true);
 			
-			jda.build();
+			botInstance = jda.build();
 			
 		} catch (LoginException e) {
 			
@@ -242,6 +233,18 @@ public class GamerBotApplication {
 		} catch (IllegalArgumentException e) {
 			
 			log.fatal("Error starting Gamer Bot...");
+			System.exit(1);
+			
+		}
+		
+		try {
+			
+			webClientThread = new WebClientReceiver(botInstance);
+			webClientThread.start();
+			
+		} catch (IOException e) {
+			
+			log.fatal("Error starting Gamer Bot Spring listener thread...");
 			System.exit(1);
 			
 		}

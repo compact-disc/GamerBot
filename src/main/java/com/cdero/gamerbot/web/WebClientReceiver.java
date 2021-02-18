@@ -6,6 +6,9 @@ import java.net.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.entities.TextChannel;
+
 /**
  * 
  * @author 		Christopher DeRoche
@@ -39,13 +42,20 @@ public class WebClientReceiver extends Thread {
 	 * A data input stream to read the data from the socket
 	 */
 	private DataInputStream dataInput; 
+	
+	/**
+	 * An instance of the Gamer Bot Application
+	 */
+	private JDA botInstance;
 
 	/**
 	 * Create the server socket and bind it to port 5000
 	 * 
 	 * @throws IOException	When there is an error creating the socket
 	 */
-	public WebClientReceiver() throws IOException {
+	public WebClientReceiver(JDA jda) throws IOException {
+		
+		this.botInstance = jda;
 
 		receiverSocket = new ServerSocket();
 		receiverSocket.setReuseAddress(true);
@@ -72,7 +82,9 @@ public class WebClientReceiver extends Thread {
 					
 					if((data = dataInput.readUTF()) != null) {
 						
-						log.info(data);
+						TextChannel channel = this.botInstance.getTextChannelById("782133338050658315");
+						
+						channel.sendMessage(channel.getName() + ": " + data).queue();
 						
 					}
 					
