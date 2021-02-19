@@ -14,7 +14,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
  * @since		1.0
  *
  */
-public class BotLeaveVoiceOnEmpty extends ListenerAdapter {
+public class GuildVoiceLeaveEventListener extends ListenerAdapter {
 	
 	/**
 	 * Method that is triggered when a user leaves 

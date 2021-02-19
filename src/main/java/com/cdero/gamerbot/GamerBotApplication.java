@@ -22,8 +22,8 @@ import com.cdero.gamerbot.commands.RoleCommandListener;
 import com.cdero.gamerbot.commands.ShutdownCommandListener;
 import com.cdero.gamerbot.commands.StockInformationCommandListener;
 import com.cdero.gamerbot.commands.TimerCommandListener;
-import com.cdero.gamerbot.events.BotJoinEventListener;
-import com.cdero.gamerbot.events.BotLeaveVoiceOnEmpty;
+import com.cdero.gamerbot.events.GuildJoinEventListener;
+import com.cdero.gamerbot.events.GuildVoiceLeaveEventListener;
 import com.cdero.gamerbot.events.MemberJoinEventListener;
 import com.cdero.gamerbot.events.TextChannelCreateEventListener;
 import com.cdero.gamerbot.events.TextChannelDeleteEventListener;
@@ -208,8 +208,8 @@ public class GamerBotApplication {
 			 * Start Event Listeners
 			 */
 			jda.addEventListeners(new MemberJoinEventListener());
-			jda.addEventListeners(new BotJoinEventListener());
-			jda.addEventListeners(new BotLeaveVoiceOnEmpty());
+			jda.addEventListeners(new GuildJoinEventListener());
+			jda.addEventListeners(new GuildVoiceLeaveEventListener());
 			jda.addEventListeners(new TextChannelCreateEventListener());
 			jda.addEventListeners(new TextChannelDeleteEventListener());
 			/*

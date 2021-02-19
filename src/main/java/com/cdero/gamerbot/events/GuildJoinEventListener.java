@@ -19,7 +19,7 @@ import java.util.List;
  * @since		1.0
  *
  */
-public class BotJoinEventListener extends ListenerAdapter {
+public class GuildJoinEventListener extends ListenerAdapter {
 	
 	/**
 	 * Logger for the MemberJoinEventListener class.
