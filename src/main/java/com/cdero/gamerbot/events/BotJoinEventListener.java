@@ -3,14 +3,11 @@ package com.cdero.gamerbot.events;
 //import statements
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import com.cdero.gamerbot.sql.SQLConnection;
-
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
 import net.dv8tion.jda.api.exceptions.InsufficientPermissionException;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
@@ -29,6 +26,9 @@ public class BotJoinEventListener extends ListenerAdapter {
 	 */
 	private final static Logger log = LogManager.getLogger(MemberJoinEventListener.class.getName());
 	
+	/**
+	 * Instance variable to keep track of the Guild Join Event for use in various methods.
+	 */
 	private GuildJoinEvent event;
 	
 	/**
@@ -79,7 +79,7 @@ public class BotJoinEventListener extends ListenerAdapter {
 	/**
 	 * Method that gets the guild id and the guild name and puts it into a SQL database.
 	 */
-	private void getAndStoreGuildInfo(){
+	private void getAndStoreGuildInfo() throws SQLException {
 		
 		String guild_id = this.event.getGuild().getId();
 		String guild_name = this.event.getGuild().getName();
