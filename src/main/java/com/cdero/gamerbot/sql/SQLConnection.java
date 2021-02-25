@@ -37,28 +37,18 @@ public class SQLConnection {
 	/**
 	 * Connect the Gamer Bot Application to the MySQL/MariaDB server.
 	 * 
+	 * @throws SQLException	When there is an error connecting the MariaDB connector to the database.
 	 */
-	public static void connectToSQL() {
+	public static void connectToSQL() throws SQLException {
 
-		try {
+		String dbURL = "jdbc:mysql://db.cdero.com:3306/gamerbot";
+		String dbUser = "gamerbot";
+		String dbPassword = "L6Bw4NdEhkxuZGtX";
 
-			String dbURL = "jdbc:mysql://db.cdero.com:3306/gamerbot";
-			String dbUser = "gamerbot";
-			String dbPassword = "L6Bw4NdEhkxuZGtX";
+		sqlConnection = DriverManager.getConnection(dbURL, dbUser, dbPassword);
+		sqlConnection.setAutoCommit(false);
 
-			sqlConnection = DriverManager.getConnection(dbURL, dbUser, dbPassword);
-			sqlConnection.setAutoCommit(false);
-
-			connected = true;
-
-		} catch (SQLException se) {
-
-			log.fatal("Unable to connect to MySQL/MariaDB server, shutting down...");
-			System.exit(1);
-
-		}
-
-		log.info("Gamer Bot Application successfully connected to MySQL/MariaDB...");
+		connected = true;
 
 	}
 
@@ -66,8 +56,9 @@ public class SQLConnection {
 	 * Getter for the MySQL/MariaDB connection.
 	 * 
 	 * @return Connection Returns the connection to the MySQL/MariaDB server.
+	 * @throws SQLException	If there is an error connecting to the SQL server. This is if the method is called and somehow it is not connected.
 	 */
-	public static Connection getSQL() {
+	public static Connection getSQL() throws SQLException {
 
 		if (connected) {
 
@@ -88,31 +79,14 @@ public class SQLConnection {
 	/**
 	 * Get the status of the MySQL/MariaDB server
 	 * 
-	 * @return Boolean Either true or false depending if the SQL server is still
-	 *         connected.
+	 * @return Boolean Either true or false depending if the SQL server is still connected.
+	 * @throws SQLException	When there is an error checking the status of an SQL Connector.
 	 */
-	public static Boolean getSQLStatus() {
+	public static Boolean getSQLStatus() throws SQLException {
 
 		Boolean status = false;
-
-		try {
-
-			log.info("Checking if the connection to MySQL/MariaDB is still valid...");
-
-			status = sqlConnection.isValid(3);
-
-		} catch (SQLException e) {
-
-			log.fatal("Unable to contact the MySQL/MariaDB server"
-					+ "\n Data will not be saved! Please check the connection to the MySQL/MariaDB server!");
-
-			return false;
-
-		} finally {
-
-			log.info("Connection to MySQL/MariaDB is valid...");
-
-		}
+			
+		status = sqlConnection.isValid(3);
 
 		return status;
 

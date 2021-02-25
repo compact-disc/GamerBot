@@ -78,6 +78,8 @@ public class GuildJoinEventListener extends ListenerAdapter {
 	
 	/**
 	 * Method that gets the guild id and the guild name and puts it into a SQL database.
+	 * 
+	 * @throws SQLException	When there is an error querying the database.
 	 */
 	private void getAndStoreGuildInfo() throws SQLException {
 		
@@ -90,7 +92,6 @@ public class GuildJoinEventListener extends ListenerAdapter {
 	
 	/**
 	 * Gets all the guild's text channels with their name, id, and related guild. Then puts them all into a batch query.
-	 * 
 	 * 
 	 * @throws SQLException	When there is an error creating the batch query.
 	 */

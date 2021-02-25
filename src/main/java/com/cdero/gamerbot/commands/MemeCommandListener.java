@@ -10,6 +10,7 @@ import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.exceptions.ErrorResponseException;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 /**
@@ -99,6 +100,15 @@ public class MemeCommandListener extends ListenerAdapter{
 					try{
 						
 						channel.sendFile(image, "meme.jpg").queue();
+						
+					} catch (ErrorResponseException e) {
+						
+						channel.sendMessage(":x: **There was an error getting a meme for you!**").queue();
+						log.error("Error when sending the meme to Discord."
+								+ "\nGuild: " + guild.toString()
+								+ "\nChannel: " + channel.toString()
+								+ "\nAuthor: " + author.toString());
+						return;
 					
 					} catch (Exception e) {
 						

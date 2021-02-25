@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Properties;
 import java.util.Scanner;
 import javax.security.auth.login.LoginException;
@@ -64,12 +65,14 @@ public class GamerBotApplication {
 	 */
 	private File configFile;
 	
+	/**
+	 * The Thread for the web client connection. This will capture data from Spring Boot Gamer Bot.
+	 */
 	private Thread webClientThread;
 	
 	/**
 	 * Logger for the GamerBotApplication class.
 	 */
-	//private final static Logger log = Logger.getLogger(GamerBotApplication.class.getPackage().getName());
 	private static final Logger log = LogManager.getLogger(GamerBotApplication.class.getName());
 
 	/**
@@ -147,7 +150,21 @@ public class GamerBotApplication {
 		}
 		
 		//Connect the application to the SQL server
-		SQLConnection.connectToSQL();
+		try {
+			
+			SQLConnection.connectToSQL();
+			
+		} catch (SQLException e) {
+			
+			log.fatal("Unable to connect to MySQL/MariaDB server, shutting down...");
+			System.exit(1);
+			
+		} finally {
+			
+			log.info("Connected to MariaDB...");
+			
+		}
+		
 		
 		String token = config.getProperty("token");
 		
