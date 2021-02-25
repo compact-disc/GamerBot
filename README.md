@@ -5,6 +5,8 @@
 ### Complete Misc.
 - Switched to Log4j
 - Image returner based on given parameter (Works for any subreddit)
+- Added MariaDB integration.
+  - Get and store Guild ID's and Text Channel ID's (more to come)
 
 ### Complete Commands:
 - Beans Listener/Command
@@ -45,10 +47,12 @@
 ### Complete Events:
 - Guild Member Join Event
 - Bot join Guild Event
+  - Adds Text Channels to SQL
+- Text Channel Create/Delete
 
 ### Plans/Todo:
-- Customized prefixes per server
-- Either MariaDB/MongoDB integration for per server customizations
+- ~~Customized prefixes per server~~ (Discord update coming soon for / (slash) commands)
+- ~~Either MariaDB/MongoDB integration for per server customizations~~
 - Auto Role functionality - Users add their own specific roles and/or react roles
 - Always more Documentation/Javadoc
 - Get weather by zip code command
