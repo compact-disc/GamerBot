@@ -43,6 +43,10 @@
   - ```>>play / >>play [YouTube URL]/[YouTube Search]```
 - Skip
   - ```>>skip```
+- Queue
+  - ```>queue```
+- Now Playing
+  - ```>>nowplaying```
 
 ### Complete Events:
 - Guild Member Join Event
