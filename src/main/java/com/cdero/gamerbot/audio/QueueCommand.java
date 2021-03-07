@@ -40,13 +40,6 @@ public class QueueCommand {
 			channel.sendMessage(":x: **You are not connected to a voice channel!**").queue();
 			return;
 			
-		}
-		
-		if (queue.isEmpty()) {
-			
-			channel.sendMessage(":x: **There are no tracks in the queue!**").queue();
-			return;
-			
 		} else {
 			
 			AudioTrack track;
@@ -54,15 +47,16 @@ public class QueueCommand {
 			List<AudioTrack> trackList = new ArrayList<>(queue);
 			
 			EmbedBuilder embedBuilder = new EmbedBuilder();
-			embedBuilder.setAuthor("Gamer Bot");
-			embedBuilder.setColor(Color.BLUE);
+			embedBuilder.setColor(Color.CYAN);
 			embedBuilder.setTitle("Audio Queue");
-			embedBuilder.setDescription("The audio tracks queued to be played by Gamer Bot and their order.");
 			
-			for(int i = 1; i <= numTracks; i++) {
+			embedBuilder.addField("Now Playing: " + musicManager.player.getPlayingTrack().getInfo().title, "Length: " + ((musicManager.player.getPlayingTrack().getInfo().length / 1000) / 60) + ":" + (int) ((musicManager.player.getPlayingTrack().getInfo().length / 1000)  % 60), false);
+			
+			for(int i = 0; i < numTracks; i++) {
 				
 				track = trackList.get(i);
-				embedBuilder.addField(i + ": " + track.getInfo().title, "Length: " + track.getInfo().length, false);
+				
+				embedBuilder.addField((i + 1) + ": " + track.getInfo().title, "Length: " + ((track.getInfo().length / 1000) / 60) + ":" + (int) ((track.getInfo().length / 1000)  % 60), false);
 				
 			}
 			
