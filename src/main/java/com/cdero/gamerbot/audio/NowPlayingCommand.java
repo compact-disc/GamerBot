@@ -32,7 +32,7 @@ public class NowPlayingCommand {
 			channel.sendMessage(":x: **You are not connected to a voice channel!**").queue();
 			return;
 			
-		} else if (musicManager == null) {
+		} else if (musicManager == null || musicManager.player.getPlayingTrack() == null) {
 			
 			channel.sendMessage(":x: **There is nothing playing!**").queue();
 			return;

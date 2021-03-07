@@ -31,6 +31,11 @@ public class SkipCommand {
 			channel.sendMessage(":x: **You are not connected to a voice channel!**").queue();
 			return;
 			
+		}else if (MusicManagers.musicManagers.get(event.getGuild().getIdLong()) == null || MusicManagers.musicManagers.get(event.getGuild().getIdLong()).player.getPlayingTrack() == null) {
+			
+			channel.sendMessage(":x: **There is nothing playing!**").queue();
+			return;
+			
 		}
 		
 		skipTrack(channel);

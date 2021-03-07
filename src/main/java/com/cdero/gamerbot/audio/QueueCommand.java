@@ -33,15 +33,19 @@ public class QueueCommand {
 		TextChannel channel = event.getChannel();
 		VoiceChannel voiceChannel = event.getMember().getVoiceState().getChannel();
 		GuildMusicManager musicManager = MusicManagers.musicManagers.get(event.getGuild().getIdLong());
-		BlockingQueue<AudioTrack> queue = musicManager.scheduler.getQueue();
 		
 		if (voiceChannel == null) {
 			
 			channel.sendMessage(":x: **You are not connected to a voice channel!**").queue();
 			return;
 			
+		} else if (musicManager == null) {
+			
+			channel.sendMessage(":x: **There is nothing playing!**").queue();
+			
 		} else {
 			
+			BlockingQueue<AudioTrack> queue = musicManager.scheduler.getQueue();
 			AudioTrack track;
 			int numTracks = Integer.min(queue.size(), 20);
 			List<AudioTrack> trackList = new ArrayList<>(queue);
@@ -50,7 +54,11 @@ public class QueueCommand {
 			embedBuilder.setColor(Color.CYAN);
 			embedBuilder.setTitle("Audio Queue");
 			
-			embedBuilder.addField("Now Playing: " + musicManager.player.getPlayingTrack().getInfo().title, "Length: " + ((musicManager.player.getPlayingTrack().getInfo().length / 1000) / 60) + ":" + (int) ((musicManager.player.getPlayingTrack().getInfo().length / 1000)  % 60), false);
+			if (musicManager != null) {
+				
+				embedBuilder.addField("Now Playing: " + musicManager.player.getPlayingTrack().getInfo().title, "Length: " + ((musicManager.player.getPlayingTrack().getInfo().length / 1000) / 60) + ":" + (int) ((musicManager.player.getPlayingTrack().getInfo().length / 1000)  % 60), false);
+				
+			}
 			
 			for(int i = 0; i < numTracks; i++) {
 				

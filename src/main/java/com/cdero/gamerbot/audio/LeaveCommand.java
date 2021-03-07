@@ -25,7 +25,7 @@ public class LeaveCommand {
 		VoiceChannel voiceChannel = event.getMember().getVoiceState().getChannel();
 		TextChannel textChannel = event.getChannel();
 		
-		if(voiceChannel == null) {
+		if(voiceChannel == null || !event.getGuild().getAudioManager().isConnected()) {
 			
 			textChannel.sendMessage(":x: **I am not connected to voice!**").queue();
 			return;
