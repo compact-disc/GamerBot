@@ -64,4 +64,16 @@ public class TrackScheduler extends AudioEventAdapter {
 		}
 	}
 	
+	/**
+	 * 
+	 * Get the guild's music manager audio queue.
+	 * 
+	 * @return	The BlockingQueue of type Audio Tracks.
+	 */
+	public BlockingQueue<AudioTrack> getQueue() {
+		
+		return queue;
+		
+	}
+	
 }

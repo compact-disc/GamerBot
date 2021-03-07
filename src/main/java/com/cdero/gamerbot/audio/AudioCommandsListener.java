@@ -51,7 +51,7 @@ public class AudioCommandsListener extends ListenerAdapter {
 		
 		TextChannel channel = event.getChannel();
 		
-		if(command[0].equalsIgnoreCase(PREFIX + "leave") || command[0].equalsIgnoreCase(PREFIX + "pause") || command[0].equalsIgnoreCase(PREFIX + "play") || command[0].equalsIgnoreCase(PREFIX + "skip") || command[0].equalsIgnoreCase(PREFIX + "join")) {
+		if(command[0].equalsIgnoreCase(PREFIX + "nowplaying") || command[0].equalsIgnoreCase(PREFIX + "queue") || command[0].equalsIgnoreCase(PREFIX + "leave") || command[0].equalsIgnoreCase(PREFIX + "pause") || command[0].equalsIgnoreCase(PREFIX + "play") || command[0].equalsIgnoreCase(PREFIX + "skip") || command[0].equalsIgnoreCase(PREFIX + "join")) {
 			
 			if(commandLength == 2 && command[1].equalsIgnoreCase("help")) {
 				
@@ -59,9 +59,13 @@ public class AudioCommandsListener extends ListenerAdapter {
 						+ "\n"
 						+ "\n" + PREFIX + "play [YouTube URL]/[YouTube Search] :arrow_right: To play the audio from a YouTube video."
 						+ "\n"
+						+ "\n" + PREFIX + "nowplaying :arrow_right: Show the track that is currently playing from Gamer Bot."
+						+ "\n"
 						+ "\n" + PREFIX + "pause :arrow_right: To pause and unpause audio."
 						+ "\n"
-						+ "\n" + PREFIX + "skip :arrow_right: To skip the current song."
+						+ "\n" + PREFIX + "skip :arrow_right: To skip the current video."
+						+ "\n"
+						+ "\n" + PREFIX + "queue :arrow_right: Show the audio queue."
 						+ "\n"
 						+ "\n" + PREFIX + "leave :arrow_right: To make Gamer Bot leave the voice channel."
 						+ "**").queue();
@@ -110,6 +114,22 @@ public class AudioCommandsListener extends ListenerAdapter {
 								+ "\nAuthor: " + author.toString());
 						new JoinCommand(event);
 						break;
+					
+					case PREFIX + "queue":
+						log.info("Audio Command: " + command[0]
+								+ "\nGuild: " + guild.toString()
+								+ "\nChannel: " + channel.toString()
+								+ "\nAuthor: " + author.toString());
+						new QueueCommand(event);
+						break;
+						
+					case PREFIX + "nowplaying":
+						log.info("Audio Command: " + command[0]
+								+ "\nGuild: " + guild.toString()
+								+ "\nChannel: " + channel.toString()
+								+ "\nAuthor: " + author.toString());
+						new NowPlayingCommand(event);
+						break;
 				
 				}
 				
@@ -130,9 +150,13 @@ public class AudioCommandsListener extends ListenerAdapter {
 								+ "\n"
 								+ "\n" + PREFIX + "play [YouTube URL]/[YouTube Search] :arrow_right: To play the audio from a YouTube video."
 								+ "\n"
+								+ "\n" + PREFIX + "nowplaying :arrow_right: Show the track that is currently playing from Gamer Bot."
+								+ "\n"
 								+ "\n" + PREFIX + "pause :arrow_right: To pause and unpause audio."
 								+ "\n"
-								+ "\n" + PREFIX + "skip :arrow_right: To skip the current song."
+								+ "\n" + PREFIX + "skip :arrow_right: To skip the current video."
+								+ "\n"
+								+ "\n" + PREFIX + "queue :arrow_right: Show the audio queue."
 								+ "\n"
 								+ "\n" + PREFIX + "leave :arrow_right: To make Gamer Bot leave the voice channel."
 								+ "**").queue();
@@ -151,9 +175,13 @@ public class AudioCommandsListener extends ListenerAdapter {
 						+ "\n"
 						+ "\n" + PREFIX + "play [YouTube URL]/[YouTube Search] :arrow_right: To play the audio from a YouTube video."
 						+ "\n"
+						+ "\n" + PREFIX + "nowplaying :arrow_right: Show the track that is currently playing from Gamer Bot."
+						+ "\n"
 						+ "\n" + PREFIX + "pause :arrow_right: To pause and unpause audio."
 						+ "\n"
-						+ "\n" + PREFIX + "skip :arrow_right: To skip the current song."
+						+ "\n" + PREFIX + "skip :arrow_right: To skip the current video."
+						+ "\n"
+						+ "\n" + PREFIX + "queue :arrow_right: Show the audio queue."
 						+ "\n"
 						+ "\n" + PREFIX + "leave :arrow_right: To make Gamer Bot leave the voice channel."
 						+ "**").queue();
