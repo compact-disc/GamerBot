@@ -42,6 +42,12 @@ public class QueueCommand {
 		} else if (musicManager == null) {
 			
 			channel.sendMessage(":x: **There is nothing playing!**").queue();
+			return;
+			
+		} else if (!event.getGuild().getAudioManager().isConnected()) {
+			
+			channel.sendMessage(":x: **I am not connected to voice!**").queue();
+			return;
 			
 		} else {
 			
