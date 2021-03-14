@@ -28,6 +28,7 @@ import com.cdero.gamerbot.events.GuildVoiceLeaveEventListener;
 import com.cdero.gamerbot.events.MemberJoinEventListener;
 import com.cdero.gamerbot.events.TextChannelCreateEventListener;
 import com.cdero.gamerbot.events.TextChannelDeleteEventListener;
+import com.cdero.gamerbot.events.TextChannelUpdateEventListener;
 import com.cdero.gamerbot.sql.SQLConnection;
 import com.cdero.gamerbot.web.WebClientReceiver;
 import net.dv8tion.jda.api.JDA;
@@ -229,6 +230,7 @@ public class GamerBotApplication {
 			jda.addEventListeners(new GuildVoiceLeaveEventListener());
 			jda.addEventListeners(new TextChannelCreateEventListener());
 			jda.addEventListeners(new TextChannelDeleteEventListener());
+			jda.addEventListeners(new TextChannelUpdateEventListener());
 			/*
 			 * End Event Listeners
 			 */
@@ -305,6 +307,17 @@ public class GamerBotApplication {
 		Runtime.getRuntime().addShutdownHook(new Thread() {
 			
 			public void run() {
+				
+				try {
+					
+					SQLConnection.getSQL().close();
+					log.info("SQL Connection closed...");
+					
+				} catch (SQLException e) {
+					
+					log.error("Error closing the SQL connection...");
+					
+				}
 				
 				MusicManagers.musicManagers.clear();
 				MusicManagers.playerManager.shutdown();

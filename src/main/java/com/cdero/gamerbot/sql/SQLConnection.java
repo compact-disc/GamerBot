@@ -93,7 +93,7 @@ public class SQLConnection {
 	}
 
 	/**
-	 * 
+	 * Run a query to the connected SQL server and return a result set.
 	 * 
 	 * @param query
 	 * @return
@@ -116,7 +116,7 @@ public class SQLConnection {
 	}
 
 	/**
-	 * 
+	 * Run a batch query to the connected SQL server.
 	 * 
 	 * @param sqlStatement
 	 * @throws SQLException
