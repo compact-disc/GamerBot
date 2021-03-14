@@ -6,7 +6,6 @@
 - Switched to Log4j
 - Image returner based on given parameter (Works for any subreddit)
 - Added MariaDB integration.
-  - Get and store Guild ID's and Text Channel ID's (more to come)
 
 ### Complete Commands:
 - Beans Listener/Command
@@ -52,7 +51,10 @@
 - Guild Member Join Event
 - Bot join Guild Event
   - Adds Text Channels to SQL
-- Text Channel Create/Delete
+  - Adds Guild ID and Name to SQL
+- Text Channel Create/Delete/Rename Events for SQL Database
+- On Ready
+  - Checks for text channel additions or renaming when coming online, updates if needed
 
 ### Plans/Todo:
 - ~~Customized prefixes per server~~ (Discord update coming soon for / (slash) commands)
