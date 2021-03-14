@@ -28,7 +28,7 @@ import com.cdero.gamerbot.events.GuildVoiceLeaveEventListener;
 import com.cdero.gamerbot.events.MemberJoinEventListener;
 import com.cdero.gamerbot.events.TextChannelCreateEventListener;
 import com.cdero.gamerbot.events.TextChannelDeleteEventListener;
-import com.cdero.gamerbot.events.TextChannelUpdateEventListener;
+import com.cdero.gamerbot.events.TextChannelUpdateNameEventListener;
 import com.cdero.gamerbot.sql.SQLConnection;
 import com.cdero.gamerbot.web.WebClientReceiver;
 import net.dv8tion.jda.api.JDA;
@@ -230,7 +230,7 @@ public class GamerBotApplication {
 			jda.addEventListeners(new GuildVoiceLeaveEventListener());
 			jda.addEventListeners(new TextChannelCreateEventListener());
 			jda.addEventListeners(new TextChannelDeleteEventListener());
-			jda.addEventListeners(new TextChannelUpdateEventListener());
+			jda.addEventListeners(new TextChannelUpdateNameEventListener());
 			/*
 			 * End Event Listeners
 			 */

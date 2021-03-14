@@ -84,32 +84,42 @@ public class OnReady extends ListenerAdapter {
 			
 			boolean empty = true;
 			List<Long> sqlTextChannelIds = new ArrayList<Long>();
+			List<String> sqlTextChannelName = new ArrayList<String>();
+			
 			List<Long> guildTextChannelIds = new ArrayList<Long>();
+			List<String> guildTextChannelNames = new ArrayList<String>();
+			
 			List<TextChannel> textChannels = guild.getTextChannels();
 			
 			guildId = guild.getIdLong();
-			queryResult = SQLConnection.query("SELECT text_channel_id FROM text_channels WHERE guild_id='" + guildId + "';");
+			queryResult = SQLConnection.query("SELECT * FROM text_channels WHERE guild_id='" + guildId + "';");
 			
 			while (queryResult.next()) {
 				
 				empty = false;
 				sqlTextChannelIds.add(Long.parseLong(queryResult.getString("text_channel_id")));
+				sqlTextChannelName.add(queryResult.getString("text_channel_name"));
 				
 			}
 			
 			Collections.sort(sqlTextChannelIds);
+			Collections.sort(sqlTextChannelName);
 			
 			for (TextChannel channel : textChannels) {
 				
 				guildTextChannelIds.add(channel.getIdLong());
+				guildTextChannelNames.add(channel.getName());
 				
 			}
 			
 			Collections.sort(guildTextChannelIds);
+			Collections.sort(guildTextChannelNames);
 			
-			if(!sqlTextChannelIds.equals(guildTextChannelIds)) {
+			if(!sqlTextChannelIds.equals(guildTextChannelIds) || !sqlTextChannelName.equals(guildTextChannelNames)) {
 				
 				if (!empty) {
+					
+					log.info("reeee");
 					
 					SQLConnection.query("DELETE FROM text_channels WHERE guild_id='" + guildId + "';");
 					
