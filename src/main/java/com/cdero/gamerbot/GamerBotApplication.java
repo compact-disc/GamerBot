@@ -24,6 +24,7 @@ import com.cdero.gamerbot.commands.ShutdownCommandListener;
 import com.cdero.gamerbot.commands.StockInformationCommandListener;
 import com.cdero.gamerbot.commands.TimerCommandListener;
 import com.cdero.gamerbot.events.GuildJoinEventListener;
+import com.cdero.gamerbot.events.GuildUpdateNameEventListener;
 import com.cdero.gamerbot.events.GuildVoiceLeaveEventListener;
 import com.cdero.gamerbot.events.MemberJoinEventListener;
 import com.cdero.gamerbot.events.TextChannelCreateEventListener;
@@ -231,6 +232,7 @@ public class GamerBotApplication {
 			jda.addEventListeners(new TextChannelCreateEventListener());
 			jda.addEventListeners(new TextChannelDeleteEventListener());
 			jda.addEventListeners(new TextChannelUpdateNameEventListener());
+			jda.addEventListeners(new GuildUpdateNameEventListener());
 			/*
 			 * End Event Listeners
 			 */

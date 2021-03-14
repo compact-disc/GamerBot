@@ -55,6 +55,8 @@
 - Text Channel Create/Delete/Rename Events for SQL Database
 - On Ready
   - Checks for text channel additions or renaming when coming online, updates if needed
+  - Checks for guild name change, updates if needed
+- Guild Name Change Event to SQL
 
 ### Plans/Todo:
 - ~~Customized prefixes per server~~ (Discord update coming soon for / (slash) commands)

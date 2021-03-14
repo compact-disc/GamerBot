@@ -184,27 +184,36 @@ public class OnReady extends ListenerAdapter {
 		ResultSet queryResult;
 		boolean empty = true;
 		String guild_id;
-		String guild_name;
+		String jda_guild_name;
+		String sql_guild_name = "";
 		
 		for(Guild guild : guilds) {
 			
 			guildId = guild.getId();
-			queryResult = SQLConnection.query("SELECT guild_id FROM guild_list WHERE guild_id='" + guildId + "';");
+			queryResult = SQLConnection.query("SELECT * FROM guild_list WHERE guild_id='" + guildId + "';");
 
 			while(queryResult.next()) {
+				
+				guild_id = queryResult.getString("guild_id");
+				sql_guild_name = queryResult.getString("guild_name");
 				
 				empty = false;
 				
 			}
 			
+			guild_id = guild.getId();
+			jda_guild_name = guild.getName();
+			
 			if(empty) {
 				
-				guild_id = guild.getId();
-				guild_name = guild.getName();
+				SQLConnection.query("INSERT INTO guild_list(guild_id, guild_name) VALUES ('" + guild_id + "','" + jda_guild_name + "')");
+					
+			} else if(!jda_guild_name.equals(sql_guild_name)) {
 				
-				SQLConnection.query("INSERT INTO guild_list(guild_id, guild_name) VALUES ('" + guild_id + "','" + guild_name + "')");
+				SQLConnection.query("UPDATE guild_list SET guild_name='" + jda_guild_name + "' WHERE guild_id='" + guildId + "';");
 				
 			}
+				
 			
 		}
 		
