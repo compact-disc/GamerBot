@@ -22,7 +22,11 @@ public class TextChannelUpdateNameEventListener extends ListenerAdapter {
 	 */
 	private final static Logger log = LogManager.getLogger(TextChannelUpdateNameEventListener.class.getName());
 	
-	
+	/**
+	 * This will update the SQL database when the text channel's name is updated so everything is concurrent.
+	 * 
+	 * @param event	Information about the event that was called. This includes the guild and text channel.
+	 */
 	@Override
 	public void onTextChannelUpdateName(TextChannelUpdateNameEvent event) {
 		

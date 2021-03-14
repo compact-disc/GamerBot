@@ -32,6 +32,11 @@ public class OnReady extends ListenerAdapter {
 	 */
 	private final static Logger log = LogManager.getLogger(OnReady.class.getName());
 	
+	/**
+	 * Runs when the Bot is finished loading and connected to the Discord servers. Sets up the music managers for Lava Player and audio commands.
+	 * This also handles the text channel, guild id, and other naming changes if the bot is offline.
+	 * 
+	 */
 	@Override
 	public void onReady(ReadyEvent event) {
 		
@@ -74,6 +79,13 @@ public class OnReady extends ListenerAdapter {
 		
 	}
 	
+	/**
+	 * 
+	 * Checks the text channel list to see if the text channels are added to the SQL Database, updates if needed.
+	 * 
+	 * @param jda	JDA information about the bot instance that can give a list of text channels and guilds for checking.
+	 * @throws SQLException	If there is an error running the SQL query on the database.
+	 */
 	private void checkSQLTextChannels(JDA jda) throws SQLException {
 		
 		List<Guild> guilds = jda.getGuilds();
@@ -119,8 +131,6 @@ public class OnReady extends ListenerAdapter {
 				
 				if (!empty) {
 					
-					log.info("reeee");
-					
 					SQLConnection.query("DELETE FROM text_channels WHERE guild_id='" + guildId + "';");
 					
 				}
@@ -133,6 +143,13 @@ public class OnReady extends ListenerAdapter {
 		
 	}
 	
+	/**
+	 * If there was a change in the text channels, then re-add the text channels to the database for the guilds.
+	 * 
+	 * @param guildId	The ID for the guild.
+	 * @param textChannels	A list of Text Channels for the guild.
+	 * @throws SQLException	If there is an error running the SQL query on the database.
+	 */
 	private void updateSQLTextChannels(long guildId, List<TextChannel> textChannels) throws SQLException {
 		
 		String text_channel_id;
@@ -153,6 +170,13 @@ public class OnReady extends ListenerAdapter {
 		
 	}
 	
+	/**
+	 * 
+	 * Checks the guild list to see if the Guild is added to the SQL Database, updates if needed.
+	 * 
+	 * @param jda	JDA information about the bot instance that can give a list of guilds for checking.
+	 * @throws SQLException	If there is an error running the SQL query on the database.
+	 */
 	private void checkSQLGuildList(JDA jda) throws SQLException {
 		
 		List<Guild> guilds = jda.getGuilds();
