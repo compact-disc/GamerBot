@@ -6,6 +6,7 @@
 - Switched to Log4j
 - Image returner based on given parameter (Works for any subreddit)
 - Added MariaDB integration.
+- Complete build.gradle to successfully compile Gamer Bot into a single jar file
 
 ### Complete Commands:
 - Beans Listener/Command
