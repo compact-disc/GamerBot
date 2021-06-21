@@ -1,13 +1,8 @@
 package com.cdero.gamerbot;
 
 //import statements
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Properties;
 import java.util.Scanner;
 import javax.security.auth.login.LoginException;
 import com.cdero.gamerbot.audio.AudioCommandsListener;
@@ -48,26 +43,6 @@ import org.apache.logging.log4j.Logger;
 public class GamerBotApplication {
 	
 	/**
-	 * Properties class to store and save the settings for the Gamer Bot Application.
-	 */
-	private Properties config = new Properties();
-	
-	/**
-	 * File Input Stream to read the properties file into the Properties class.
-	 */
-	private FileInputStream configInput;
-	
-	/**
-	 * File Output Stream to save the properties file from the Properties class.
-	 */
-	private FileOutputStream configOutput;
-	
-	/**
-	 * File class for the properties file.
-	 */
-	private File configFile;
-	
-	/**
 	 * The Thread for the web client connection. This will capture data from Spring Boot Gamer Bot.
 	 */
 	private Thread webClientThread;
@@ -97,60 +72,6 @@ public class GamerBotApplication {
 		
 		log.info("Starting Gamer Bot...");
 		
-		//Declare the configuration file object with the proper name
-		configFile = new File("config.properties");
-		
-		//Check if there is a configuration file, if not, create one
-		//Exit after creating the file so the user can add the token to the file
-		if(!configFile.exists()) {
-			
-			try {
-				
-				configOutput = new FileOutputStream(configFile);
-				
-				config.setProperty("token", "ENTER YOUR TOKEN HERE");
-				config.store(configOutput, "Gamer Bot Configuration File");
-				
-				log.info("Add token to configuration file and restart...");
-				
-				configOutput.close();
-				System.exit(0);
-				
-			} catch (IOException io) {
-				
-				log.fatal("There was an I/O error creating the configuration file...");
-				System.exit(1);
-				
-			} catch (SecurityException se) {
-				
-				log.fatal("There was a permissions error when trying to write the configuration file...");
-				System.exit(1);
-				
-			}
-			
-		}
-		
-		//Start reading the properties from the file
-		try {
-			
-			configInput = new FileInputStream(configFile);
-			
-			config.load(configInput);
-			
-			configInput.close();
-			
-		} catch (FileNotFoundException fnfe) {
-			
-			log.fatal("There was no configuration file found...");
-			System.exit(1);
-			
-		} catch (IOException io) {
-			
-			log.fatal("There was an I/O error when loading the configuration file...");
-			System.exit(1);
-			
-		}
-		
 		//Connect the application to the SQL server
 		try {
 			
@@ -167,17 +88,7 @@ public class GamerBotApplication {
 			
 		}
 		
-		
-		String token = config.getProperty("token");
-		
-		if(token.equals("ENTER YOUR TOKEN HERE")) {
-			
-			log.fatal("Invalid token! It looks like you have not entered one yet! Please enter a valid token and then start Gamer Bot...");
-			System.exit(1);
-			
-		}
-		
-		JDABuild(token);
+		JDABuild();
 		
 	}
 	
@@ -187,9 +98,10 @@ public class GamerBotApplication {
 	 * 
 	 * @param	token	String of the Discord token to connect the application to Discord.
 	 */
-	private void JDABuild(String token) {
+	private void JDABuild() {
 		
-		JDABuilder jda = JDABuilder.createDefault(token);
+		//Use static Configuration.botTken to get the Discord bot token
+		JDABuilder jda = JDABuilder.createDefault(Configuration.botToken);
 		JDA botInstance = null;
 		
 		try {

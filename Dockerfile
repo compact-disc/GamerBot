@@ -9,6 +9,4 @@ RUN mkdir /app
 
 COPY --from=build /home/gradle/src/build/libs/*.jar /app/gamerbot.jar
 
-COPY config.properties /app
-
 ENTRYPOINT ["java", "-jar", "/app/gamerbot.jar"]
